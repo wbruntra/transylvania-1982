@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Transylvania (1982) — Web Port v0.1</title>
+    <script type="module" crossorigin src="/assets/index-CpjI51cp.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DGGQa6El.css">
+  </head>
+  <body>
+    <div id="app">
+      <h1>Transylvania — web port <small>v0.1 exploration build</small></h1>
+
+      <div id="scene"><div class="label" id="sceneLabel"></div></div>
+      <div id="log"></div>
+
+      <div id="row">
+        <input
+          id="cmd"
+          autocomplete="off"
+          placeholder="COMMAND :  e.g. north, look, get note, inventory, help"
+        />
+        <button id="go">Go</button>
+      </div>
+      <div class="dirs" id="dirs"></div>
+
+      <p>
+        <small>
+          Data from Apple II .do (38 rooms / 39 objects). Core verbs: N/S/E/W/U/D, LOOK, GET,
+          DROP, INVENTORY, HELP. Scene rendering lives in
+          <code>src/ui/scene.js</code>; swap it for generated images or Three.js later.
+        </small>
+      </p>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,99 @@
+:root { color-scheme: dark; }
+
+body {
+  margin: 0;
+  background: #0b0e1a;
+  color: #e8e6df;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+}
+
+#app {
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* Square, to match the 1024x1024 scene art: nothing gets cropped, and no
+   generated pixels are paid for and then thrown away. Width is capped by the
+   viewport height so the prompt still fits on screen without scrolling. */
+#scene {
+  aspect-ratio: 1 / 1;
+  width: min(100%, 58vh, 620px);
+  margin: 12px auto;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #333;
+  background: #000;
+}
+
+.scene-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* contain, not cover: the square box matches the art, and anything that is
+     not square should letterbox rather than lose its edges. */
+  object-fit: contain;
+}
+
+#scene .label {
+  position: absolute;
+  left: 12px;
+  bottom: 10px;
+  font-size: 12px;
+  opacity: 0.85;
+  background: #000a;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+#log {
+  height: 26vh;
+  overflow: auto;
+  background: #00000088;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 12px;
+  white-space: pre-wrap;
+}
+
+#row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+#cmd {
+  flex: 1;
+  background: #111;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 10px;
+  font: inherit;
+}
+
+button {
+  background: #2a3cff;
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.dirs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.dirs button {
+  background: #222;
+  border: 1px solid #444;
+}
+
+small { opacity: 0.7; }

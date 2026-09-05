@@ -1,0 +1,9 @@
+node_modules/
+
+# Original 1982 Transylvania game files (ripped disk images + extracted art)
+*.DO/
+*.DO.zip
+web/dist/art/original/
+web/public/art/original/
+web/dist/art/original-pic.png
+web/public/art/original-pic.png
