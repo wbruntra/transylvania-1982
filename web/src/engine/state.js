@@ -82,6 +82,9 @@ export function createState(world) {
     nounMapOverrides: {},
     flags: createFlags(),
     timers: createTimers(),
+    visitedRooms: [START_ROOM],
+    isGameOver: false,
+    isDead: false,
   };
 }
 
@@ -200,5 +203,10 @@ export function deserializeState(json) {
     nounMapOverrides: { ...parsed.nounMapOverrides },
     flags: { ...createFlags(), ...parsed.flags },
     timers: { ...createTimers(), ...parsed.timers },
+    visitedRooms: Array.isArray(parsed.visitedRooms)
+      ? [...parsed.visitedRooms]
+      : [parsed.room ?? START_ROOM],
+    isGameOver: Boolean(parsed.isGameOver),
+    isDead: Boolean(parsed.isDead),
   };
 }

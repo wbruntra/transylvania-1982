@@ -5,7 +5,7 @@
     "subject": "facing an ancient stump covered with faint writing.",
     "png": "web/public/art/room-1.png",
     "webp": "web/public/art/room-1.webp",
-    "prompt": "The scene: facing an ancient stump covered with faint writing. A way out leads north. Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: facing an ancient stump covered with faint writing. A way out leads north. Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. The stump's face carries faint worn carvings that read as abstract marks rather than letters -- this is the only carved surface in the game's art. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "subject": "standing near a broken horse-drawn wagon.",
     "png": "web/public/art/room-2.png",
     "webp": "web/public/art/room-2.webp",
-    "prompt": "The scene: standing near a broken horse-drawn wagon. Ways out lead north, south, west and east. Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: standing near a broken horse-drawn wagon. Ways out lead north, south, west and east. Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@
     "subject": "in a dark area of the forest.",
     "png": "web/public/art/room-3.png",
     "webp": "web/public/art/room-3.webp",
-    "prompt": "The scene: in a dark area of the forest. Ways out lead north, south, west and east. Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a dark area of the forest. Ways out lead north, south, west and east. Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 4,
@@ -29,7 +29,7 @@
     "subject": "in a clearing.",
     "png": "web/public/art/room-4.png",
     "webp": "web/public/art/room-4.webp",
-    "prompt": "The scene: in a clearing. Ways out lead south and east. Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a clearing. Ways out lead south and east. Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 5,
@@ -37,7 +37,7 @@
     "subject": "in a cemetery.",
     "png": "web/public/art/room-5.png",
     "webp": "web/public/art/room-5.webp",
-    "prompt": "The scene: in a cemetery. Ways out lead north, south and west. Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a cemetery. Ways out lead north, south and west. Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 6,
@@ -45,7 +45,7 @@
     "subject": "near a clay hut.",
     "png": "web/public/art/room-6.png",
     "webp": "web/public/art/room-6.webp",
-    "prompt": "The scene: near a clay hut. Ways out lead north and south. Standing outside a structure at night: the building's mass reads as a dark silhouette against a moonlit sky. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: near a clay hut. Ways out lead north and south. Standing outside a structure at night: the building's mass reads as a dark silhouette against a moonlit sky. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 7,
@@ -53,7 +53,7 @@
     "subject": "in a clay hut.",
     "png": "web/public/art/room-7.png",
     "webp": "web/public/art/room-7.webp",
-    "prompt": "The scene: in a clay hut. A way out leads west. A small cramped interior lit by a single candle or hearth; tight framing, warm amber pooling in the centre. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a clay hut. A way out leads west. A small cramped interior at night, lit by a single candle or hearth; tight framing, warm amber pooling in the centre. Any doorway or window shows dark night sky outside, never daylight. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 8,
@@ -61,7 +61,7 @@
     "subject": "near a cave entrance shut by a rock slide.",
     "png": "web/public/art/room-8.png",
     "webp": "web/public/art/room-8.webp",
-    "prompt": "The scene: near a cave entrance shut by a rock slide. Ways out lead south and west. Standing outside a structure at night: the building's mass reads as a dark silhouette against a moonlit sky. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: near a cave entrance shut by a rock slide. Ways out lead south and west. Standing outside at night before a rocky hillside: the collapsed cave mouth and its heaped boulders read as a dark mass against a moonlit sky. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 9,
@@ -69,7 +69,7 @@
     "subject": "in a small dark cave. there is a door mounted on the northern wall.",
     "png": "web/public/art/room-9.png",
     "webp": "web/public/art/room-9.webp",
-    "prompt": "The scene: in a small dark cave. there is a door mounted on the northern wall. An enclosed underground space: no sky, damp rock, wet mineral glints, almost no light beyond a faint glow. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a small dark cave. there is a door mounted on the northern wall. An enclosed underground space: no sky, damp rock, wet mineral glints, almost no light beyond a faint glow. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 10,
@@ -77,7 +77,7 @@
     "subject": "in a cave. on a stalagmite rests a crystal ball.",
     "png": "web/public/art/room-10.png",
     "webp": "web/public/art/room-10.webp",
-    "prompt": "The scene: in a cave. on a stalagmite rests a crystal ball. An enclosed underground space: no sky, damp rock, wet mineral glints, almost no light beyond a faint glow. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a cave. on a stalagmite rests a crystal ball. An enclosed underground space: no sky, damp rock, wet mineral glints, almost no light beyond a faint glow. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 11,
@@ -85,7 +85,7 @@
     "subject": "in a secret chamber under the cemetery.",
     "png": "web/public/art/room-11.png",
     "webp": "web/public/art/room-11.webp",
-    "prompt": "The scene: in a secret chamber under the cemetery. A way out leads above. An enclosed underground space: no sky, damp rock, wet mineral glints, almost no light beyond a faint glow. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a secret chamber under the cemetery. A way out leads above. An enclosed underground space: no sky, damp rock, wet mineral glints, almost no light beyond a faint glow. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 12,
@@ -93,7 +93,7 @@
     "subject": "at the crossing of paths. in the distance lies a castle.",
     "png": "web/public/art/room-12.png",
     "webp": "web/public/art/room-12.webp",
-    "prompt": "The scene: at the crossing of paths. in the distance lies a castle. Ways out lead north, west and east. Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: at the crossing of paths. in the distance lies a castle. Ways out lead north, west and east. Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 13,
@@ -101,7 +101,7 @@
     "subject": "standing before a gloomy castle.",
     "png": "web/public/art/room-13.png",
     "webp": "web/public/art/room-13.webp",
-    "prompt": "The scene: standing before a gloomy castle. Ways out lead north and south. Standing outside a structure at night: the building's mass reads as a dark silhouette against a moonlit sky. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: standing before a gloomy castle. Ways out lead north and south. Standing outside a structure at night: the building's mass reads as a dark silhouette against a moonlit sky. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 14,
@@ -109,7 +109,7 @@
     "subject": "in a dismal area of the forest.",
     "png": "web/public/art/room-14.png",
     "webp": "web/public/art/room-14.webp",
-    "prompt": "The scene: in a dismal area of the forest. Ways out lead south, west and east. Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a dismal area of the forest. Ways out lead south, west and east. Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 15,
@@ -117,7 +117,7 @@
     "subject": "in the crown of a sleepy willow tree. a sign hangs nearby.",
     "png": "web/public/art/room-15.png",
     "webp": "web/public/art/room-15.webp",
-    "prompt": "The scene: in the crown of a sleepy willow tree. a sign hangs nearby. A way out leads below. An enclosed underground space: no sky, damp rock, wet mineral glints, almost no light beyond a faint glow. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in the crown of a sleepy willow tree. a sign hangs nearby. A way out leads below. High in the crown of an enormous willow at night: a platform of thick boughs with hanging curtains of leaves, the moonlit forest canopy spread out below. A blank weathered board hangs from a branch. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 16,
@@ -125,7 +125,7 @@
     "subject": "on a lake shore.",
     "png": "web/public/art/room-16.png",
     "webp": "web/public/art/room-16.webp",
-    "prompt": "The scene: on a lake shore. A way out leads east. Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: on a lake shore. A way out leads east. A moonlit lake shore at night: still dark water stretching to a far treeline, a pebbled bank in the foreground, conifer silhouettes framing the edges. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 17,
@@ -133,7 +133,7 @@
     "subject": "still in the forest.",
     "png": "web/public/art/room-17.png",
     "webp": "web/public/art/room-17.webp",
-    "prompt": "The scene: still in the forest. Ways out lead north, south and east. Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: still in the forest. Ways out lead north, south and east. Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 18,
@@ -141,7 +141,7 @@
     "subject": "in a foreboding part of the forest.",
     "png": "web/public/art/room-18.png",
     "webp": "web/public/art/room-18.webp",
-    "prompt": "The scene: in a foreboding part of the forest. Ways out lead north, south, west and east. Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a foreboding part of the forest. Ways out lead north, south, west and east. Dense oppressive forest at night: gnarled dead trees with clawing bare branches crowding close, the path narrowing between them, only a sliver of moonlit sky above. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 19,
@@ -149,7 +149,7 @@
     "subject": "facing a shack on a dirt road. behind you is a log cabin.",
     "png": "web/public/art/room-19.png",
     "webp": "web/public/art/room-19.webp",
-    "prompt": "The scene: facing a shack on a dirt road. behind you is a log cabin. Ways out lead north and south. Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: facing a shack on a dirt road. behind you is a log cabin. Ways out lead north and south. A dirt road at night running between two buildings: a small grim shack ahead and a log cabin behind, both dark silhouettes with a little warm light at their windows, conifer forest beyond. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 20,
@@ -157,7 +157,7 @@
     "subject": "in a small grim shack.",
     "png": "web/public/art/room-20.png",
     "webp": "web/public/art/room-20.webp",
-    "prompt": "The scene: in a small grim shack. A way out leads east. A small cramped interior lit by a single candle or hearth; tight framing, warm amber pooling in the centre. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a small grim shack. A way out leads east. A small cramped interior at night, lit by a single candle or hearth; tight framing, warm amber pooling in the centre. Any doorway or window shows dark night sky outside, never daylight. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 21,
@@ -165,7 +165,7 @@
     "subject": "in a log cabin.",
     "png": "web/public/art/room-21.png",
     "webp": "web/public/art/room-21.webp",
-    "prompt": "The scene: in a log cabin. A way out leads west. A rough timber interior: log walls, plank floor, warmer brown tones, one small window admitting moonlight. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a log cabin. A way out leads west. A rough timber interior at night: log walls, plank floor, warmer brown tones, one small window admitting moonlight. Any doorway or window shows dark night sky outside, never daylight. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 22,
@@ -173,7 +173,7 @@
     "subject": "in a secret annex.",
     "png": "web/public/art/room-22.png",
     "webp": "web/public/art/room-22.webp",
-    "prompt": "The scene: in a secret annex. An enclosed underground space: no sky, damp rock, wet mineral glints, almost no light beyond a faint glow. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a secret annex. A concealed stone chamber behind a wall at night: bare cold masonry, a low vaulted ceiling, a single guttering candle, dust and cobwebs, no windows. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 23,
@@ -181,7 +181,7 @@
     "subject": "before an old but elegant frame house. a dirt road goes west.",
     "png": "web/public/art/room-23.png",
     "webp": "web/public/art/room-23.webp",
-    "prompt": "The scene: before an old but elegant frame house. a dirt road goes west. A way out leads west. Standing outside a structure at night: the building's mass reads as a dark silhouette against a moonlit sky. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: before an old but elegant frame house. a dirt road goes west. A way out leads west. Standing outside a structure at night: the building's mass reads as a dark silhouette against a moonlit sky. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 24,
@@ -189,7 +189,7 @@
     "subject": "in an old house.",
     "png": "web/public/art/room-24.png",
     "webp": "web/public/art/room-24.webp",
-    "prompt": "The scene: in an old house. Ways out lead east and above. A small cramped interior lit by a single candle or hearth; tight framing, warm amber pooling in the centre. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in an old house. Ways out lead east and above. A small cramped interior at night, lit by a single candle or hearth; tight framing, warm amber pooling in the centre. Any doorway or window shows dark night sky outside, never daylight. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 25,
@@ -197,7 +197,7 @@
     "subject": "in a large attic.",
     "png": "web/public/art/room-25.png",
     "webp": "web/public/art/room-25.webp",
-    "prompt": "The scene: in a large attic. A way out leads below. A small cramped interior lit by a single candle or hearth; tight framing, warm amber pooling in the centre. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a large attic. A way out leads below. A large open attic at night: bare rafters overhead, stored clutter under dust sheets, a single shaft of moonlight from a gable window, stairs descending. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 26,
@@ -205,7 +205,7 @@
     "subject": "in a sandy field.",
     "png": "web/public/art/room-26.png",
     "webp": "web/public/art/room-26.webp",
-    "prompt": "The scene: in a sandy field. Ways out lead north and west. Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a sandy field. Ways out lead north and west. An open sandy field at night: pale windblown sand and sparse scrub grass, low dunes, a wide moonlit sky, the forest only a distant dark line. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 27,
@@ -213,7 +213,7 @@
     "subject": "in the castle's entranceway.",
     "png": "web/public/art/room-27.png",
     "webp": "web/public/art/room-27.webp",
-    "prompt": "The scene: in the castle's entranceway. Ways out lead north, south, west and east. An enclosed underground space: no sky, damp rock, wet mineral glints, almost no light beyond a faint glow. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in the castle's entranceway. Ways out lead north, south, west and east. A vaulted stone entrance passage inside a castle at night: cold masonry, iron torch brackets throwing pools of flame-light, arched openings leading off to either side. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 28,
@@ -221,7 +221,7 @@
     "subject": "in a small room.",
     "png": "web/public/art/room-28.png",
     "webp": "web/public/art/room-28.webp",
-    "prompt": "The scene: in a small room. A way out leads east. A small cramped interior lit by a single candle or hearth; tight framing, warm amber pooling in the centre. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a small room. A way out leads east. A small cramped interior at night, lit by a single candle or hearth; tight framing, warm amber pooling in the centre. Any doorway or window shows dark night sky outside, never daylight. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 29,
@@ -229,7 +229,7 @@
     "subject": "in a room.",
     "png": "web/public/art/room-29.png",
     "webp": "web/public/art/room-29.webp",
-    "prompt": "The scene: in a room. A way out leads west. A rough timber interior: log walls, plank floor, warmer brown tones, one small window admitting moonlight. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a room. A way out leads west. A rough timber interior at night: log walls, plank floor, warmer brown tones, one small window admitting moonlight. Any doorway or window shows dark night sky outside, never daylight. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 30,
@@ -237,7 +237,7 @@
     "subject": "in a vast chamber.",
     "png": "web/public/art/room-30.png",
     "webp": "web/public/art/room-30.webp",
-    "prompt": "The scene: in a vast chamber. Ways out lead south, above and below. A vast stone chamber: cold grey masonry, strong vertical scale, light falling from far above. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a vast chamber. Ways out lead south, above and below. A vast stone chamber: cold grey masonry, strong vertical scale, light falling from far above. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 31,
@@ -245,7 +245,7 @@
     "subject": "in the cellar with a vault door.",
     "png": "web/public/art/room-31.png",
     "webp": "web/public/art/room-31.webp",
-    "prompt": "The scene: in the cellar with a vault door. Ways out lead south, above and below. A small cramped interior lit by a single candle or hearth; tight framing, warm amber pooling in the centre. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in the cellar with a vault door. Ways out lead south, above and below. A stone cellar at night: cold damp walls, a heavy iron-bound vault door dominating one side, a lantern the only light, no windows. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 32,
@@ -253,7 +253,7 @@
     "subject": "",
     "png": "web/public/art/room-32.png",
     "webp": "web/public/art/room-32.webp",
-    "prompt": "The scene: an empty, featureless space. An indistinct liminal space, heavy fog, almost featureless. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: an empty, featureless space. An empty liminal void: flat overlapping planes of deep colour receding into blackness, no floor, no horizon, no objects at all. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 33,
@@ -261,7 +261,7 @@
     "subject": "in a dungeon chamber.",
     "png": "web/public/art/room-33.png",
     "webp": "web/public/art/room-33.webp",
-    "prompt": "The scene: in a dungeon chamber. A way out leads north. A rough timber interior: log walls, plank floor, warmer brown tones, one small window admitting moonlight. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a dungeon chamber. A way out leads north. A stone dungeon chamber at night: rough block walls, a low arched exit, an iron sconce guttering, straw on the flagstones. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 34,
@@ -269,7 +269,7 @@
     "subject": "in a musty dungeon.",
     "png": "web/public/art/room-34.png",
     "webp": "web/public/art/room-34.webp",
-    "prompt": "The scene: in a musty dungeon. Ways out lead above and below. A vast stone chamber: cold grey masonry, strong vertical scale, light falling from far above. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a musty dungeon. Ways out lead above and below. A vast stone chamber: cold grey masonry, strong vertical scale, light falling from far above. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 35,
@@ -277,7 +277,7 @@
     "subject": "in the royal treasure room.",
     "png": "web/public/art/room-35.png",
     "webp": "web/public/art/room-35.webp",
-    "prompt": "The scene: in the royal treasure room. A way out leads above. A small cramped interior lit by a single candle or hearth; tight framing, warm amber pooling in the centre. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in the royal treasure room. A way out leads above. A royal treasure vault at night: a tall stone chamber heaped with coin, plate and gilded chests, a stone stair rising, everything catching hard glints of gold against deep shadow. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 36,
@@ -285,7 +285,7 @@
     "subject": "in a high chamber.",
     "png": "web/public/art/room-36.png",
     "webp": "web/public/art/room-36.webp",
-    "prompt": "The scene: in a high chamber. A way out leads below. An enclosed underground space: no sky, damp rock, wet mineral glints, almost no light beyond a faint glow. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a high chamber. A way out leads below. A high tower chamber of cold stone at night, a stone stair descending into darkness; tall narrow windows admit shafts of moonlight. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 37,
@@ -293,7 +293,7 @@
     "subject": "in a tower chamber bathed in moonlight.",
     "png": "web/public/art/room-37.png",
     "webp": "web/public/art/room-37.webp",
-    "prompt": "The scene: in a tower chamber bathed in moonlight. A way out leads below. A small cramped interior lit by a single candle or hearth; tight framing, warm amber pooling in the centre. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a tower chamber bathed in moonlight. A way out leads below. A high tower chamber flooded with moonlight at night: tall arched windows admitting broad cold shafts of light across a bare stone floor. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   },
   {
     "id": 38,
@@ -301,6 +301,6 @@
     "subject": "in a broken horse-drawn wagon.",
     "png": "web/public/art/room-38.png",
     "webp": "web/public/art/room-38.webp",
-    "prompt": "The scene: in a broken horse-drawn wagon. A way out leads below. An enclosed underground space: no sky, damp rock, wet mineral glints, almost no light beyond a faint glow. Moonlit gothic matte painting in the style of an oil-on-canvas book illustration. Desaturated blue-black night palette; warm amber appears only where a real light source justifies it. Heavy atmospheric haze, deep shadow occupying the lower third, a single cool key light from a high moon. Painterly, not photographic. No figures or people. No text, letters, signs, compass markings or map symbols. Square composition, subject centred, no important detail touching the frame edge."
+    "prompt": "The scene: in a broken horse-drawn wagon. A way out leads below. Inside the bed of a broken wooden wagon at night, looking out past splintered planks and a torn canvas cover at the moonlit forest beyond. Cel-shaded graphic-novel illustration with bold, confident ink linework defining every form. Hard edges and flat planes of colour; no soft gradients and no atmospheric fog. Depth built from layered, silhouetted vector shapes receding in scale rather than from haze. Lighting simplified to high-contrast cel-shading: two or three discrete tonal steps, sharp shadow boundaries. Punchy saturated palette of deep purples and teals, with a small number of bright accent highlights. Graphic and stylised, not photographic. No figures or people. No text, letters, signs, runes, glyphs or carved inscriptions of any kind. Square composition, subject centred, no important detail touching the frame edge."
   }
 ]

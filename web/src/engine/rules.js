@@ -16,6 +16,7 @@
 // this in now would mean guessing at what the player types. The mechanism is
 // here and tested; add entries as each noun is confirmed.
 
+import { MESSAGES } from "./messages.js";
 import { isCarried, placeObject } from "./state.js";
 import { resolveNoun, resolveVerb } from "./vocabulary.js";
 import { objectsInRoom } from "./world.js";
@@ -187,6 +188,26 @@ export const RULES = [
     when: { verb: "look", X: 47, objectPresent: 3 },
     then: { say: "IT IS COVERED WITH SHINY RUNES AND STARS." },
     source: "TRANS.bas:1560, 1700",
+  },
+  // 1570 -> 1780: the crystal ball, which is the only place the game tells you
+  // what the cloak and the ring are for.
+  {
+    when: { verb: "look", X: 67, room: 10 },
+    then: {
+      say: [
+        "AS YOU GAZE INTO THE CRYSTAL BALL YOU SEE A SMALL ORANGE FLAME BURNING WITH AN UNNATURAL BRILLIANCE. AS YOU PEER",
+        "DEEPER INTO THE FIRE, YOU SEE YOURSELF STANDING SOMEWHERE IN THE WOODS, NEAR A STATUE. A FIGURE CLAD IN A WIZARD'S",
+        "CLOAK APPROACHES THE STATUE. ON HIS HAND HE WEARS A SHINY GOLD RING WHICH GLOWS WITH A SOFT, WHITE FLAME. WITH A WAVE",
+        "OF HIS HAND, EVERYTHING AROUND THE STATUE GOES ABLAZE WITH BRIGHT GREEN FIRE. YOU FEEL A JOLT OF THUNDER AND",
+        "RETURN TO YOUR SENSES, STEPPING AWAY FROM THE CRYSTAL BALL.",
+      ],
+    },
+    source: "TRANS.bas:1780, 1785-1787",
+  },
+  {
+    when: { verb: "look", X: 67 },
+    then: { say: MESSAGES.notHere },
+    source: "TRANS.bas:1780",
   },
   {
     when: { verb: "look", X: 61, room: 31 },

@@ -19,8 +19,8 @@ export function shoot({ state, command }) {
     return [MESSAGES.missed];
   }
 
-  // 4605 IF P%(34)=P AND X=34 THEN ...
-  if (state.objectLoc[34] === state.room && command.X === 34) {
+  // 4605 IF P%(34)=P AND (X=34 OR bare SHOOT) THEN ...
+  if (state.objectLoc[34] === state.room && (command.X === 34 || !command.X)) {
     state.flags.WF = 1;
     placeObject(state, 34, GONE);
     setObjectName(state, 17, "SMOKING FLINTLOCK PISTOL.");

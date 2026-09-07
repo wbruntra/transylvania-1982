@@ -10,7 +10,7 @@ import { close } from "./close.js";
 import { drop } from "./drop.js";
 import { drink, eat } from "./eat.js";
 import { enterStructure, exitStructure } from "./enterExit.js";
-import { help, quit } from "./meta.js";
+import { help, mapCommand, quit, restoreGame, saveGame } from "./meta.js";
 import { inventory } from "./inventory.js";
 import { listen } from "./listen.js";
 import { load } from "./load.js";
@@ -60,7 +60,13 @@ export const COMMANDS = {
   get: take,
   drop,
   help,
+  map: mapCommand,
   quit,
+  save: saveGame,
+  restore: restoreGame,
+
+  // Known gap: LIST (1110) does not exist in original disk -> 230
+  list: dontUnderstand,
 
   // Tier 1 canned refusals (PORTING.md)
   hunt: notHere, // 210
@@ -72,7 +78,8 @@ export const COMMANDS = {
   brush: cant, // 240
   pet: cant, // 240
   pat: cant, // 240
-  kill: cant, // 5950 -> 240
+  // Known gap: KILL + noun 77 (PASSA) jumps to non-existent 6130 in original -> 230
+  kill: ({ command }) => (command.X === 77 ? [MESSAGES.dontUnderstand] : [MESSAGES.cant]), // 5930/5950
   scream: nothingHappened, // 290
   sing: nothingHappened, // 290
   kick: nothingHappened, // 290

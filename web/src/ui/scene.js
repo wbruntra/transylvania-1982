@@ -2,6 +2,8 @@
 // artwork does not exist yet. Swap the body of `show` for generated images or a
 // Three.js canvas without touching the engine.
 
+import { updateSceneOverlay } from "./sceneOverlay.js";
+
 /** Room type (RT%) -> [background, highlight] for the placeholder gradient. */
 const PALETTE_BY_ROOM_TYPE = {
   1: ["#0d3311", "#7fd18b"],
@@ -15,37 +17,145 @@ const PALETTE_BY_ROOM_TYPE = {
 const DEFAULT_PALETTE = PALETTE_BY_ROOM_TYPE[1];
 
 /**
+ * Rooms whose *background* changes with game state, not just their props.
+ * These exist because the art was generated from each room's fixed
+ * description text, so anything the description names is painted in
+ * permanently -- a change the description never mentions (a door opening,
+ * ground burning) has to be a different picture, not an overlay. See
+ * SCENE_VARIATIONS.md for why these three and not others.
+ *
+ * @type {Record<number, (state: import("../engine/state.js").GameState) => string>}
+ */
+const BACKGROUND_VARIANTS = {
+  // The cave door (TRANS.bas:6310/6320) is painted shut in both rooms it
+  // joins; DR is the same flag that actually unlocks and opens it.
+  9: (state) => (state.flags.DR ? "-open" : ""),
+  10: (state) => (state.flags.DR ? "-open" : ""),
+  // 7745: the alien statue's destruction leaves a scorched 30-foot circle
+  // (object 29) that no prop overlay could cover convincingly.
+  4: (state) => (state.objectLoc[2] === -1 ? "-burnt" : ""),
+};
+
+const ART_MODE_KEY = "transylvania-art-mode";
+
+/**
+ * The art paths to try, in order, for a room in the current state. A pure
+ * function so the state -> art mapping is testable without a DOM.
+ * @param {import("../data/gameData.js").RawRoom} room
+ * @param {import("../engine/state.js").GameState} [state]
+ * @param {"enhanced" | "classic"} [mode]
+ * @returns {string[]}
+ */
+export function artCandidates(room, state, mode = "enhanced") {
+  const variant = state ? BACKGROUND_VARIANTS[room.id]?.(state) ?? "" : "";
+  const enhanced = [`art/room-${room.id}${variant}.webp`, `art/room-${room.id}.webp`, `art/room-${room.id}.png`];
+  // Classic art has no state variants (it's a direct render of the 1982
+  // vector program for the room, R1..R38) and no room 32 (a blank stub in
+  // the original -- see PORTING.md). Missing ones fall through to enhanced.
+  if (mode === "classic") return [`art/classic/room-${room.id}.webp`, ...enhanced];
+  return enhanced;
+}
+
+/**
  * @param {HTMLElement} container
  * @param {HTMLElement} label
+ * @param {SVGSVGElement} [overlaySvg]
+ * @param {(action: string) => void} [onAction]
  */
-export function createScene(container, label) {
+export function createScene(container, label, overlaySvg, onAction) {
   const image = document.createElement("img");
   image.className = "scene-art";
   image.alt = "";
   container.prepend(image);
+
+  const backdrop = document.getElementById("sceneBackdrop");
+
+  let mode = /** @type {"enhanced" | "classic"} */ (
+    (() => {
+      try {
+        return localStorage.getItem(ART_MODE_KEY) === "classic" ? "classic" : "enhanced";
+      } catch {
+        return "enhanced";
+      }
+    })()
+  );
+  /** @type {{room: import("../data/gameData.js").RawRoom, state?: import("../engine/state.js").GameState, world?: unknown} | null} */
+  let lastShown = null;
 
   /** @param {import("../data/gameData.js").RawRoom} room */
   function paintPlaceholder(room) {
     image.style.display = "none";
     const [background, highlight] = PALETTE_BY_ROOM_TYPE[room.type] ?? DEFAULT_PALETTE;
     container.style.background = `radial-gradient(circle at 50% 30%, ${highlight}, ${background} 70%)`;
+    if (backdrop) {
+      backdrop.style.backgroundImage = "none";
+      backdrop.style.background = `radial-gradient(circle at 50% 50%, ${highlight}, ${background} 80%)`;
+      backdrop.style.opacity = "0.35";
+    }
   }
 
+  image.onload = () => {
+    if (backdrop && image.src) {
+      backdrop.style.backgroundImage = `url("${image.src}")`;
+      backdrop.style.opacity = "0.45";
+    }
+  };
+
   return {
-    /** @param {import("../data/gameData.js").RawRoom} room */
-    show(room) {
+    /**
+     * @param {import("../data/gameData.js").RawRoom} room
+     * @param {import("../engine/state.js").GameState} [state]
+     * @param {ReturnType<typeof import("../engine/world.js").createWorld>} [world]
+     */
+    show(room, state, world) {
+      lastShown = { room, state, world };
       // Try each candidate in turn; fall back to the gradient when none load.
-      const candidates = [`art/room-${room.id}.webp`, `art/room-${room.id}.png`];
+      const candidates = artCandidates(room, state, mode);
       container.style.background = "#000";
       image.style.display = "block";
-      image.onerror = () => {
-        const next = candidates.shift();
-        if (next) image.src = next;
-        else paintPlaceholder(room);
-      };
-      image.src = candidates.shift();
 
-      label.textContent = `ROOM ${room.id} · TYPE ${room.type} · ${room.desc.slice(0, 60)}…`;
+      function tryNext() {
+        const next = candidates.shift();
+        if (next) {
+          image.src = next;
+        } else {
+          paintPlaceholder(room);
+        }
+      }
+
+      image.onerror = tryNext;
+      tryNext();
+
+      // Render dynamic SVG overlay assets for interactive scene variations
+      if (overlaySvg && state && world) {
+        updateSceneOverlay(overlaySvg, {
+          roomId: room.id,
+          state,
+          world,
+          onAction,
+        });
+      }
+
+      // Just the identifiers: the description belongs in the log, and printing
+      // a truncated copy of it over the artwork only obscured the picture.
+      label.textContent = `ROOM ${room.id} · TYPE ${room.type}`;
+    },
+
+    /** @returns {"enhanced" | "classic"} */
+    getArtMode() {
+      return mode;
+    },
+
+    /** Toggles between the AI-illustrated art and the decoded 1982 vector renders, redrawing the current room. */
+    toggleArtMode() {
+      mode = mode === "classic" ? "enhanced" : "classic";
+      try {
+        localStorage.setItem(ART_MODE_KEY, mode);
+      } catch {
+        // Private browsing / storage disabled: the toggle just won't persist.
+      }
+      if (lastShown) this.show(lastShown.room, lastShown.state, lastShown.world);
+      return mode;
     },
   };
 }

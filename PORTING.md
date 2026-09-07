@@ -4,7 +4,8 @@ What is left to turn the web port into a winnable game, ordered so that each
 tier is useful on its own. Line numbers refer to
 [`trans_port_kit/TRANS.bas`](trans_port_kit/TRANS.bas), the detokenised listing.
 
-Status at time of writing: **39 of 45 routines ported**, covering 86 of 89 verbs.
+Status at time of writing: **45 of 45 routines ported**, covering all 89 verbs,
+and the game is winnable end to end — see below.
 
 ## Before anything else: two enabling changes
 
@@ -131,7 +132,7 @@ Each needs its own handler and touches flags or object placement.
 - [x] **The `LOOK <thing>` table, 1500–1599.** Around 20 `(noun, room, object,
       flag)` tests. Straight into `RULES` now that noun ids resolve. Default is
       "YOU SEE NOTHING UNUSUAL." (1599).
-- [ ] **The per-turn block, 7000–7180.** Register as turn hooks:
+- [x] **The per-turn block, 7000–7180.** Registered as turn hooks:
   - `7000/7001` — clear `V`/`W` when the vampire (39) or werewolf (34) is absent.
   - `7003` — object 5 vanishes and 23 appears if you leave room 35.
   - `7005` — **the clock**: `TU=TU+1`; every 70 turns `Y=TU/70` and it chimes.
@@ -145,13 +146,11 @@ Each needs its own handler and touches flags or object placement.
   - `7050–7056` — the goblin's random harassment in room 26.
   - `7090–7100` — the werewolf's random appearance, suppressed by `WF` and for
     the first 10 turns.
-- [ ] **Endings.** 27000 (sunrise / time out) and 30000 (death). Both need a
-      terminal state the engine does not have — `execute` currently always
-      returns to the prompt.
-- [ ] **25000 — `SAVE`, and RESTORE at line 50.** `serializeState` /
-      `deserializeState` already cover the state; this is the UI and storage.
-- [ ] **Room 32 has no description.** Blank in the ROOMS file — confirm against
-      the original how it is meant to present.
+- [x] **Endings.** 27000 (sunrise / time out) and 30000 (death). Both have terminal
+      state `isGameOver`, and commands prompt to restart.
+- [x] **25000 — `SAVE`, and RESTORE at line 50.** LocalStorage + state serialization.
+- [x] **Room 32 has no description.** Confirmed: blank stub record in original
+      `ROOMS` file, never referenced in `TRANS.bas`.
 
 ## Known gaps
 
@@ -180,7 +179,7 @@ Each needs its own handler and touches flags or object placement.
      in a browser with no disk.
   2. *Pragmatic (recommended)* — route both to "I'M SORRY - I DON'T UNDERSTAND."
      (line 230) with a comment pointing here. Indistinguishable to a player,
-     since neither action does anything in the original. **Not yet applied.**
+     since neither action does anything in the original. **Applied.**
 
 - **The listing is missing lines 1–3, which are on the disk.** They are not game
   logic — they are a crack patch:
@@ -203,9 +202,133 @@ Each needs its own handler and touches flags or object placement.
 - Descriptions are the Apple II's 40-column text with hard-wrapped spacing
   ("HORSE-   DRAWN WAGON"). Faithful, but it reads oddly in a fluid layout.
 
+## The game is winnable, and there is a test that plays it
+
+`web/test/winnable.test.js` plays one game from the opening prompt to
+"WELL DONE!" using nothing but commands a player could type — no assignments to
+`state.room` or `objectLoc` anywhere. It wins in **94 turns**, against a
+350-turn limit (the fifth chime at 7005).
+
+The chain it walks, which is the shortest one there is:
+
+| Step | Needs | Line |
+| --- | --- | --- |
+| Take the cross | — | — |
+| `SAY IJNID` to the goblin | — | 8510 |
+| `MOVE GRAVESTONE`, `UNLOCK GRATE`, `GO GRATE` | the goblin's key | 7815 / 6370 / 6010 |
+| Take the elixir | — | — |
+| `PULL ANTLERS` in the cabin, take the cloak | — | 4703 |
+| `WAVE CROSS` at the vampire | the cross, and the vampire | 7769 |
+| `OPEN COFFER`, take the ring | `VR` from the cross | 7530 / 3067 |
+| `WAVE RING` at the statue | ring **and** cloak, in room 4 | 7745 |
+| `GO UFO`, twenty turns later | the shooting star | 7030 / **5920** |
+| `CLIMB LADDER` to the tower | `VR` again | 6095 |
+| `MOVE VINES`, `PUSH BUTTON` | the black box | 7820 / 4933 |
+| `WAVE ELIXIR`, `POUR ELIXIR`, `CLAP` | the elixir, in that order | 7780 / 4840 / 7900 |
+| Carry her to the lake, `SAIL BOAT` | the princess | 9440 |
+
+**The ending depends on a random event.** The vampire only appears by chance
+(7350-7355: 20% a turn, rooms 27-37), and destroying him is the only way to set
+`VR` — which gates both the ring and the ladder to the tower. There is no
+deterministic route to the princess. The test holds the RNG in the dead band
+where nothing fires and dips it once, deliberately, so this dependency is
+written down rather than left to luck; a fourth test asserts that without the
+dip the tower stays shut.
+
+Writing that test found four defects, now fixed:
+
+- **5920 was never ported**, and it is the only line in the listing that puts
+  the black metal box in your hands (`P%(27)=-2`). Without it the sarcophagus
+  can never be blasted open, so **the port was not winnable at all**.
+- **5700-5737 was not wired to `GO`.** `GO GRATE` and `GO CABIN` — what the room
+  descriptions tell you to type — were refused; only `ENTER` reached 5737.
+- **Every non-compass arrival described the room twice**, because the movement
+  helpers each called `describeRoom` and the turn loop then did it again.
+- **Winning did not end the game**; 9450 falls through to 30040 like every other
+  ending, so `isGameOver` is now set there too.
+
+3067 (the ring is barred by "A MYSTERIOUS BARRIER" until `VR`) was also missing
+and is now in; it is what forces the cross to come before the treasure room.
+
+## The cave behind the stump is the hint room
+
+`KNOCK` on the stump drops you into room 9, which has no exits in `ROOMS` and
+whose `EXIT` is refused outright (10019). That looks like a dead end, and it is
+not one — three of the lines that make it work were unported, which is what made
+it look like a trap:
+
+- **3080 — `TAKE BOOK` in room 9** prints "IT IS MINE! GO AWAY!" and sets `P=1`.
+  This is the way out, and the only one.
+- **1780/1785-1787 — `LOOK CRYSTAL` in room 10** shows a figure in a wizard's
+  cloak, wearing a shiny ring, waving at the statue until everything goes ablaze.
+  This is the game's *only* statement of the cloak-plus-ring-at-the-statue
+  puzzle, which is otherwise unguessable.
+- **3090/3095 — `TAKE FLIES`** scatters them unless the flypaper is carried,
+  and catching them is what makes object 7 takeable at all.
+
+So the cave is two clue rooms with a door between them (pick from the cloak,
+6320), holding the two things a player cannot deduce: how the elixir works
+(9720) and what the ring and cloak are for. `web/test/winnable.test.js` now
+plays that loop, and the flypaper -> flies -> bullfrog -> IJNID chain with it.
+
+## The original artwork, rendered
+
+`tools/picdraw.py` reproduces the 1982 art by running the game's own drawing
+code. The pictures on disk are not bitmaps: each room (`R1`..`R38`, no `R32`)
+and each object (`O1`..`O39`) is a vector program for `PICDRAW2`, which
+`TRANS.bas` drives as
+
+```
+8000  BLOAD R<P>,A4608   POKE 2560,0    POKE 2561,18   CALL 2608
+8070  BLOAD O<I>,A6632   POKE 2560,232  POKE 2561,25   CALL 2613
+```
+
+`PICDRAW2` loads at `$0800` and ends exactly where the room data begins
+(`$1200`); `$0A00/$0A01` is its data pointer. The two `CALL`s are one routine
+with two entry points — `$0A30` floods the page white first, `$0A35` draws on
+top, which is how objects composite over rooms.
+
+It draws two ways. Outlines go through four Applesoft HIRES ROM entry points
+(`$F3F4` BKGND, `$F6EC` HCOLOR, `$F411` HPOSN, `$F53A` HLIN); fills are written
+straight into the hires page through a pointer at `$08/$09`, whose high byte it
+forms by adding HPAG (`$E6`). So the tool is a small 6502 interpreter
+(`tools/cpu6502.py`) plus a real 8K framebuffer, with those four routines
+supplied in Python and the finished page decoded the way an Apple II displays
+it — colour from *pairs* of bits, bit 7 selecting violet/green or orange/blue.
+
+```sh
+python3 tools/picdraw.py --out web/public/art/original     # all 76
+python3 tools/picsheet.py                                  # contact sheets
+python3 tools/picsheet.py --compose 5:6,12                 # room + objects
+```
+
+All 76 render without a failure. The decoder is checked against `PIC`, the one
+genuine bitmap on the disk (the title screen), which comes out as the original
+artwork.
+
+Three things this settles that guesswork could not:
+
+- **Room 4 is an empty clearing.** The statue is object `O2`, composited. So
+  every state of that room really is an overlay, as `SCENE_VARIATIONS.md`
+  assumed — except the scorching, which no object covers.
+- **Room 9's door is in the room art**, and there is no door object. The
+  original never showed it open either, so an open variant is an improvement on
+  1982 rather than a restoration of it.
+- **`O12` (gravestone), `O23` (treasure coffer) and `O35` are empty programs.**
+  Those things are painted into the room; the object exists only so that
+  "THERE IS A ..." has something to name.
+
+Objects render onto a blank page, so any drawn in black look empty on their own
+— `O24`, the black cat, is 115 lines that only show over the white clay hut.
+Compose them over their room to see them.
+
 ## Method that works
 
 Port a routine, add its cases to `web/test/walkthrough.test.js` as a played
 sequence, and check the transcript against the BASIC by reading the lines rather
 than by playing the original. The engine is headless, so a test is a walkthrough
 and a walkthrough is a test.
+
+Per-routine tests place the world where the routine needs it, which verifies the
+routine but hides missing links between routines. `winnable.test.js` is the
+counterweight: it assigns nothing, so a puzzle with no way to reach it fails.

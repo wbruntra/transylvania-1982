@@ -30,8 +30,12 @@ export const VERBS = {
   inventory: { words: ["inventory", "i"], takesObject: false },
   get: { words: ["get", "take", "grab", "steal", "catch", "lift"], takesObject: true },
   drop: { words: ["drop", "release", "throw", "leave", "give"], takesObject: true },
-  help: { words: ["help"], takesObject: false },
+  help: { words: ["help"], takesObject: true },
+  map: { words: ["map", "m", "chart"], takesObject: false },
   quit: { words: ["quit", "end"], takesObject: false },
+  save: { words: ["save"], takesObject: false },
+  restore: { words: ["restore"], takesObject: false },
+  list: { words: ["list"], takesObject: false },
 
   // Tier 1 canned refusals (PORTING.md)
   hunt: { words: ["hunt"], takesObject: true },
@@ -268,6 +272,8 @@ export function resolveVerb(world, firstWord, canonicalVerb = "") {
     read: "READ",
     exit: "EXIT",
     enter: "ENTER",
+    save: "SAVE",
+    list: "LIST",
   };
 
   const directionToTable = {

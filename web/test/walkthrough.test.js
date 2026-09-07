@@ -89,6 +89,11 @@ test("the carry limit is five things", async () => {
   const engine = await createTestEngine();
 
   // Pile the first six takeable objects into the starting room.
+  // The ring is one of the first six takeable objects and TRANS.bas:3067 keeps
+  // it behind a barrier until the vampire is gone; this test is about the
+  // limit, not that puzzle.
+  engine.state.flags.VR = 1;
+
   const takeable = [...engine.world.objects.values()].filter((object) => object.takeable);
   const names = takeable.slice(0, MAX_CARRIED + 1).map((object) => object.name);
   for (const object of takeable.slice(0, MAX_CARRIED + 1)) {
@@ -106,14 +111,16 @@ test("the carry limit is five things", async () => {
   assert.deepEqual(engine.run(`get ${names[MAX_CARRIED]}`), [MESSAGES.ok]);
 });
 
-test("unknown input is refused without costing anything but a turn", async () => {
+test("unknown input is refused without costing a turn", async () => {
   const engine = await createTestEngine();
 
   assert.deepEqual(engine.run("xyzzy"), [MESSAGES.dontUnderstand]);
   assert.deepEqual(engine.run("get"), [MESSAGES.dontUnderstand]);
-  assert.deepEqual(engine.run("go"), [MESSAGES.dontUnderstand]);
+  // GO alone is answered by TRANS.bas:5700, which goes back to the prompt
+  // rather than through 7000 -- so it is refused without costing a turn.
+  assert.deepEqual(engine.run("go"), [MESSAGES.needDirection]);
   assert.equal(engine.state.room, START_ROOM);
-  assert.equal(engine.state.turns, 3);
+  assert.equal(engine.state.turns, 0);
 });
 
 test("blank input is not a turn", async () => {
@@ -193,8 +200,8 @@ test("tier 1 canned refusals print expected lines and consume a turn", async () 
   // 9600: KISS -> "ISN'T THAT A LITTLE CORNY?"
   assert.deepEqual(engine.run("kiss"), [MESSAGES.littleCorny]);
 
-  // Each command consumed a turn (23 commands executed above)
-  assert.equal(engine.state.turns, 23);
+  // 21 valid action refusals consumed 1 turn each (HOLD and USE produce "I DON'T UNDERSTAND" without consuming a turn)
+  assert.equal(engine.state.turns, 21);
 });
 
 test("tier 2 routines and rules work as expected", async () => {
@@ -202,7 +209,12 @@ test("tier 2 routines and rules work as expected", async () => {
 
   // 1. STRIKE/KNOCK/HIT (TRANS.bas:9820)
   assert.equal(engine.state.room, START_ROOM);
-  assert.deepEqual(engine.run("knock stump"), ["POOF!"]);
+  // 9820 ends in GOTO 7000, which falls through to 7990: because P changed, the
+  // turn loop redescribes the room. The teleport itself only says "POOF!".
+  const knocked = engine.run("knock stump");
+  assert.equal(knocked[0], "POOF!");
+  assert.equal(engine.state.room, 9);
+  assert.match(knocked[1], /SMALL DARK CAVE/);
   assert.equal(engine.state.room, 9);
   assert.deepEqual(engine.run("knock stump"), ["HUH?"]);
   assert.deepEqual(engine.run("knock door"), [MESSAGES.nothingHappened]);
@@ -367,6 +379,15 @@ test("tier 3 puzzle routines work as expected", async () => {
 
   const pull22 = engine.run("pull antlers");
   assert.equal(pull22[0], MESSAGES.wallSpins);
+  assert.equal(engine.state.room, 21);
+
+  // Pull wall (112) also spins wall in rooms 21 and 22
+  const pullWall = engine.run("pull wall");
+  assert.equal(pullWall[0], MESSAGES.wallSpins);
+  assert.equal(engine.state.room, 22);
+
+  const pullWall22 = engine.run("pull wall");
+  assert.equal(pullWall22[0], MESSAGES.wallSpins);
   assert.equal(engine.state.room, 21);
 
   // --- 4800: POUR ---
@@ -571,11 +592,15 @@ test("tier 3 puzzle routines work as expected", async () => {
   assert.equal(sailRefuse[0].includes("REFUSE TO LET YOU LAND"), true);
   assert.equal(engine.state.turns, sailTurnBefore); // Does not consume turn
 
-  // With Sabrina carried: win ending
-  engine.state.objectLoc[38] = CARRIED;
-  const sailWin = engine.run("sail boat");
+  // With Sabrina carried: win ending. On its own engine, because the ending
+  // now ends the game -- test/winnable.test.js plays the whole route to it.
+  const winEngine = await createTestEngine();
+  winEngine.state.room = 16;
+  winEngine.state.objectLoc[38] = CARRIED;
+  const sailWin = winEngine.run("sail boat");
   assert.equal(sailWin[0].includes("PRINCESS SABRINA"), true);
   assert.equal(sailWin[1], "PRESS ANY KEY TO RESTART THE GAME.");
+  assert.equal(winEngine.isGameOver(), true);
 
   // --- 9700: READ ---
   // Sign at 15
@@ -629,5 +654,205 @@ test("tier 3 puzzle routines work as expected", async () => {
   engine.run("enter");
   assert.equal(engine.state.room, 27);
 });
+
+test("per-turn block 7000-7180, endings, and meta commands work as expected", async () => {
+  const engine = await createTestEngine();
+
+  // --- Meta commands ---
+  // HELP with no noun does not consume a turn (TRANS.bas:4200)
+  const turnsBeforeHelp = engine.state.turns;
+  assert.deepEqual(engine.run("help"), ["HAVE YOU INSPECTED EVERYTHING?"]);
+  assert.equal(engine.state.turns, turnsBeforeHelp);
+  assert.deepEqual(engine.run("help tree"), [MESSAGES.cant]);
+
+  // Known gap: LIST -> 230
+  assert.deepEqual(engine.run("list"), [MESSAGES.dontUnderstand]);
+
+  // Known gap: KILL + PASSA (noun 77) -> 230
+  assert.deepEqual(engine.run("kill passage"), [MESSAGES.dontUnderstand]);
+
+  // SAVE
+  assert.deepEqual(engine.run("save"), ["SAVED."]);
+
+  // QUIT -> game over terminal state
+  const quitEngine = await createTestEngine();
+  assert.equal(quitEngine.isGameOver(), false);
+  assert.deepEqual(quitEngine.run("quit"), ["PRESS ANY KEY TO RESTART THE GAME."]);
+  assert.equal(quitEngine.isGameOver(), true);
+  assert.deepEqual(quitEngine.run("look"), ["PRESS ANY KEY TO RESTART THE GAME."]);
+
+  // Restart resets game over
+  const restartRes = quitEngine.run("restart");
+  assert.equal(quitEngine.isGameOver(), false);
+  assert.equal(restartRes[0], MESSAGES.welcome);
+
+  // --- Per-turn block: Wandering mice (object 20) ---
+  const miceEngine = await createTestEngine();
+  miceEngine.state.objectLoc[20] = 2;
+  miceEngine.run("look"); // turn 1
+  assert.equal(miceEngine.state.objectLoc[20], 17);
+  miceEngine.run("look"); // turn 2
+  assert.equal(miceEngine.state.objectLoc[20], 3);
+  miceEngine.run("look"); // turn 3
+  assert.equal(miceEngine.state.objectLoc[20], 19);
+  miceEngine.run("look"); // turn 4
+  assert.equal(miceEngine.state.objectLoc[20], 2);
+
+  // When mice arrive in player's room, announcement appears
+  miceEngine.state.room = 17;
+  const miceEnter = miceEngine.run("look"); // mice move from 2 to 17
+  assert.equal(miceEnter.at(-1), "THERE IS A TRIO OF RAVENOUS MICE.");
+
+  // --- Per-turn block: Shooting star (7030) ---
+  const starEngine = await createTestEngine();
+  starEngine.state.timers.R = starEngine.state.turns - 19;
+  const starRes = starEngine.run("look");
+  assert.equal(starRes.at(-1), "I THOUGHT I SAW A SHOOTING STAR!");
+  assert.equal(starEngine.state.objectLoc[28], 4);
+
+  // --- Per-turn block: Leaving room 35 resets coffer (7003) ---
+  const cofferEngine = await createTestEngine();
+  cofferEngine.state.room = 35;
+  cofferEngine.state.objectLoc[5] = 35; // ring loose
+  cofferEngine.state.objectLoc[23] = GONE; // coffer opened
+  cofferEngine.run("up"); // Leaves room 35 to 34
+  assert.equal(cofferEngine.state.objectLoc[5], GONE);
+  assert.equal(cofferEngine.state.objectLoc[23], 35); // coffer reset
+
+  // --- Per-turn block: Clock strikes and sunrise ending (7005 / 27000) ---
+  const clockEngine = await createTestEngine();
+  clockEngine.state.turns = 69;
+  const chime1 = clockEngine.run("look");
+  assert.equal(chime1.at(-1), "FAR AWAY A CLOCK STRIKES 1.");
+  assert.equal(clockEngine.state.hour, 1);
+  assert.equal(clockEngine.isGameOver(), false);
+
+  // 5th chime (turn 350) -> sunrise ending
+  clockEngine.state.turns = 349;
+  const chime5 = clockEngine.run("look");
+  assert.equal(chime5.includes("FAR AWAY A CLOCK STRIKES 5."), true);
+  assert.equal(chime5.includes("THE SUN BEGINS TO APPEAR ON THE HORIZON."), true);
+  assert.equal(chime5.includes("YOUR TIME HAS RUN OUT! "), true);
+  assert.equal(chime5.at(-1), "PRESS ANY KEY TO RESTART THE GAME.");
+  assert.equal(clockEngine.isGameOver(), true);
+
+  // --- Per-turn block: Monster deaths (7015 / 7020) ---
+  // Vampire kills player 1 turn after being in same room
+  const vampEngine = await createTestEngine();
+  vampEngine.state.objectLoc[39] = vampEngine.state.room;
+  vampEngine.state.timers.V = vampEngine.state.turns; // stamped on turn N
+  const vampDeath = vampEngine.run("look"); // turn N+1
+  assert.equal(vampDeath.includes("YOU FEEL A PINCH ON YOUR NECK, THE ROOM SPINS, AND YOU BLACK OUT..."), true);
+  assert.equal(vampDeath.includes("SO MUCH FOR THAT TRY..."), true);
+  assert.equal(vampEngine.isGameOver(), true);
+
+  // Werewolf kills player 1 turn after being in same room
+  const wolfEngine = await createTestEngine();
+  wolfEngine.state.objectLoc[34] = wolfEngine.state.room;
+  wolfEngine.state.timers.W = wolfEngine.state.turns; // stamped on turn N
+  const wolfDeath = wolfEngine.run("look"); // turn N+1
+  assert.equal(wolfDeath.includes("TOO LATE! THE FURRY FIEND JUST HAD YOU FOR DINNER..."), true);
+  assert.equal(wolfDeath.includes("SO MUCH FOR THAT TRY..."), true);
+  assert.equal(wolfEngine.isGameOver(), true);
+
+  // Unrecognized input ("I DON'T UNDERSTAND.") does NOT advance turn and does NOT kill player
+  const safeWolfEngine = await createTestEngine();
+  safeWolfEngine.state.objectLoc[34] = safeWolfEngine.state.room;
+  safeWolfEngine.state.timers.W = safeWolfEngine.state.turns;
+  const safeRes1 = safeWolfEngine.run("xyzzy");
+  assert.deepEqual(safeRes1, [MESSAGES.dontUnderstand]);
+  assert.equal(safeWolfEngine.isGameOver(), false);
+  assert.equal(safeWolfEngine.state.turns, 0);
+
+  const safeRes2 = safeWolfEngine.run("attack werewolf");
+  assert.deepEqual(safeRes2, [MESSAGES.dontUnderstand]);
+  assert.equal(safeWolfEngine.isGameOver(), false);
+  assert.equal(safeWolfEngine.state.turns, 0);
+
+  const safeVampEngine = await createTestEngine();
+  safeVampEngine.state.objectLoc[39] = safeVampEngine.state.room;
+  safeVampEngine.state.timers.V = safeVampEngine.state.turns;
+  const safeRes3 = safeVampEngine.run("stab vampire");
+  assert.deepEqual(safeRes3, [MESSAGES.dontUnderstand]);
+  assert.equal(safeVampEngine.isGameOver(), false);
+  assert.equal(safeVampEngine.state.turns, 0);
+});
+
+test("probabilistic turn hooks with seeded RNG trigger expected events", async () => {
+  const data = await (await import("./helpers.js")).loadGameData();
+  const { createEngine } = await import("../src/engine/engine.js");
+
+  // 1. Cat hissing in room 7
+  let rngVal = 0.1;
+  const catEngine = createEngine(data, { randomEvents: true, rng: () => rngVal });
+  catEngine.state.room = 7;
+  catEngine.state.objectLoc[24] = 7;
+  const catRes = catEngine.execute("look").messages;
+  assert.equal(catRes.includes("YOU HEAR A LOUD, HISSING 'MEOW'."), true);
+
+  // 2. Goblin harassment in room 26
+  rngVal = 0.5; // picks second goblin message
+  const gobEngine = createEngine(data, { randomEvents: true, rng: () => rngVal });
+  gobEngine.state.room = 26;
+  gobEngine.state.objectLoc[10] = 26;
+  const gobRes = gobEngine.execute("look").messages;
+  assert.equal(gobRes.some((m) => m.includes("GOBLIN") || m.includes("SOMEONE")), true);
+
+  // 3. Werewolf appearance in forest
+  rngVal = 0.8; // rng >= 0.67 triggers werewolf if turns >= 10
+  const wolfEngine = createEngine(data, { randomEvents: true, rng: () => rngVal });
+  wolfEngine.state.room = 1;
+  wolfEngine.state.turns = 10;
+  const wolfRes = wolfEngine.execute("look").messages;
+  assert.equal(wolfEngine.state.objectLoc[34], 1);
+  assert.equal(wolfRes.at(-1), "THERE IS A MENACING WEREWOLF.");
+
+  // 4. Vampire appearance in castle
+  rngVal = 0.1; // rng < 0.2 triggers vampire in castle
+  const vampEngine = createEngine(data, { randomEvents: true, rng: () => rngVal });
+  vampEngine.state.room = 28;
+  vampEngine.state.flags.VR = 0;
+  const vampRes = vampEngine.execute("look").messages;
+  assert.equal(vampEngine.state.objectLoc[39], 28);
+  assert.equal(vampRes.at(-1), "THERE IS A VAMPIRE.");
+});
+
+test("player makes a map as they explore the world", async () => {
+  const engine = await createTestEngine();
+
+  // Initially at room 1 (Stump): only room 1 is charted
+  assert.deepEqual(engine.getVisitedRooms(), [1]);
+
+  // MAP meta command reports 1 of 37 without consuming a turn
+  const turnsBefore = engine.state.turns;
+  assert.deepEqual(engine.run("map"), ["YOU CONSULT YOUR MAP. [1 OF 37 AREAS CHARTED]"]);
+  assert.equal(engine.state.turns, turnsBefore);
+
+  // Travel north to room 8
+  engine.run("north");
+  assert.equal(engine.state.room, 8);
+  assert.deepEqual(engine.getVisitedRooms(), [1, 8]);
+
+  // Travel west to room 3
+  engine.run("west");
+  assert.equal(engine.state.room, 3);
+  assert.deepEqual(engine.getVisitedRooms(), [1, 8, 3]);
+
+  // Teleport or visit room 9: newly revealed room added
+  engine.state.room = 1;
+  engine.run("knock stump"); // teleports to room 9
+  assert.equal(engine.state.room, 9);
+  assert.equal(engine.getVisitedRooms().includes(9), true);
+  assert.equal(engine.getVisitedRooms().length, 4);
+
+  // MAP command reflects the 4 charted rooms
+  assert.deepEqual(engine.run("map"), ["YOU CONSULT YOUR MAP. [4 OF 37 AREAS CHARTED]"]);
+
+  // State serialization preserves visitedRooms across save/restore
+  const serialized = (await import("../src/engine/state.js")).serializeState(engine.state);
+  const restored = (await import("../src/engine/state.js")).deserializeState(serialized);
+  assert.deepEqual(restored.visitedRooms, [1, 8, 3, 9]);
+});
+
 
 

@@ -1,6 +1,8 @@
 // 10000: EXIT / IN and 11000: ENTER / OUT. Room-type arithmetic.
+// Handlers that move the player return no text: engine.execute redescribes the
+// room whenever a turn changed it (TRANS.bas:7990/8000). Describing here as
+// well printed every arrival twice.
 
-import { describeRoom } from "../describe.js";
 import { specialNav5737 } from "../helpers.js";
 import { MESSAGES } from "../messages.js";
 
@@ -17,31 +19,31 @@ export function exitStructure({ world, state }) {
   // 10010 IF RT%(P)<7 THEN P=P-RT%(P)+3: GOTO 7000
   if (room.type < 7) {
     state.room = state.room - room.type + 3;
-    return describeRoom(world, state);
+    return [];
   }
 
   // Type 7+ rooms
   if (state.room === 27) {
     state.room = 13;
-    return describeRoom(world, state);
+    return [];
   }
   if (state.room === 36 || state.room === 11) {
     state.room = state.room - 6;
-    return describeRoom(world, state);
+    return [];
   }
   if (state.room === 38) {
     state.room = 2;
-    return describeRoom(world, state);
+    return [];
   }
   if (state.room === 15) {
     state.room = 16;
-    return describeRoom(world, state);
+    return [];
   }
   if (state.room === 9 || state.room === 10 || state.room === 22) {
     return [MESSAGES.cant];
   }
 
-  return describeRoom(world, state);
+  return [];
 }
 
 /**
@@ -67,14 +69,14 @@ export function enterStructure(context) {
   // 11010 IF P=23 OR P=6 THEN P=P+1
   if (state.room === 23 || state.room === 6) {
     state.room = state.room + 1;
-    return describeRoom(world, state);
+    return [];
   }
 
   // 11015 IF P=13 THEN P=27
   if (state.room === 13) {
     state.room = 27;
-    return describeRoom(world, state);
+    return [];
   }
 
-  return describeRoom(world, state);
+  return [];
 }

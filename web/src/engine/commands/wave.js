@@ -16,8 +16,8 @@ export function wave({ world, state, command }) {
     return alienFireball(world, state);
   }
 
-  // 7701 IF X=26 AND P%(6)=-2: cross light
-  if (command.X === 26 && isCarried(state, 6)) {
+  // 7701 IF X=26 AND P%(6)=-2: cross light (or bare WAVE when vampire is present)
+  if ((command.X === 26 || (!command.X && state.objectLoc[39] === state.room)) && isCarried(state, 6)) {
     return crossLight(world, state);
   }
 

@@ -7,7 +7,10 @@ import { MESSAGES } from "../messages.js";
 export const notHere = () => [MESSAGES.notHere];
 
 /** @type {import("./index.js").CommandHandler} */
-export const dontUnderstand = () => [MESSAGES.dontUnderstand];
+export const dontUnderstand = () => ({
+  messages: [MESSAGES.dontUnderstand],
+  consumeTurn: false,
+});
 
 /** @type {import("./index.js").CommandHandler} */
 export const cant = () => [MESSAGES.cant];

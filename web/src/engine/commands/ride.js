@@ -1,7 +1,6 @@
 // 6140: RIDE / 6142: FLY. Broomstick flyover and boat sailing.
 
 import { GONE } from "../constants.js";
-import { describeRoom } from "../describe.js";
 import { MESSAGES } from "../messages.js";
 import { isCarried, isObjectTakeable, placeObject } from "../state.js";
 import { sail } from "./sail.js";
@@ -43,6 +42,5 @@ export function fly({ world, state, command }) {
     "SOUTH YOU SEE A LAKE EXTENDING FAR BEYOND THE FOREST. SUDDENLY THE BROOM",
     "PLUNGES TOWARD THE LAKE. YOU ARE SHAKEN",
     "LOOSE AND FALL INTO A LARGE WILLOW ON THE SHORE.  THE LAST SOUND YOU HEAR IS THE LOUD, CHILLING CACKLE OF A WITCH!",
-    ...describeRoom(world, state),
   ];
 }
