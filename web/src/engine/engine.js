@@ -13,12 +13,13 @@ import { createWorld } from "./world.js";
  * @param {{
  *   state?: import("./state.js").GameState,
  *   randomEvents?: boolean,
- *   rng?: () => number
+ *   rng?: () => number,
+ *   debugInventory?: boolean
  * }} [options]
  */
 export function createEngine(data, options = {}) {
   const world = createWorld(validateGameData(data));
-  const state = options.state ?? createState(world);
+  const state = options.state ?? createState(world, { debugInventory: options.debugInventory });
 
   /**
    * Things that happen at the end of every turn regardless of the command:
@@ -76,7 +77,7 @@ export function createEngine(data, options = {}) {
 
       if (state.isGameOver) {
         if (input.toLowerCase().trim() === "restart") {
-          const fresh = createState(world);
+          const fresh = createState(world, { debugInventory: options.debugInventory });
           Object.assign(state, fresh);
           return { echo: input.toUpperCase(), messages: [MESSAGES.welcome, ...describeRoom(world, state)] };
         }

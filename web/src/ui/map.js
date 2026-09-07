@@ -336,8 +336,8 @@ export function createMap(elements) {
       }
 
       if (state && detailItems) {
-        const hereObjects = objectsInRoom(world, state, roomId).map((objId) =>
-          getObjectName(world, state, objId).replace(/\s+/g, " ").trim()
+        const hereObjects = objectsInRoom(world, state, roomId).map((object) =>
+          getObjectName(world, state, object.id).replace(/\s+/g, " ").trim()
         );
         detailItems.innerHTML = hereObjects.length
           ? `<strong>ITEMS HERE:</strong> ${hereObjects.join(", ")}`

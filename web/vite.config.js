@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
+  base: "./",
   // public/ holds the generated game.json and the scene art; both are copied
   // verbatim into the build. game.json is written by tools/sync-data.mjs -- it
   // is generated, not source.

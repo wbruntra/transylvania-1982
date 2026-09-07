@@ -160,31 +160,6 @@ function createInteractiveGroup(label, onClick) {
 }
 
 /**
- * Room 1: Ancient Stump
- * Displays acid-burned glowing runes when SM flag is set.
- */
-function renderRoom1(overlay, state, onAction) {
-  if (state.flags.SM) {
-    const g = createInteractiveGroup("Glowing Rune Inscription", () => onAction?.("read stump"));
-    g.innerHTML += `
-      <!-- Burned moss patch -->
-      <ellipse cx="512" cy="710" rx="160" ry="60" fill="rgba(10, 15, 8, 0.75)" filter="url(#runeGlow)" />
-
-      <!-- Glowing ancient runes -->
-      <g filter="url(#runeGlow)">
-        <!-- Outer decorative runic brackets -->
-        <path d="M 330 690 L 355 710 L 330 730" fill="none" stroke="#86efac" stroke-width="3" stroke-linecap="round" />
-        <path d="M 694 690 L 669 710 L 694 730" fill="none" stroke="#86efac" stroke-width="3" stroke-linecap="round" />
-        
-        <text x="512" y="718" text-anchor="middle" class="rune-text">KNOCK HERE</text>
-        <circle cx="512" cy="670" r="4" fill="#4ade80" />
-      </g>
-    `;
-    overlay.appendChild(propRoot(g));
-  }
-}
-
-/**
  * Room 3: Dark Forest
  * Displays the wrinkled note on the forest floor if Object 18 is present.
  */
@@ -263,40 +238,16 @@ function renderRoom4(overlay, state, onAction) {
   // 2. Alien Creature Statue (Obj 2)
   if (state.objectLoc[2] === 4) {
     const g = createInteractiveGroup("Alien Creature Statue", () => onAction?.("look statue"));
-    placeProp(g, "translate(512, 650)");
+    placeProp(g, "translate(512, 740)");
     g.innerHTML += `
       <!-- Pedestal shadow -->
-      <ellipse cx="0" cy="85" rx="80" ry="26" fill="rgba(0,0,0,0.7)" filter="url(#paperShadow)"/>
+      <ellipse cx="0" cy="0" rx="80" ry="22" fill="rgba(0,0,0,0.7)" filter="url(#paperShadow)"/>
 
-      <!-- Carved stone pedestal base -->
-      <polygon points="-65,40 65,40 80,85 -80,85" fill="#1e293b" stroke="#0f172a" stroke-width="2.5"/>
-      <rect x="-55" y="-5" width="110" height="48" rx="3" fill="#334155" stroke="#1e293b" stroke-width="2"/>
-      <!-- Carved alien glyph lines on pedestal -->
-      <line x1="-35" y1="18" x2="35" y2="18" stroke="#0ea5e9" stroke-width="1.5" stroke-dasharray="6,4"/>
-
-      <!-- Folded gargoyle/alien wings -->
-      <path d="M -25 -20 Q -95 -80 -65 15 Q -40 25 -25 10 Z" fill="#1e293b" stroke="#334155" stroke-width="2" filter="url(#paperShadow)"/>
-      <path d="M 25 -20 Q 95 -80 65 15 Q 40 25 25 10 Z" fill="#1e293b" stroke="#334155" stroke-width="2" filter="url(#paperShadow)"/>
-
-      <!-- Crouched alien body & clawed limbs -->
-      <ellipse cx="0" cy="5" rx="32" ry="24" fill="#0f172a" stroke="#1e293b" stroke-width="2"/>
-      <path d="M -30 20 L -45 42 L -35 44" stroke="#475569" stroke-width="3" stroke-linecap="round"/>
-      <path d="M 30 20 L 45 42 L 35 44" stroke="#475569" stroke-width="3" stroke-linecap="round"/>
-
-      <!-- Horned alien head & spines -->
-      <polygon points="-16,-45 -28,-75 -10,-55" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
-      <polygon points="16,-45 28,-75 10,-55" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
-      <ellipse cx="0" cy="-35" rx="24" ry="20" fill="#1e293b" stroke="#334155" stroke-width="2"/>
-
-      <!-- Glowing green alien eyes -->
-      <ellipse cx="-10" cy="-35" rx="5" ry="3" fill="#4ade80" filter="url(#runeGlow)"/>
-      <circle cx="-10" cy="-35" r="1.5" fill="#14532d"/>
-      <ellipse cx="10" cy="-35" rx="5" ry="3" fill="#4ade80" filter="url(#runeGlow)"/>
-      <circle cx="10" cy="-35" r="1.5" fill="#14532d"/>
+      <image href="art/props/statue.webp" x="-146" y="-380" width="293" height="380" filter="url(#paperShadow)"/>
 
       <g class="prop-badge">
-        <rect x="-65" y="-85" width="130" height="22" rx="11" fill="rgba(6, 9, 18, 0.95)" stroke="#38bdf8" stroke-width="1.2"/>
-        <text x="0" y="-70" text-anchor="middle" class="prop-badge-text">🗿 ALIEN STATUE</text>
+        <rect x="-65" y="-410" width="130" height="22" rx="11" fill="rgba(6, 9, 18, 0.95)" stroke="#38bdf8" stroke-width="1.2"/>
+        <text x="0" y="-395" text-anchor="middle" class="prop-badge-text">🗿 ALIEN STATUE</text>
       </g>
     `;
     overlay.appendChild(propRoot(g));
@@ -472,24 +423,14 @@ function renderRoom7(overlay, state, onAction) {
   // 3. Black Cat (Obj 24)
   if (state.objectLoc[24] === 7) {
     const g = createInteractiveGroup("Black Cat", () => onAction?.("look cat"));
-    placeProp(g, "translate(530, 640)");
+    placeProp(g, "translate(530, 700)");
     g.innerHTML += `
-      <!-- Cat body & arched tail -->
-      <ellipse cx="0" cy="10" rx="26" ry="18" fill="#09090b" stroke="#18181b" stroke-width="1.5" filter="url(#paperShadow)"/>
-      <path d="M 18 10 Q 38 4 34 -18 Q 30 -30 24 -24" fill="none" stroke="#09090b" stroke-width="5" stroke-linecap="round"/>
-      <!-- Cat head & ears -->
-      <circle cx="-16" cy="-4" r="14" fill="#09090b"/>
-      <polygon points="-26,-10 -22,-26 -14,-14" fill="#09090b"/>
-      <polygon points="-16,-14 -10,-26 -6,-10" fill="#09090b"/>
-      <!-- Glowing yellow slit eyes -->
-      <ellipse cx="-20" cy="-6" rx="3.5" ry="5" fill="#facc15"/>
-      <line x1="-20" y1="-10" x2="-20" y2="-2" stroke="#000000" stroke-width="1.5"/>
-      <ellipse cx="-11" cy="-6" rx="3.5" ry="5" fill="#facc15"/>
-      <line x1="-11" y1="-10" x2="-11" y2="-2" stroke="#000000" stroke-width="1.5"/>
+      <ellipse cx="0" cy="0" rx="50" ry="14" fill="rgba(0,0,0,0.5)" filter="url(#paperShadow)"/>
+      <image href="art/props/cat.webp" x="-70.5" y="-220" width="141" height="220" filter="url(#paperShadow)"/>
 
       <g class="prop-badge">
-        <rect x="-42" y="-55" width="84" height="20" rx="10" fill="rgba(6, 9, 18, 0.9)" stroke="#eab308" stroke-width="1"/>
-        <text x="0" y="-41" text-anchor="middle" class="prop-badge-text">🐈‍⬛ BLACK CAT</text>
+        <rect x="-42" y="-245" width="84" height="20" rx="10" fill="rgba(6, 9, 18, 0.9)" stroke="#eab308" stroke-width="1"/>
+        <text x="0" y="-231" text-anchor="middle" class="prop-badge-text">🐈‍⬛ BLACK CAT</text>
       </g>
     `;
     overlay.appendChild(propRoot(g));
@@ -503,7 +444,7 @@ function renderRoom7(overlay, state, onAction) {
 function renderRoom9(overlay, state, onAction) {
   // 1. Swarm of Buzzing Flies (Obj 7)
   if (state.objectLoc[7] === 9) {
-    const g = createInteractiveGroup("Swarm of Buzzing Flies", () => onAction?.("get flies"));
+    const g = createInteractiveGroup("Swarm of Buzzing Flies", () => onAction?.("catch flies"));
     placeProp(g, "translate(420, 480)");
     g.innerHTML += `
       <!-- Animated buzzing fly particle cloud -->
@@ -515,8 +456,34 @@ function renderRoom9(overlay, state, onAction) {
       <circle cx="5" cy="-5" r="3.5" fill="#000" stroke="#64748b" stroke-width="1" class="fly-particle"/>
 
       <g class="prop-badge">
-        <rect x="-40" y="-55" width="80" height="20" rx="10" fill="rgba(6, 9, 18, 0.9)" stroke="#94a3b8" stroke-width="1"/>
-        <text x="0" y="-41" text-anchor="middle" class="prop-badge-text">🪰 FLIES</text>
+        <rect x="-56" y="-55" width="112" height="20" rx="10" fill="rgba(6, 9, 18, 0.9)" stroke="#94a3b8" stroke-width="1"/>
+        <text x="0" y="-41" text-anchor="middle" class="prop-badge-text">🪰 CATCH FLIES</text>
+      </g>
+    `;
+    overlay.appendChild(propRoot(g));
+  }
+
+  // 2. Piece of Flypaper in Room 9 (Obj 31)
+  if (state.objectLoc[31] === 9) {
+    const hasFlies = state.objectLoc[7] === 9;
+    const g = createInteractiveGroup("Piece of Flypaper", () =>
+      onAction?.(hasFlies ? "use flypaper" : "get flypaper"),
+    );
+    placeProp(g, "translate(580, 580)");
+    g.innerHTML += `
+      <!-- Shadow on cave floor -->
+      <ellipse cx="0" cy="20" rx="42" ry="12" fill="rgba(0,0,0,0.6)" filter="url(#paperShadow)"/>
+      <!-- Sticky amber flypaper ribbon resting on cavern floor -->
+      <path d="M -35 15 Q -10 5 15 22 Q 30 10 42 16" fill="none" stroke="#d97706" stroke-width="10" stroke-linecap="round"/>
+      <path d="M -35 15 Q -10 5 15 22 Q 30 10 42 16" fill="none" stroke="#fbbf24" stroke-width="6" stroke-linecap="round" opacity="0.85"/>
+      <!-- Trapped black specks -->
+      <circle cx="-20" cy="12" r="1.5" fill="#000"/>
+      <circle cx="5" cy="16" r="1.8" fill="#000"/>
+      <circle cx="28" cy="14" r="1.5" fill="#000"/>
+
+      <g class="prop-badge">
+        <rect x="-56" y="-45" width="112" height="20" rx="10" fill="rgba(6, 9, 18, 0.9)" stroke="#fbbf24" stroke-width="1.2"/>
+        <text x="0" y="-31" text-anchor="middle" class="prop-badge-text">🪰 FLYPAPER</text>
       </g>
     `;
     overlay.appendChild(propRoot(g));
@@ -553,78 +520,16 @@ function renderRoom9(overlay, state, onAction) {
     overlay.appendChild(propRoot(g));
   }
 
-  // 3. Iron Door to North
-  renderCaveIronDoor(overlay, state, onAction, 9);
-}
-
-/**
- * Shared iron door between Room 9 (Dark Cave) and Room 10 (Crystal Cavern).
- */
-function renderCaveIronDoor(overlay, state, onAction, roomId) {
-  const isOpen = state.flags.DR === 1;
-  const g = createInteractiveGroup(
-    isOpen ? "Open Iron Doorway" : "Locked Heavy Iron Door",
-    () => onAction?.(isOpen ? "go door" : "unlock door"),
-  );
-  placeProp(g, "translate(512, 420)");
-
-  if (isOpen) {
-    g.innerHTML += `
-      <!-- Deep cavern archway shadow -->
-      <path d="M -75 90 L -75 -40 A 75 75 0 0 1 75 -40 L 75 90 Z" fill="#020617" stroke="#334155" stroke-width="4"/>
-      <!-- Glowing passage beyond doorway -->
-      <path d="M -60 85 L -60 -30 A 60 60 0 0 1 60 -30 L 60 85 Z" fill="#0369a1" opacity="0.35" filter="url(#runeGlow)"/>
-      <ellipse cx="0" cy="50" rx="45" ry="20" fill="#38bdf8" opacity="0.4" filter="url(#runeGlow)"/>
-
-      <!-- Swung-open iron door leaf in perspective -->
-      <polygon points="75,-40 120,-30 115,85 75,90" fill="#18181b" stroke="#52525b" stroke-width="2.5"/>
-      <line x1="75" y1="20" x2="118" y2="22" stroke="#71717a" stroke-width="2"/>
-
-      <g class="prop-badge">
-        <rect x="-60" y="-85" width="120" height="22" rx="11" fill="rgba(6, 9, 18, 0.95)" stroke="#38bdf8" stroke-width="1.2"/>
-        <text x="0" y="-70" text-anchor="middle" class="prop-badge-text">🚪 OPEN DOORWAY</text>
-      </g>
-    `;
-  } else {
-    g.innerHTML += `
-      <!-- Arched stone frame -->
-      <path d="M -85 95 L -85 -45 A 85 85 0 0 1 85 -45 L 85 95 Z" fill="#18181b" stroke="#334155" stroke-width="5" filter="url(#paperShadow)"/>
-      <path d="M -72 90 L -72 -38 A 72 72 0 0 1 72 -38 L 72 90 Z" fill="#27272a" stroke="#52525b" stroke-width="2"/>
-
-      <!-- Iron door panels and rivets -->
-      <line x1="0" y1="-38" x2="0" y2="90" stroke="#09090b" stroke-width="3"/>
-      <line x1="-72" y1="5" x2="72" y2="5" stroke="#3f3f46" stroke-width="4"/>
-      <line x1="-72" y1="50" x2="72" y2="50" stroke="#3f3f46" stroke-width="4"/>
-
-      <!-- Iron rivets -->
-      <circle cx="-35" cy="5" r="3" fill="#a1a1aa"/>
-      <circle cx="35" cy="5" r="3" fill="#a1a1aa"/>
-      <circle cx="-35" cy="50" r="3" fill="#a1a1aa"/>
-      <circle cx="35" cy="50" r="3" fill="#a1a1aa"/>
-      <circle cx="-35" cy="-15" r="3" fill="#a1a1aa"/>
-      <circle cx="35" cy="-15" r="3" fill="#a1a1aa"/>
-
-      <!-- Heavy lock escutcheon and keyhole -->
-      <rect x="-14" y="20" width="28" height="24" rx="4" fill="#b45309" stroke="#fbbf24" stroke-width="1.5"/>
-      <circle cx="0" cy="29" r="3.5" fill="#000000"/>
-      <polygon points="-2,29 2,29 3,38 -3,38" fill="#000000"/>
-
-      <g class="prop-badge">
-        <rect x="-62" y="-90" width="124" height="22" rx="11" fill="rgba(6, 9, 18, 0.95)" stroke="#fbbf24" stroke-width="1.2"/>
-        <text x="0" y="-75" text-anchor="middle" class="prop-badge-text">🔒 LOCKED DOOR</text>
-      </g>
-    `;
-  }
-  overlay.appendChild(propRoot(g));
 }
 
 /**
  * Room 10: Crystal Cavern
- * Displays the iron door leading back south to Room 9.
+ * The shared iron door between here and Room 9 is painted into the
+ * background art (BACKGROUND_VARIANTS[9]/[10] switch on the DR flag), so
+ * there is nothing to overlay -- "unlock door" / "go door" still work as
+ * typed commands.
  */
-function renderRoom10(overlay, state, onAction) {
-  renderCaveIronDoor(overlay, state, onAction, 10);
-}
+function renderRoom10(overlay, state, onAction) {}
 
 /**
  * Room 16: Lake Shore
@@ -633,23 +538,14 @@ function renderRoom10(overlay, state, onAction) {
 function renderRoom16(overlay, state, onAction) {
   if (state.objectLoc[8] === 16) {
     const g = createInteractiveGroup("Plump Bullfrog", () => onAction?.("feed frog"));
-    placeProp(g, "translate(340, 770)");
+    placeProp(g, "translate(340, 800)");
     g.innerHTML += `
-      <!-- Frog body sitting on rock -->
-      <ellipse cx="0" cy="8" rx="38" ry="24" fill="#15803d" stroke="#14532d" stroke-width="2"/>
-      <ellipse cx="-12" cy="-14" rx="14" ry="14" fill="#22c55e" stroke="#14532d" stroke-width="1.8"/>
-      <ellipse cx="12" cy="-14" rx="14" ry="14" fill="#22c55e" stroke="#14532d" stroke-width="1.8"/>
-      <!-- Bulging yellow frog eyes -->
-      <circle cx="-12" cy="-16" r="6" fill="#facc15"/>
-      <circle cx="-12" cy="-16" r="2.5" fill="#000000"/>
-      <circle cx="12" cy="-16" r="6" fill="#facc15"/>
-      <circle cx="12" cy="-16" r="2.5" fill="#000000"/>
-      <!-- Belly -->
-      <ellipse cx="0" cy="12" rx="24" ry="12" fill="#86efac" opacity="0.8"/>
+      <ellipse cx="0" cy="0" rx="45" ry="12" fill="rgba(0,0,0,0.5)" filter="url(#paperShadow)"/>
+      <image href="art/props/frog.webp" x="-92.5" y="-160" width="185" height="160" filter="url(#paperShadow)"/>
 
       <g class="prop-badge">
-        <rect x="-48" y="-50" width="96" height="20" rx="10" fill="rgba(6, 9, 18, 0.9)" stroke="#22c55e" stroke-width="1.2"/>
-        <text x="0" y="-36" text-anchor="middle" class="prop-badge-text">🐸 BULLFROG</text>
+        <rect x="-48" y="-185" width="96" height="20" rx="10" fill="rgba(6, 9, 18, 0.9)" stroke="#22c55e" stroke-width="1.2"/>
+        <text x="0" y="-171" text-anchor="middle" class="prop-badge-text">🐸 BULLFROG</text>
       </g>
     `;
     overlay.appendChild(propRoot(g));
@@ -779,59 +675,14 @@ function renderRoom20(overlay, state, onAction) {
 }
 
 /**
- * Room 21: Log Cabin
- * Displays mounted elk antlers that rotate the secret wall (Noun 46).
- */
-function renderRoom21(overlay, state, onAction) {
-  const g = createInteractiveGroup("Mounted Elk Antlers", () => onAction?.("pull antlers"));
-  placeProp(g, "translate(512, 380)");
-  g.innerHTML += `
-    <!-- Wall mount wooden plaque -->
-    <ellipse cx="0" cy="10" rx="28" ry="36" fill="#3b2617" stroke="#78350f" stroke-width="3" filter="url(#paperShadow)"/>
-    <ellipse cx="0" cy="10" rx="20" ry="28" fill="#5a3d28"/>
-    <ellipse cx="0" cy="6" rx="12" ry="10" fill="#1c0f06"/>
-
-    <!-- Left antler branched beam -->
-    <path d="M -8 4 Q -35 -15 -55 -45 Q -65 -65 -85 -85 M -55 -45 Q -75 -40 -95 -45 M -40 -30 Q -60 -20 -75 -15" 
-          fill="none" stroke="#fef3c7" stroke-width="6" stroke-linecap="round" filter="url(#paperShadow)"/>
-    
-    <!-- Right antler branched beam -->
-    <path d="M 8 4 Q 35 -15 55 -45 Q 65 -65 85 -85 M 55 -45 Q 75 -40 95 -45 M 40 -30 Q 60 -20 75 -15" 
-          fill="none" stroke="#fef3c7" stroke-width="6" stroke-linecap="round" filter="url(#paperShadow)"/>
-
-    <g class="prop-badge">
-      <rect x="-48" y="-115" width="96" height="20" rx="10" fill="rgba(6, 9, 18, 0.9)" stroke="#fef3c7" stroke-width="1"/>
-      <text x="0" y="-101" text-anchor="middle" class="prop-badge-text">🦌 ANTLERS</text>
-    </g>
-  `;
-  overlay.appendChild(propRoot(g));
-}
-
-/**
  * Room 22: Secret Annex
- * Displays Wizard's Cloak (Obj 3), discovered Lock Pick (Obj 26), and Revolving Wall Mechanism.
+ * Displays Wizard's Cloak (Obj 3) and discovered Lock Pick (Obj 26). The
+ * antlers/revolving-wall lever is painted directly into the room-21 and
+ * room-22 background art now, so no overlay prop is needed for it -- "pull
+ * antlers" still works as a typed command either way.
  */
 function renderRoom22(overlay, state, onAction) {
-  // 1. Revolving Secret Wall mechanism (back to Room 21)
-  const wallGroup = createInteractiveGroup("Revolving Secret Wall", () => onAction?.("pull antlers"));
-  placeProp(wallGroup, "translate(180, 520)");
-  wallGroup.innerHTML += `
-    <!-- Stone wall seam & rotating pivot mechanism -->
-    <path d="M 0 -150 L 0 160" stroke="#475569" stroke-width="3" stroke-dasharray="8,6" opacity="0.8"/>
-    <!-- Iron bracket & lever -->
-    <rect x="-10" y="-20" width="20" height="40" rx="4" fill="#1e293b" stroke="#64748b" stroke-width="1.5" filter="url(#paperShadow)"/>
-    <circle cx="0" cy="0" r="6" fill="#ca8a04"/>
-    <line x1="0" y1="0" x2="18" y2="-24" stroke="#94a3b8" stroke-width="3.5" stroke-linecap="round"/>
-    <circle cx="18" cy="-24" r="4.5" fill="#e2e8f0"/>
-
-    <g class="prop-badge">
-      <rect x="-68" y="-55" width="136" height="22" rx="11" fill="rgba(6, 9, 18, 0.95)" stroke="#38bdf8" stroke-width="1.2"/>
-      <text x="0" y="-40" text-anchor="middle" class="prop-badge-text">🔄 REVOLVING WALL</text>
-    </g>
-  `;
-  overlay.appendChild(propRoot(wallGroup));
-
-  // 2. Dusty Wizard's Cloak (Obj 3)
+  // 1. Dusty Wizard's Cloak (Obj 3)
   if (state.objectLoc[3] === 22) {
     const g = createInteractiveGroup("Dusty Wizard's Cloak", () => onAction?.("get cloak"));
     placeProp(g, "translate(420, 520)");
@@ -942,59 +793,16 @@ function renderRoom26(overlay, state, onAction) {
   // 1. Sneering Goblin with key (Obj 10)
   if (state.objectLoc[10] === 26) {
     const g = createInteractiveGroup("Sneering Goblin with Key", () => onAction?.("say ijnid"));
-    placeProp(g, "translate(512, 650)");
+    placeProp(g, "translate(512, 740)");
     g.innerHTML += `
       <!-- Sand shadow -->
-      <ellipse cx="0" cy="85" rx="70" ry="24" fill="rgba(0,0,0,0.5)" filter="url(#paperShadow)"/>
+      <ellipse cx="0" cy="0" rx="70" ry="20" fill="rgba(0,0,0,0.5)" filter="url(#paperShadow)"/>
 
-      <!-- Goblin legs & feet -->
-      <ellipse cx="-24" cy="72" rx="16" ry="10" fill="#451a03"/>
-      <ellipse cx="24" cy="72" rx="16" ry="10" fill="#451a03"/>
-      <polygon points="-30,45 -18,45 -22,70 -26,70" fill="#3f6212"/>
-      <polygon points="18,45 30,45 26,70 22,70" fill="#3f6212"/>
-
-      <!-- Tattered leather vest & goblin torso -->
-      <polygon points="-28,15 28,15 32,50 -32,50" fill="#78350f" stroke="#451a03" stroke-width="2" filter="url(#paperShadow)"/>
-      <polygon points="-12,15 12,15 8,45 -8,45" fill="#4d7c0f"/>
-
-      <!-- Pointed goblin ears -->
-      <polygon points="-25,-12 -65,-28 -32,-2" fill="#65a30d" stroke="#3f6212" stroke-width="1.5"/>
-      <polygon points="25,-12 65,-28 32,-2" fill="#65a30d" stroke="#3f6212" stroke-width="1.5"/>
-
-      <!-- Goblin head -->
-      <ellipse cx="0" cy="-10" rx="28" ry="24" fill="#65a30d" stroke="#3f6212" stroke-width="2"/>
-      <!-- Beady yellow squinting eyes -->
-      <ellipse cx="-11" cy="-14" rx="5" ry="3" fill="#facc15"/>
-      <circle cx="-11" cy="-14" r="1.8" fill="#000"/>
-      <ellipse cx="11" cy="-14" rx="5" ry="3" fill="#facc15"/>
-      <circle cx="11" cy="-14" r="1.8" fill="#000"/>
-      <!-- Bulbous warty nose -->
-      <circle cx="0" cy="-7" r="5" fill="#4d7c0f"/>
-
-      <!-- Crooked sneering mouth with fangs -->
-      <path d="M -16 2 Q 0 12 16 2" fill="#1e293b" stroke="#3f6212" stroke-width="2"/>
-      <polygon points="-10,2 -7,8 -4,2" fill="#ffffff"/>
-      <polygon points="4,2 7,8 10,2" fill="#ffffff"/>
-
-      <!-- Left arm resting on hip -->
-      <path d="M -26 22 Q -45 32 -30 46" fill="none" stroke="#65a30d" stroke-width="6" stroke-linecap="round"/>
-      <!-- Right arm raised high twirling key -->
-      <path d="M 26 22 Q 52 0 54 -28" fill="none" stroke="#65a30d" stroke-width="6" stroke-linecap="round"/>
-      <circle cx="54" cy="-30" r="5" fill="#65a30d"/>
-
-      <!-- Twirled tiny golden key with glint -->
-      <g filter="url(#goldGlint)" transform="translate(58, -42) rotate(35)">
-        <circle cx="0" cy="0" r="10" fill="url(#goldKeyGrad)" stroke="#78350f" stroke-width="1.5"/>
-        <circle cx="0" cy="0" r="5" fill="#65a30d"/>
-        <rect x="8" y="-2.5" width="22" height="5" rx="1.5" fill="url(#goldKeyGrad)" stroke="#78350f" stroke-width="1.2"/>
-        <rect x="22" y="2.5" width="3.5" height="6" fill="url(#goldKeyGrad)"/>
-        <rect x="27" y="2.5" width="3.5" height="4" fill="url(#goldKeyGrad)"/>
-        <polygon points="-8,-8 -5,-12 -2,-8 -5,-4" fill="#ffffff"/>
-      </g>
+      <image href="art/props/goblin.webp" x="-96" y="-300" width="192" height="300" filter="url(#paperShadow)"/>
 
       <g class="prop-badge">
-        <rect x="-65" y="-72" width="130" height="22" rx="11" fill="rgba(6, 9, 18, 0.95)" stroke="#65a30d" stroke-width="1.2"/>
-        <text x="0" y="-57" text-anchor="middle" class="prop-badge-text">👺 SNEERING GOBLIN</text>
+        <rect x="-65" y="-330" width="130" height="22" rx="11" fill="rgba(6, 9, 18, 0.95)" stroke="#65a30d" stroke-width="1.2"/>
+        <text x="0" y="-315" text-anchor="middle" class="prop-badge-text">👺 SNEERING GOBLIN</text>
       </g>
     `;
     overlay.appendChild(propRoot(g));
@@ -1206,127 +1014,25 @@ function renderRoom35(overlay, state, onAction) {
 
 /**
  * Room 37: Moonlit Tower
- * Tangled vines, sarcophagus, sleeping Sabrina, or wide awake Princess Sabrina!
+ * The vines, sealed sarcophagus, and sleeping Sabrina are painted directly
+ * into their respective room-37 background variants (see BACKGROUND_VARIANTS
+ * in scene.js), so only the wide-awake princess -- who has no background
+ * variant of her own -- still needs an overlay prop.
  */
 function renderRoom37(overlay, state, onAction) {
-  // 1. Tangled Creeping Vines covering alcove (Obj 14)
-  if (state.objectLoc[14] === 37) {
-    const g = createInteractiveGroup("Tangled Vines", () => onAction?.("pull vines"));
-    placeProp(g, "translate(512, 540)");
-    g.innerHTML += `
-      <!-- Dark backdrop shadow behind thick vine curtain -->
-      <rect x="-240" y="-180" width="480" height="340" fill="rgba(6, 12, 8, 0.65)" filter="url(#paperShadow)"/>
-
-      <!-- Main gnarled hanging vine trunks -->
-      <path d="M -180 -180 Q -150 -50 -170 50 Q -180 120 -150 160" fill="none" stroke="#14532d" stroke-width="12" stroke-linecap="round"/>
-      <path d="M -90 -180 Q -110 -70 -70 20 Q -40 100 -70 160" fill="none" stroke="#166534" stroke-width="14" stroke-linecap="round"/>
-      <path d="M 0 -180 Q 30 -90 -10 10 Q -30 90 10 160" fill="none" stroke="#14532d" stroke-width="16" stroke-linecap="round"/>
-      <path d="M 90 -180 Q 70 -80 110 30 Q 130 110 90 160" fill="none" stroke="#166534" stroke-width="14" stroke-linecap="round"/>
-      <path d="M 180 -180 Q 150 -60 170 40 Q 190 120 160 160" fill="none" stroke="#14532d" stroke-width="12" stroke-linecap="round"/>
-
-      <!-- Cross intertwining branches -->
-      <path d="M -220 -80 Q -90 -40 30 -90 Q 140 -120 220 -60" fill="none" stroke="#15803d" stroke-width="9" stroke-linecap="round"/>
-      <path d="M -200 40 Q -80 80 20 30 Q 120 0 210 50" fill="none" stroke="#15803d" stroke-width="10" stroke-linecap="round"/>
-      <path d="M -140 -140 Q 0 -60 140 -130" fill="none" stroke="#166534" stroke-width="8" stroke-linecap="round"/>
-
-      <!-- Sharp bramble thorns -->
-      <polygon points="-160,-20 -178,-25 -162,-15" fill="#14532d"/>
-      <polygon points="-80,60 -98,68 -82,72" fill="#14532d"/>
-      <polygon points="20,-30 38,-38 22,-24" fill="#14532d"/>
-      <polygon points="100,70 118,78 102,82" fill="#14532d"/>
-      <polygon points="160,-10 178,-16 162,-5" fill="#14532d"/>
-
-      <!-- Ivy leaf clusters -->
-      <ellipse cx="-120" cy="-60" rx="14" ry="9" fill="#22c55e" transform="rotate(-25 -120 -60)"/>
-      <ellipse cx="-50" cy="20" rx="16" ry="10" fill="#4ade80" transform="rotate(35 -50 20)"/>
-      <ellipse cx="40" cy="-80" rx="15" ry="9" fill="#22c55e" transform="rotate(-15 40 -80)"/>
-      <ellipse cx="120" cy="40" rx="16" ry="10" fill="#4ade80" transform="rotate(40 120 40)"/>
-      <ellipse cx="-20" cy="110" rx="14" ry="9" fill="#16a34a" transform="rotate(-30 -20 110)"/>
-
-      <g class="prop-badge">
-        <rect x="-65" y="-95" width="130" height="22" rx="11" fill="rgba(6, 9, 18, 0.95)" stroke="#22c55e" stroke-width="1.2"/>
-        <text x="0" y="-80" text-anchor="middle" class="prop-badge-text">🌿 TANGLED VINES</text>
-      </g>
-    `;
-    overlay.appendChild(propRoot(g));
-    return;
-  }
-
-  // 2. Wide awake Princess Sabrina (Obj 38)
+  // Wide awake Princess Sabrina (Obj 38)
   if (state.objectLoc[38] === 37) {
     const g = createInteractiveGroup("Princess Sabrina (Awake)", () => onAction?.("talk princess"));
-    placeProp(g, "translate(512, 600)");
+    placeProp(g, "translate(512, 740)");
     g.innerHTML += `
       <!-- Aura of liberation -->
-      <ellipse cx="0" cy="40" rx="90" ry="130" fill="none" stroke="#f472b6" stroke-width="2.5" opacity="0.7" filter="url(#saucerGlow)"/>
+      <ellipse cx="0" cy="-190" rx="100" ry="190" fill="none" stroke="#f472b6" stroke-width="2.5" opacity="0.7" filter="url(#saucerGlow)"/>
 
-      <!-- Royal gown -->
-      <polygon points="-40,140 40,140 22,20 -22,20" fill="#f43f5e" stroke="#fda4af" stroke-width="2" filter="url(#paperShadow)"/>
-      <polygon points="-28,140 28,140 14,35 -14,35" fill="#fb7185"/>
-
-      <!-- Bodice & golden belt -->
-      <rect x="-18" y="10" width="36" height="30" rx="4" fill="#e11d48"/>
-      <line x1="-20" y1="38" x2="20" y2="38" stroke="#fbbf24" stroke-width="4"/>
-
-      <!-- Sabrina's face & golden tiara -->
-      <circle cx="0" cy="-10" r="18" fill="#fde047" opacity="0.3"/>
-      <circle cx="0" cy="-10" r="16" fill="#fed7aa" stroke="#7c2d12" stroke-width="1.5"/>
-      <circle cx="-5" cy="-12" r="2" fill="#0f172a"/>
-      <circle cx="5" cy="-12" r="2" fill="#0f172a"/>
-      <path d="M -5 -4 Q 0 -1 5 -4" fill="none" stroke="#b91c1c" stroke-width="1.8"/>
-
-      <!-- Golden hair -->
-      <path d="M -16 -12 Q -22 15 -14 45" fill="none" stroke="#eab308" stroke-width="6" stroke-linecap="round"/>
-      <path d="M 16 -12 Q 22 15 14 45" fill="none" stroke="#eab308" stroke-width="6" stroke-linecap="round"/>
-      <polygon points="-12,-22 0,-30 12,-22 8,-18 -8,-18" fill="#facc15" stroke="#78350f" stroke-width="1"/>
+      <image href="art/props/sabrina.webp" x="-102" y="-460" width="205" height="460" filter="url(#paperShadow)"/>
 
       <g class="prop-badge">
-        <rect x="-64" y="-60" width="128" height="22" rx="11" fill="rgba(6, 9, 18, 0.95)" stroke="#f43f5e" stroke-width="1.2"/>
-        <text x="0" y="-45" text-anchor="middle" class="prop-badge-text">👸 PRINCESS SABRINA</text>
-      </g>
-    `;
-    overlay.appendChild(propRoot(g));
-    return;
-  }
-
-  // 2. Sleeping Damsel in blasted sarcophagus (Obj 16)
-  if (state.objectLoc[16] === 37) {
-    const g = createInteractiveGroup("Sleeping Princess Sabrina", () => onAction?.("wake damsel"));
-    placeProp(g, "translate(512, 700)");
-    g.innerHTML += `
-      <!-- Blasted stone sarcophagus base -->
-      <rect x="-130" y="-30" width="260" height="85" rx="8" fill="#27272a" stroke="#71717a" stroke-width="3" filter="url(#paperShadow)"/>
-      <rect x="-115" y="-20" width="230" height="65" fill="#3f3f46"/>
-
-      <!-- Silk cushion & sleeping Sabrina -->
-      <rect x="-95" y="-12" width="190" height="45" rx="6" fill="#881337"/>
-      <circle cx="-55" cy="8" r="14" fill="#fed7aa"/>
-      <path d="M -68 0 Q -50 0 -40 20" fill="none" stroke="#facc15" stroke-width="5"/>
-      <rect x="-40" y="-4" width="120" height="32" rx="6" fill="#fda4af" opacity="0.9"/>
-
-      <g class="prop-badge">
-        <rect x="-65" y="-65" width="130" height="22" rx="11" fill="rgba(6, 9, 18, 0.95)" stroke="#fda4af" stroke-width="1.2"/>
-        <text x="0" y="-50" text-anchor="middle" class="prop-badge-text">💤 SLEEPING PRINCESS</text>
-      </g>
-    `;
-    overlay.appendChild(propRoot(g));
-    return;
-  }
-
-  // 3. Sealed Stone Sarcophagus (Obj 15)
-  if (state.objectLoc[15] === 37) {
-    const g = createInteractiveGroup("Sealed Stone Sarcophagus", () => onAction?.("open sarcophagus"));
-    placeProp(g, "translate(512, 700)");
-    g.innerHTML += `
-      <rect x="-130" y="-40" width="260" height="95" rx="10" fill="#27272a" stroke="#52525b" stroke-width="3" filter="url(#paperShadow)"/>
-      <rect x="-120" y="-32" width="240" height="22" fill="#3f3f46" stroke="#71717a" stroke-width="1.5"/>
-      <!-- Carved royal relief on lid -->
-      <ellipse cx="0" cy="12" rx="70" ry="24" fill="none" stroke="#71717a" stroke-width="2"/>
-      <line x1="-100" y1="12" x2="100" y2="12" stroke="#52525b" stroke-width="2"/>
-
-      <g class="prop-badge">
-        <rect x="-70" y="-72" width="140" height="22" rx="11" fill="rgba(6, 9, 18, 0.9)" stroke="#a1a1aa" stroke-width="1.2"/>
-        <text x="0" y="-57" text-anchor="middle" class="prop-badge-text">⚰️ STONE SARCOPHAGUS</text>
+        <rect x="-64" y="-490" width="128" height="22" rx="11" fill="rgba(6, 9, 18, 0.95)" stroke="#f43f5e" stroke-width="1.2"/>
+        <text x="0" y="-475" text-anchor="middle" class="prop-badge-text">👸 PRINCESS SABRINA</text>
       </g>
     `;
     overlay.appendChild(propRoot(g));
@@ -1465,60 +1171,19 @@ function renderRavenousMice(overlay, state, onAction) {
  */
 function renderWerewolf(overlay, state, onAction) {
   const g = createInteractiveGroup("Snarling Werewolf", () => onAction?.("shoot werewolf"));
-  placeProp(g, "translate(512, 570)");
+  placeProp(g, "translate(512, 740)");
   g.innerHTML += `
     <!-- Menacing dark shadow -->
-    <ellipse cx="0" cy="170" rx="110" ry="35" fill="rgba(0,0,0,0.75)" filter="url(#paperShadow)"/>
+    <ellipse cx="0" cy="0" rx="110" ry="30" fill="rgba(0,0,0,0.75)" filter="url(#paperShadow)"/>
 
     <!-- Red beast threat aura -->
-    <ellipse cx="0" cy="50" rx="120" ry="150" fill="none" stroke="#dc2626" stroke-width="3" opacity="0.6" filter="url(#bloodGlow)"/>
+    <ellipse cx="0" cy="-190" rx="130" ry="190" fill="none" stroke="#dc2626" stroke-width="3" opacity="0.6" filter="url(#bloodGlow)"/>
 
-    <!-- Massive muscular legs & clawed feet -->
-    <path d="M -70 90 L -50 165 L -25 168 L -40 95 Z" fill="#26180f" stroke="#170d06" stroke-width="2"/>
-    <path d="M 70 90 L 50 165 L 25 168 L 40 95 Z" fill="#26180f" stroke="#170d06" stroke-width="2"/>
-    <!-- Claws on toes -->
-    <line x1="-50" y1="168" x2="-55" y2="176" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round"/>
-    <line x1="-38" y1="168" x2="-40" y2="178" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round"/>
-    <line x1="50" y1="168" x2="55" y2="176" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round"/>
-    <line x1="38" y1="168" x2="40" y2="178" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round"/>
-
-    <!-- Hunched muscular werewolf torso & dark shaggy fur -->
-    <polygon points="-85,15 -45,100 45,100 85,15 50,-40 -50,-40" fill="#3b2617" stroke="#1a0f08" stroke-width="3" filter="url(#paperShadow)"/>
-    <polygon points="-40,15 -25,80 25,80 40,15 25,-25 -25,-25" fill="#451a03"/>
-
-    <!-- Left arm raised with outstretched talons -->
-    <path d="M -70 -20 Q -120 10 -105 50" fill="none" stroke="#3b2617" stroke-width="24" stroke-linecap="round"/>
-    <path d="M -105 50 L -120 62 M -105 50 L -115 72 M -105 50 L -100 75" stroke="#f1f5f9" stroke-width="3.5" stroke-linecap="round"/>
-
-    <!-- Right arm raised ready to strike -->
-    <path d="M 70 -20 Q 120 10 105 50" fill="none" stroke="#3b2617" stroke-width="24" stroke-linecap="round"/>
-    <path d="M 105 50 L 120 62 M 105 50 L 115 72 M 105 50 L 100 75" stroke="#f1f5f9" stroke-width="3.5" stroke-linecap="round"/>
-
-    <!-- Werewolf head & pointed ears -->
-    <polygon points="-35,-55 -55,-105 -20,-75" fill="#26180f" stroke="#170d06" stroke-width="2"/>
-    <polygon points="35,-55 55,-105 20,-75" fill="#26180f" stroke="#170d06" stroke-width="2"/>
-    <circle cx="0" cy="-55" r="38" fill="#3b2617" stroke="#1a0f08" stroke-width="2"/>
-
-    <!-- Snarling wolf muzzle with bared fangs -->
-    <polygon points="-22,-50 0,-20 22,-50" fill="#1c1008"/>
-    <!-- Glowing blood-red feral eyes -->
-    <ellipse cx="-16" cy="-62" rx="7" ry="4.5" fill="#ef4444" filter="url(#runeGlow)"/>
-    <ellipse cx="16" cy="-62" rx="7" ry="4.5" fill="#ef4444" filter="url(#runeGlow)"/>
-    <circle cx="-16" cy="-62" r="2.5" fill="#7f1d1d"/>
-    <circle cx="16" cy="-62" r="2.5" fill="#7f1d1d"/>
-
-    <!-- Open snarling jaws with fangs -->
-    <path d="M -16 -40 Q 0 -30 16 -40 Q 0 -15 -16 -40 Z" fill="#7f1d1d"/>
-    <!-- Top fangs -->
-    <polygon points="-14,-40 -11,-30 -8,-40" fill="#ffffff"/>
-    <polygon points="8,-40 11,-30 14,-40" fill="#ffffff"/>
-    <!-- Bottom fangs -->
-    <polygon points="-10,-24 -7,-32 -4,-24" fill="#ffffff"/>
-    <polygon points="4,-24 7,-32 10,-24" fill="#ffffff"/>
+    <image href="art/props/werewolf.webp" x="-230" y="-460" width="460" height="460" filter="url(#paperShadow)"/>
 
     <g class="prop-badge">
-      <rect x="-70" y="-125" width="140" height="24" rx="12" fill="rgba(6, 9, 18, 0.95)" stroke="#ef4444" stroke-width="1.4"/>
-      <text x="0" y="-109" text-anchor="middle" class="prop-badge-text">🐺 SNARLING WEREWOLF</text>
+      <rect x="-70" y="-490" width="140" height="24" rx="12" fill="rgba(6, 9, 18, 0.95)" stroke="#ef4444" stroke-width="1.4"/>
+      <text x="0" y="-474" text-anchor="middle" class="prop-badge-text">🐺 SNARLING WEREWOLF</text>
     </g>
   `;
   overlay.appendChild(propRoot(g));
@@ -1529,55 +1194,19 @@ function renderWerewolf(overlay, state, onAction) {
  */
 function renderVampire(overlay, state, onAction) {
   const g = createInteractiveGroup("Lethal Vampire", () => onAction?.("wave cross"));
-  placeProp(g, "translate(512, 560)");
+  placeProp(g, "translate(512, 740)");
   g.innerHTML += `
     <!-- Shadow -->
-    <ellipse cx="0" cy="180" rx="90" ry="30" fill="rgba(0,0,0,0.8)" filter="url(#paperShadow)"/>
+    <ellipse cx="0" cy="0" rx="90" ry="26" fill="rgba(0,0,0,0.8)" filter="url(#paperShadow)"/>
 
     <!-- Hypnotic supernatural aura -->
-    <ellipse cx="0" cy="50" rx="100" ry="145" fill="none" stroke="#991b1b" stroke-width="2.5" opacity="0.65" filter="url(#bloodGlow)"/>
+    <ellipse cx="0" cy="-190" rx="110" ry="190" fill="none" stroke="#991b1b" stroke-width="2.5" opacity="0.65" filter="url(#bloodGlow)"/>
 
-    <!-- Sweeping black cloak with deep crimson silk lining -->
-    <path d="M -35 -50 Q -110 50 -85 175 Q 0 190 85 175 Q 110 50 35 -50 Z" fill="#09090b" stroke="#18181b" stroke-width="3" filter="url(#paperShadow)"/>
-    <!-- Crimson inner lining revealed as cloak flutters open -->
-    <path d="M -25 -25 Q -65 60 -45 165 L 0 170 L 45 165 Q 65 60 25 -25 Z" fill="#881337" stroke="#4c0519" stroke-width="1.5"/>
-
-    <!-- High dramatic standing collar -->
-    <polygon points="-40,-50 -60,-100 -20,-60" fill="#09090b" stroke="#4c0519" stroke-width="2"/>
-    <polygon points="-36,-50 -52,-92 -20,-60" fill="#991b1b"/>
-    <polygon points="40,-50 60,-100 20,-60" fill="#09090b" stroke="#4c0519" stroke-width="2"/>
-    <polygon points="36,-50 52,-92 20,-60" fill="#991b1b"/>
-
-    <!-- Aristocratic vest & silk cravat -->
-    <polygon points="-22,-20 22,-20 18,80 -18,80" fill="#18181b"/>
-    <polygon points="-12,-20 0,10 12,-20 0,-10" fill="#f8fafc"/>
-    <circle cx="0" cy="-2" r="3" fill="#dc2626"/>
-
-    <!-- Pale vampire head -->
-    <circle cx="0" cy="-55" r="22" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
-
-    <!-- Slick black widow's peak hair -->
-    <path d="M -22 -58 Q 0 -85 22 -58 Q 18 -75 0 -68 Q -18 -75 -22 -58 Z" fill="#020617"/>
-    <polygon points="-6,-64 0,-56 6,-64" fill="#020617"/>
-
-    <!-- Piercing red eyes -->
-    <ellipse cx="-8" cy="-55" rx="4" ry="2.5" fill="#dc2626"/>
-    <circle cx="-8" cy="-55" r="1.2" fill="#000000"/>
-    <ellipse cx="8" cy="-55" rx="4" ry="2.5" fill="#dc2626"/>
-    <circle cx="8" cy="-55" r="1.2" fill="#000000"/>
-
-    <!-- Sneering fanged mouth -->
-    <path d="M -8 -44 Q 0 -41 8 -44" fill="none" stroke="#4c0519" stroke-width="1.8"/>
-    <polygon points="-6,-44 -4,-37 -2,-44" fill="#ffffff"/>
-    <polygon points="2,-44 4,-37 6,-44" fill="#ffffff"/>
-
-    <!-- Clawed pale hands protruding from sleeves -->
-    <circle cx="-50" cy="55" r="9" fill="#f1f5f9"/>
-    <circle cx="50" cy="55" r="9" fill="#f1f5f9"/>
+    <image href="art/props/vampire.webp" x="-226" y="-480" width="452" height="480" filter="url(#paperShadow)"/>
 
     <g class="prop-badge">
-      <rect x="-65" y="-120" width="130" height="24" rx="12" fill="rgba(6, 9, 18, 0.95)" stroke="#dc2626" stroke-width="1.4"/>
-      <text x="0" y="-104" text-anchor="middle" class="prop-badge-text">🧛 VAMPIRE LORD</text>
+      <rect x="-65" y="-510" width="130" height="24" rx="12" fill="rgba(6, 9, 18, 0.95)" stroke="#dc2626" stroke-width="1.4"/>
+      <text x="0" y="-494" text-anchor="middle" class="prop-badge-text">🧛 VAMPIRE LORD</text>
     </g>
   `;
   overlay.appendChild(propRoot(g));
@@ -1597,9 +1226,6 @@ export function updateSceneOverlay(svg, { roomId, state, world, onAction }) {
   svg.innerHTML = OVERLAY_DEFS;
 
   switch (roomId) {
-    case 1:
-      renderRoom1(svg, state, onAction);
-      break;
     case 3:
       renderRoom3(svg, state, onAction);
       break;
@@ -1629,9 +1255,6 @@ export function updateSceneOverlay(svg, { roomId, state, world, onAction }) {
       break;
     case 20:
       renderRoom20(svg, state, onAction);
-      break;
-    case 21:
-      renderRoom21(svg, state, onAction);
       break;
     case 22:
       renderRoom22(svg, state, onAction);

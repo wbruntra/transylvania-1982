@@ -85,30 +85,50 @@ test("objects that are not here, and objects that cannot be taken", async () => 
   assert.deepEqual(engine.run("get statue"), [MESSAGES.cant]);
 });
 
-test("the carry limit is five things", async () => {
+test("the normal game starts with nothing but bare hands -- the pistol is still in the attic", async () => {
   const engine = await createTestEngine();
 
-  // Pile the first six takeable objects into the starting room.
-  // The ring is one of the first six takeable objects and TRANS.bas:3067 keeps
-  // it behind a barrier until the vampire is gone; this test is about the
-  // limit, not that puzzle.
+  assert.equal(engine.state.objectLoc[17], 25, "the pistol starts in the attic, not carried");
+  assert.equal(engine.state.objectLoc[22], -1, "the bullet starts nowhere, not carried");
+  assert.deepEqual(engine.run("inventory"), [MESSAGES.carryingNothing]);
+});
+
+test("debug tester mode starts the player carrying the pistol, bullet, cross, elixir and box", async () => {
+  const engine = await createTestEngine({ debugInventory: true });
+
+  assert.equal(engine.state.objectLoc[17], CARRIED);
+  assert.equal(engine.state.objectLoc[22], CARRIED);
+  assert.equal(engine.state.objectLoc[6], CARRIED);
+  assert.equal(engine.state.objectLoc[36], CARRIED);
+  assert.equal(engine.state.objectLoc[27], CARRIED);
+  assert.deepEqual(engine.run("inventory"), [
+    MESSAGES.carryingHeader,
+    MESSAGES.carriedItem("WOODEN CROSS."),
+    MESSAGES.carriedItem("FLINTLOCK PISTOL."),
+    MESSAGES.carriedItem("SILVER BULLET."),
+    MESSAGES.carriedItem("SMALL BLACK METAL BOX."),
+    MESSAGES.carriedItem("MAGIC ELIXIR."),
+  ]);
+});
+
+test("there is no inventory item-carrying limit", async () => {
+  const engine = await createTestEngine();
+
+  // The ring is behind a barrier until the vampire is gone
   engine.state.flags.VR = 1;
 
-  const takeable = [...engine.world.objects.values()].filter((object) => object.takeable);
-  const names = takeable.slice(0, MAX_CARRIED + 1).map((object) => object.name);
-  for (const object of takeable.slice(0, MAX_CARRIED + 1)) {
+  const takeable = [...engine.world.objects.values()].filter(
+    (object) => object.takeable && object.id !== 20,
+  );
+  for (const object of takeable.slice(0, 6)) {
     engine.state.objectLoc[object.id] = engine.state.room;
   }
 
-  for (const name of names.slice(0, MAX_CARRIED)) {
-    assert.deepEqual(engine.run(`get ${name}`), [MESSAGES.ok]);
+  for (const object of takeable.slice(0, 6)) {
+    assert.deepEqual(engine.run(`get ${object.name}`), [MESSAGES.ok]);
   }
-  assert.equal(carriedCount(engine.state), MAX_CARRIED);
-  assert.deepEqual(engine.run(`get ${names[MAX_CARRIED]}`), [MESSAGES.carryingTooMuch]);
-
-  // Dropping something makes room again.
-  engine.run(`drop ${names[0]}`);
-  assert.deepEqual(engine.run(`get ${names[MAX_CARRIED]}`), [MESSAGES.ok]);
+  // Player carries 6 items (exceeds original 5-item limit)
+  assert.equal(carriedCount(engine.state), 6);
 });
 
 test("unknown input is refused without costing a turn", async () => {
@@ -338,6 +358,8 @@ test("tier 3 puzzle routines work as expected", async () => {
 
   // --- 4500: LOAD ---
   // Cannot load without pistol (17) and bullet (22) carried
+  engine.state.objectLoc[17] = 25;
+  engine.state.objectLoc[22] = GONE;
   assert.deepEqual(engine.run("load pistol"), [MESSAGES.cant]);
   engine.state.objectLoc[17] = CARRIED;
   engine.state.objectLoc[22] = CARRIED;
@@ -854,5 +876,102 @@ test("player makes a map as they explore the world", async () => {
   assert.deepEqual(restored.visitedRooms, [1, 8, 3, 9]);
 });
 
+test("flypaper commands in room 9 catch flies cleanly without disappearing", async () => {
+  const engine = await createTestEngine();
 
+  // 1. Entering room 9 without flypaper gives clue
+  engine.state.room = 9;
+  assert.deepEqual(engine.run("catch flies"), [
+    "THE FLIES SCATTERED BEFORE YOU COULD CATCH ANY OF THEM.",
+  ]);
+
+  // 2. 'use flypaper' catches flies
+  engine.state.objectLoc[31] = CARRIED;
+  const res1 = engine.run("use flypaper");
+  assert.equal(res1[0].includes("MANAGE TO CATCH SEVERAL OF THEM WITH THE PAPER"), true);
+  assert.equal(engine.state.objectLoc[7], CARRIED);
+  assert.equal(engine.state.objectLoc[31], GONE);
+
+  // 3. Reset and test 'catch flies with flypaper'
+  engine.state.objectLoc[7] = 9;
+  engine.state.objectLoc[31] = CARRIED;
+  const res2 = engine.run("catch flies with flypaper");
+  assert.equal(res2[0].includes("MANAGE TO CATCH SEVERAL OF THEM WITH THE PAPER"), true);
+  assert.equal(engine.state.objectLoc[7], CARRIED);
+
+  // 4. Reset and test 'drop flypaper' in room 9 catches flies instead of disappearing
+  engine.state.objectLoc[7] = 9;
+  engine.state.objectLoc[31] = CARRIED;
+  const res3 = engine.run("drop flypaper");
+  assert.equal(res3[0].includes("MANAGE TO CATCH SEVERAL OF THEM WITH THE PAPER"), true);
+  assert.equal(engine.state.objectLoc[7], CARRIED);
+
+  // 5. Reset and test 'wave flypaper' in room 9 catches flies
+  engine.state.objectLoc[7] = 9;
+  engine.state.objectLoc[31] = CARRIED;
+  const res4 = engine.run("wave flypaper");
+  assert.equal(res4[0].includes("MANAGE TO CATCH SEVERAL OF THEM WITH THE PAPER"), true);
+  assert.equal(engine.state.objectLoc[7], CARRIED);
+
+  // 6. Test feeding bullfrog with flies or dropping flies at bullfrog
+  engine.state.room = 16;
+  engine.state.objectLoc[8] = 16;
+  const feedRes = engine.run("drop flies");
+  assert.equal(feedRes[0].includes("BULLFROG SPRINGS FORWARD"), true);
+  assert.equal(engine.state.objectLoc[7], GONE);
+  assert.equal(engine.state.objectLoc[8], GONE);
+});
+
+test("cat guard in room 7 blocks acid and broom until distracted by mice", async () => {
+  const engine = await createTestEngine();
+
+  // 1. Enter room 7 where cat is present
+  engine.state.room = 7;
+  assert.equal(engine.state.objectLoc[24], 7); // cat is here
+  assert.equal(engine.state.objectLoc[1], 7);  // acid is here
+  assert.equal(engine.state.objectLoc[25], 7); // broom is here
+
+  // 2. Trying to take acid or broom is blocked by the cat
+  assert.deepEqual(engine.run("get acid"), [MESSAGES.catScowls]);
+  assert.deepEqual(engine.run("get bottle"), [MESSAGES.catScowls]);
+  assert.deepEqual(engine.run("get broom"), [MESSAGES.catScowls]);
+  assert.equal(engine.state.objectLoc[1], 7);
+  assert.equal(engine.state.objectLoc[25], 7);
+
+  // 3. Trying to ride broom while cat is in the room also scowls
+  engine.state.objectLoc[25] = CARRIED;
+  assert.deepEqual(engine.run("ride broom"), [MESSAGES.catScowls]);
+  engine.state.objectLoc[25] = 7;
+
+  // 4. Player gets the mice (escaped from wagon coffin)
+  engine.state.objectLoc[20] = CARRIED;
+
+  // 5. Dropping the mice in room 7 distracts the cat
+  const dropRes = engine.run("drop mice");
+  assert.equal(dropRes[0], "THE MICE RUN AWAY AND THE CAT CHASES AFTER THEM.");
+  assert.equal(engine.state.objectLoc[24], GONE);
+  assert.equal(engine.state.objectLoc[20], GONE);
+
+  // 6. Now that the cat is gone, player can freely take the acid and broom
+  assert.deepEqual(engine.run("get acid"), [MESSAGES.ok]);
+  assert.equal(engine.state.objectLoc[1], CARRIED);
+
+  assert.deepEqual(engine.run("get broom"), [MESSAGES.ok]);
+  assert.equal(engine.state.objectLoc[25], CARRIED);
+
+  // 7. And now player can fly the broom!
+  const flyRes = engine.run("ride broom");
+  assert.equal(flyRes[0].includes("THE BROOMSTICK BUCKS VIOLENTLY"), true);
+  assert.equal(engine.state.room, 15); // Willow on lake shore
+});
+
+test("the loaf of stale bread is a red herring and does not affect mice", async () => {
+  const engine = await createTestEngine();
+  engine.state.room = 24;
+  assert.equal(engine.state.objectLoc[9], 24);
+
+  // Eat bread
+  assert.deepEqual(engine.run("eat bread"), ["IT TASTED AWFUL."]);
+  assert.equal(engine.state.objectLoc[9], GONE);
+});
 

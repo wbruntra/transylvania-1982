@@ -64,4 +64,37 @@ test("computeActionChips generates contextual smart actions for iPad touch navig
   state.flags.PO = 1;
   const chips37Wake = computeActionChips(room37, state, world);
   assert.ok(chips37Wake.some((c) => c.cmd === "wake damsel"), "should offer WAKE SABRINA when coffin open");
+
+  // 6. Cave (Room 9) Flies & Flypaper
+  const room9 = world.room(9);
+  state.room = 9;
+  state.objectLoc[7] = 9;
+  state.objectLoc[31] = -2; // Carried flypaper
+  const chips9 = computeActionChips(room9, state, world);
+  assert.ok(chips9.some((c) => c.cmd === "catch flies"), "should offer CATCH FLIES in room 9");
+  assert.ok(chips9.some((c) => c.cmd === "use flypaper"), "should offer USE FLYPAPER in room 9");
+
+  // 7. Room 7 Cat Guard and Mice Chips
+  const room7 = world.room(7);
+  state.room = 7;
+  state.objectLoc[24] = 7; // Cat here
+  state.objectLoc[1] = 7;  // Acid here
+  state.objectLoc[25] = 7; // Broom here
+  state.objectLoc[20] = -1;// Mice not carried
+  const chips7Guarded = computeActionChips(room7, state, world);
+  const cmds7Guarded = chips7Guarded.map((c) => c.cmd);
+  assert.ok(!cmds7Guarded.includes("get acid"), "should not offer GET ACID while cat guards room 7");
+  assert.ok(!cmds7Guarded.includes("get broom"), "should not offer GET BROOM while cat guards room 7");
+  assert.ok(cmds7Guarded.includes("look cat"), "should offer LOOK CAT while cat guards room 7");
+
+  state.objectLoc[20] = -2; // Player carried mice
+  const chips7WithMice = computeActionChips(room7, state, world);
+  const cmds7WithMice = chips7WithMice.map((c) => c.cmd);
+  assert.ok(cmds7WithMice.includes("drop mice"), "should offer RELEASE MICE when carrying mice in room 7");
+
+  state.objectLoc[24] = -1; // Cat chased away
+  const chips7Cleared = computeActionChips(room7, state, world);
+  const cmds7Cleared = chips7Cleared.map((c) => c.cmd);
+  assert.ok(cmds7Cleared.includes("get acid"), "should offer GET ACID once cat is gone");
+  assert.ok(cmds7Cleared.includes("get broom"), "should offer GET BROOM once cat is gone");
 });

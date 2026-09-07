@@ -62,15 +62,34 @@ export function createTimers() {
  */
 
 /**
+ * Objects a debug tester starts carrying instead of having to find them the
+ * normal way -- the flintlock pistol (17) and its bullet (22), the wooden
+ * cross (6) that fends off the vampire, the magic elixir (36) that wakes
+ * Sabrina, and the small black metal box (27) that opens the sarcophagus.
+ * None of this is part of the original game; it exists purely so a tester
+ * can jump straight to a room (see ui/debug.js's `/room`) without first
+ * replaying the whole item-collecting route. See ui/debugMode.js for the
+ * toggle that turns this on.
+ * @type {number[]}
+ */
+export const DEBUG_STARTING_ITEMS = [17, 22, 6, 36, 27];
+
+/**
  * A fresh game, with every object at its starting location.
  * @param {ReturnType<typeof import("./world.js").createWorld>} world
+ * @param {{debugInventory?: boolean}} [options]
  * @returns {GameState}
  */
-export function createState(world) {
+export function createState(world, options = {}) {
   /** @type {Record<number, number>} */
   const objectLoc = {};
-  for (const object of world.objects.values()) {
+  const objects =
+    world?.objects instanceof Map ? world.objects.values() : (world?.objects ?? []);
+  for (const object of objects) {
     objectLoc[object.id] = object.loc;
+  }
+  if (options.debugInventory) {
+    for (const objectId of DEBUG_STARTING_ITEMS) objectLoc[objectId] = CARRIED;
   }
   return {
     room: START_ROOM,

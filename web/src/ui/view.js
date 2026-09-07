@@ -40,10 +40,15 @@ export function computeActionChips(room, state, world) {
   const here = objectsInRoom(world, state, roomId);
   for (const obj of here) {
     if (isObjectTakeable(world, state, obj.id)) {
+      // In Room 7, the Black Cat guards the acid (1) and broom (25)
+      if (roomId === 7 && state.objectLoc[24] === 7 && (obj.id === 1 || obj.id === 25)) {
+        continue;
+      }
       const name = getObjectName(world, state, obj.id);
       let icon = "📦";
       let shortCmd = `get ${name.toLowerCase().replace(/\.$/, "")}`;
       if (obj.id === 18) { icon = "📜"; shortCmd = "get note"; }
+      else if (obj.id === 20) { icon = "🐀"; shortCmd = "get mice"; }
       else if (obj.id === 32) { icon = "🧄"; shortCmd = "get garlic"; }
       else if (obj.id === 3) { icon = "🧥"; shortCmd = "get cloak"; }
       else if (obj.id === 26) { icon = "🗝️"; shortCmd = "get pick"; }
@@ -77,7 +82,18 @@ export function computeActionChips(room, state, world) {
     } else {
       chips.push({ cmd: "down", label: "CLIMB DOWN", icon: "🕳️" });
     }
-  } else if (roomId === 9 || roomId === 10) { // Cave Door
+  } else if (roomId === 9 || roomId === 10) { // Cave Door & Flies
+    if (roomId === 9 && state.objectLoc[7] === 9) {
+      if (isCarried(state, 31) || state.objectLoc[31] === 9) {
+        chips.push({ cmd: "catch flies", label: "CATCH FLIES", icon: "🪰" });
+        chips.push({ cmd: "use flypaper", label: "USE FLYPAPER", icon: "🪰" });
+      } else {
+        chips.push({ cmd: "catch flies", label: "CATCH FLIES", icon: "🪰" });
+      }
+    }
+    if (roomId === 9 && state.objectLoc[31] === 9) {
+      chips.push({ cmd: "get flypaper", label: "GET FLYPAPER", icon: "🪰" });
+    }
     if (!state.flags?.DR) {
       if (isCarried(state, 11)) {
         chips.push({ cmd: "unlock door", label: "UNLOCK DOOR", icon: "🗝️" });
@@ -85,6 +101,14 @@ export function computeActionChips(room, state, world) {
       chips.push({ cmd: "open door", label: "OPEN DOOR", icon: "🚪" });
     } else {
       chips.push({ cmd: "go door", label: "GO DOOR", icon: "🚪" });
+    }
+  } else if (roomId === 7) { // Clay Hut (Cat Guard)
+    if (state.objectLoc[24] === 7) {
+      if (isCarried(state, 20)) {
+        chips.push({ cmd: "drop mice", label: "RELEASE MICE", icon: "🐀" });
+      } else {
+        chips.push({ cmd: "look cat", label: "LOOK CAT", icon: "🐱" });
+      }
     }
   } else if (roomId === 16) { // Bullfrog
     chips.push({ cmd: "feed frog", label: "FEED FROG", icon: "🐸" });
@@ -122,7 +146,7 @@ export function computeActionChips(room, state, world) {
   if (isCarried(state, 36)) { // Elixir
     chips.push({ cmd: "drink elixir", label: "DRINK ELIXIR", icon: "🧪" });
   }
-  if (isCarried(state, 25) && (roomId === 34 || roomId === 35 || roomId === 36 || roomId === 37)) {
+  if (isCarried(state, 25) && state.objectLoc[24] !== roomId) {
     chips.push({ cmd: "ride broom", label: "RIDE BROOM", icon: "🧹" });
   }
 

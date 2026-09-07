@@ -27,6 +27,10 @@ const DEFAULT_PALETTE = PALETTE_BY_ROOM_TYPE[1];
  * @type {Record<number, (state: import("../engine/state.js").GameState) => string>}
  */
 const BACKGROUND_VARIANTS = {
+  // 4867: acid burns the faint carving on the stump's face into legible
+  // "KNOCK HERE" lettering. Painted into the wood itself rather than an SVG
+  // text overlay, same as the other permanent state changes below.
+  1: (state) => (state.flags.SM ? "-runes" : ""),
   // The cave door (TRANS.bas:6310/6320) is painted shut in both rooms it
   // joins; DR is the same flag that actually unlocks and opens it.
   9: (state) => (state.flags.DR ? "-open" : ""),
@@ -34,6 +38,24 @@ const BACKGROUND_VARIANTS = {
   // 7745: the alien statue's destruction leaves a scorched 30-foot circle
   // (object 29) that no prop overlay could cover convincingly.
   4: (state) => (state.objectLoc[2] === -1 ? "-burnt" : ""),
+  // The vines (object 14) hide a sarcophagus (15) that PULL VINES reveals;
+  // PUSH BUTTON then blasts its lid off, leaving the sleeping damsel (16)
+  // lying inside. Once she wakes (38) she's standing beside the player, not
+  // lying in the coffin, so the coffin reads as empty again from then on --
+  // same picture as once she's carried off entirely. Four backgrounds, not
+  // overlays -- see the room-37 set in SCENE_VARIATIONS.md.
+  37: (state) => {
+    if (state.objectLoc[16] === 37) return "-open"; // sleeping Sabrina still in the coffin
+    if (state.objectLoc[15] === 37) return "-sarcophagus";
+    // The vines (object 14) never actually leave room 37 -- neither
+    // revealSarcophagus() nor anything downstream relocates them, same as
+    // the original BASIC (TRANS.bas:300 only ever adds the sarcophagus, it
+    // never clears the vines). So "vines still in the room" can't be used
+    // to detect "nothing has happened yet"; object 38's untouched -1
+    // (GONE) start value is the only reliable signal for that.
+    if (state.objectLoc[38] === -1) return ""; // still vine-covered
+    return "-empty"; // awake and standing, or carried off -- coffin is empty either way
+  },
 };
 
 const ART_MODE_KEY = "transylvania-art-mode";

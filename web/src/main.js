@@ -4,6 +4,7 @@
 import { fetchGameData } from "./data/gameData.js";
 import { createEngine } from "./engine/engine.js";
 import { createDebug } from "./ui/debug.js"; // TEMPORARY -- see ui/debug.js
+import { isDebugInventoryEnabled, toggleDebugInventory } from "./ui/debugMode.js";
 import { createEffects } from "./ui/effects.js";
 import { createMap } from "./ui/map.js";
 import { createScene } from "./ui/scene.js";
@@ -11,7 +12,7 @@ import { createView } from "./ui/view.js";
 
 async function main() {
   const data = await fetchGameData();
-  const engine = createEngine(data, { randomEvents: true });
+  const engine = createEngine(data, { randomEvents: true, debugInventory: isDebugInventoryEnabled() });
 
   let handleCommand = (input) => {};
 
@@ -47,6 +48,18 @@ async function main() {
       syncArtToggle();
     });
     syncArtToggle();
+  }
+
+  const debugToggle = /** @type {HTMLButtonElement} */ (document.getElementById("debugToggle"));
+  if (debugToggle) {
+    debugToggle.classList.toggle("active", isDebugInventoryEnabled());
+    debugToggle.addEventListener("click", () => {
+      // The engine is already built with the old inventory baked in, and a
+      // handful of other modules close over it too -- reloading is simpler
+      // and more reliable than trying to retrofit the running game.
+      toggleDebugInventory();
+      location.reload();
+    });
   }
 
   const map = createMap({

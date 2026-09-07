@@ -17,9 +17,10 @@ export async function loadGameData() {
 
 /**
  * An engine plus a `run` helper that returns the printed lines for a command.
+ * @param {{debugInventory?: boolean}} [options]
  */
-export async function createTestEngine() {
-  const engine = createEngine(await loadGameData());
+export async function createTestEngine(options = {}) {
+  const engine = createEngine(await loadGameData(), options);
   return {
     ...engine,
     /** @param {string} input @returns {string[]} */

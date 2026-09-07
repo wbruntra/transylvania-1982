@@ -3,9 +3,18 @@
 import { alienFireball, crossLight } from "../helpers.js";
 import { MESSAGES } from "../messages.js";
 import { isCarried } from "../state.js";
+import { catchFlies } from "./take.js";
 
 /** @type {import("./index.js").CommandHandler} */
 export function wave({ world, state, command }) {
+  // Wave flypaper in Room 9 catches flies
+  if (
+    state.room === 9 &&
+    state.objectLoc[7] === 9 &&
+    (command.X === 141 || command.X === 65 || command.noun?.includes("paper") || command.noun?.includes("fly"))
+  ) {
+    return catchFlies(world, state);
+  }
   // 7700 IF (X=63 OR X=115) AND P=4 AND P%(3)=-2 AND P%(5)=-2: free alien from statue
   if (
     (command.X === 63 || command.X === 115) &&

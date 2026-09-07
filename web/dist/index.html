@@ -7,16 +7,32 @@
       content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1"
     />
     <title>Transylvania (1982) — Illustrated Adventure</title>
-    <script type="module" crossorigin src="/assets/index-BFJtIXj0.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CIuvob6o.css">
+    <script type="module" crossorigin src="./assets/index-DGQJq5qr.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-cBWUQDvo.css">
   </head>
   <body>
     <div id="app">
       <main id="stage" aria-label="Scene Viewport">
         <div id="sceneBackdrop"></div>
-        <div id="scene">
-          <svg id="sceneOverlay" class="scene-overlay" viewBox="0 0 1024 1024"></svg>
-          <div class="label" id="sceneLabel"></div>
+        <div class="stage-frame">
+          <div id="scene">
+            <svg id="sceneOverlay" class="scene-overlay" viewBox="0 0 1024 1024"></svg>
+            <div class="label" id="sceneLabel"></div>
+          </div>
+
+          <!-- Command Input Row -->
+          <div id="row">
+            <span class="prompt-caret">&gt;</span>
+            <input
+              id="cmd"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="false"
+              placeholder="COMMAND : e.g. north, look, get note, help"
+            />
+            <button id="go" type="button">SEND</button>
+          </div>
         </div>
 
         <!-- Floating Compact Mini-Map HUD -->
@@ -45,6 +61,10 @@
             <button id="mapToggle" class="icon-button" type="button" title="View Map Drawer" aria-label="View Map Drawer">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></svg>
               <span>MAP</span>
+            </button>
+            <button id="debugToggle" class="icon-button" type="button" title="Toggle debug tester starting inventory (pistol, bullet, cross, elixir, box) -- reloads the game" aria-label="Toggle debug tester mode">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4Z"/><path d="M6 10h12M4 14h16M8 21l-1-7M16 21l1-7"/></svg>
+              <span>DEBUG</span>
             </button>
           </div>
         </header>
@@ -120,19 +140,6 @@
             </div>
           </div>
 
-          <!-- Command Input Row -->
-          <div id="row">
-            <span class="prompt-caret">&gt;</span>
-            <input
-              id="cmd"
-              autocomplete="off"
-              autocorrect="off"
-              autocapitalize="off"
-              spellcheck="false"
-              placeholder="COMMAND : e.g. north, look, get note, help"
-            />
-            <button id="go" type="button">SEND</button>
-          </div>
           <div class="meta-hint">
             <small>Data from Apple II · Tap directions or chips · <b>HELP</b> for clues</small>
           </div>

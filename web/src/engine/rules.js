@@ -49,9 +49,9 @@ import { objectsInRoom } from "./world.js";
 
 /** @type {Rule[]} */
 export const RULES = [
-  // Tier 2: FEED (TRANS.bas:4300, 4100)
+  // Tier 2: FEED / DROP (TRANS.bas:4047, 4100, 4190)
   {
-    when: { verb: "feed", X: [10, 65], room: 16, objectInRoom: 8, objectCarried: 7 },
+    when: { verb: "feed", X: [10, 65, 141], room: 16, objectInRoom: 8, objectCarried: 7 },
     then: {
       say: [
         "THE BULLFROG SPRINGS FORWARD AND WOLFS DOWN THE FLIES. 'THANKS,' HE SAYS, 'THAT HOWLING SURE WHETS YOUR APPETITE. SAY",
@@ -60,6 +60,36 @@ export const RULES = [
       placeObjects: { 7: -1, 8: -1 },
     },
     source: "TRANS.bas:4300, 4100",
+  },
+  {
+    when: { verb: "drop", X: [65, 141], room: 16, objectInRoom: 8, objectCarried: 7 },
+    then: {
+      say: [
+        "THE BULLFROG SPRINGS FORWARD AND WOLFS DOWN THE FLIES. 'THANKS,' HE SAYS, 'THAT HOWLING SURE WHETS YOUR APPETITE. SAY",
+        "'IJNID' TO THE GOBLIN FOR ME.' HE HOPS INTO THE MURKY WATERS OF THE LAKE AND VANISHES.",
+      ],
+      placeObjects: { 7: -1, 8: -1 },
+    },
+    source: "TRANS.bas:4047, 4100",
+  },
+  {
+    // TRANS.bas:4190 - Releasing mice in Room 7 distracts the cat guard
+    when: { verb: ["drop", "use", "feed", "give"], X: [31, 20], room: 7, objectInRoom: 24, objectCarried: 20 },
+    then: {
+      say: "THE MICE RUN AWAY AND THE CAT CHASES AFTER THEM.",
+      placeObjects: { 20: -1, 24: -1 },
+      apply: ({ state }) => {
+        if (!state.timers) state.timers = {};
+        state.timers.ZZ = 11;
+      },
+    },
+    source: "TRANS.bas:4190",
+  },
+  {
+    // LOOK CAT in Room 7
+    when: { verb: "look", X: 21, room: 7, objectInRoom: 24 },
+    then: { say: "THE FIERCE BLACK CAT SCOWLS SUSPICIOUSLY, GUARDING THE HUT." },
+    source: "TRANS.bas:1599/3061",
   },
 
   // Tier 2: CLAP (TRANS.bas:7900, 7915)

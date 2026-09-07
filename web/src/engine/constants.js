@@ -20,8 +20,8 @@ export const CARRIED = -2;
 /** Object has been removed from play. */
 export const GONE = -1;
 
-/** H in TRANS.bas: the player may hold at most five things. */
-export const MAX_CARRIED = 5;
+/** Inventory item-carrying limit removed (formerly H=5 in TRANS.bas). */
+export const MAX_CARRIED = Infinity;
 
 /** P=1 at TRANS.bas:874 -- the stump where the game opens. */
 export const START_ROOM = 1;

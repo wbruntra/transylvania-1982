@@ -75,7 +75,7 @@ function findLabels(el) {
   return labels;
 }
 
-test("Room 1: displays acid runes when SM flag is set", async () => {
+test("Room 1: acid-burned 'KNOCK HERE' lettering is painted into the background art, not overlaid", async () => {
   const data = await loadGameData();
   const world = createWorld(data);
   const state = createState(data);
@@ -86,7 +86,7 @@ test("Room 1: displays acid runes when SM flag is set", async () => {
 
   state.flags.SM = 1;
   updateSceneOverlay(svg, { roomId: 1, state, world });
-  assert.ok(findLabels(svg).includes("Glowing Rune Inscription"));
+  assert.equal(findLabels(svg).length, 0);
 });
 
 test("Room 4: displays alien statue, then smoking pedestal, then crashed saucer", async () => {
@@ -113,28 +113,25 @@ test("Room 4: displays alien statue, then smoking pedestal, then crashed saucer"
   assert.ok(findLabels(svg).includes("Glowing Extraterrestrial Saucer"));
 });
 
-test("Room 9 & 10: displays cave iron door (locked vs open)", async () => {
+test("Room 9 & 10: the iron door is painted into the background art, not overlaid, whether locked or open", async () => {
   const data = await loadGameData();
   const world = createWorld(data);
   const state = createState(data);
   const svg = createMockElement("svg");
 
-  // Room 9 initially locked
   state.flags.DR = 0;
   updateSceneOverlay(svg, { roomId: 9, state, world });
-  assert.ok(findLabels(svg).includes("Locked Heavy Iron Door"));
+  assert.ok(!findLabels(svg).includes("Locked Heavy Iron Door"));
 
-  // Unlocked
   state.flags.DR = 1;
   updateSceneOverlay(svg, { roomId: 9, state, world });
-  assert.ok(findLabels(svg).includes("Open Iron Doorway"));
+  assert.ok(!findLabels(svg).includes("Open Iron Doorway"));
 
-  // Room 10 from the other side
   updateSceneOverlay(svg, { roomId: 10, state, world });
-  assert.ok(findLabels(svg).includes("Open Iron Doorway"));
+  assert.ok(!findLabels(svg).includes("Open Iron Doorway"));
 });
 
-test("Room 22: displays revolving secret wall mechanism, cloak, and lock pick", async () => {
+test("Room 22: displays cloak and lock pick (the antlers/revolving wall is painted into the background art, not overlaid)", async () => {
   const data = await loadGameData();
   const world = createWorld(data);
   const state = createState(data);
@@ -144,7 +141,7 @@ test("Room 22: displays revolving secret wall mechanism, cloak, and lock pick", 
   state.objectLoc[26] = 22;
   updateSceneOverlay(svg, { roomId: 22, state, world });
   const labels = findLabels(svg);
-  assert.ok(labels.includes("Revolving Secret Wall"));
+  assert.ok(!labels.includes("Revolving Secret Wall"));
   assert.ok(labels.includes("Dusty Wizard's Cloak"));
   assert.ok(labels.includes("Slender Lock Pick"));
 });
@@ -195,30 +192,30 @@ test("Room 27 & 30: displays werewolf ashes and vampire embers after defeat", as
   assert.ok(findLabels(svg).includes("Smoldering Vampire Embers"));
 });
 
-test("Room 37: displays tangled vines, then sarcophagus / Sabrina progression", async () => {
+test("Room 37: vines, sarcophagus and sleeping Sabrina are painted into the background art (no overlay); only the awakened princess still gets one", async () => {
   const data = await loadGameData();
   const world = createWorld(data);
   const state = createState(data);
   const svg = createMockElement("svg");
 
-  // 1. Tangled vines covering the alcove
+  // 1. Tangled vines covering the alcove -- background art only, no overlay prop
   state.objectLoc[14] = 37;
   updateSceneOverlay(svg, { roomId: 37, state, world });
-  assert.ok(findLabels(svg).includes("Tangled Vines"));
+  assert.ok(!findLabels(svg).includes("Tangled Vines"));
 
-  // 2. Vines pulled, revealing sealed sarcophagus
+  // 2. Vines pulled, revealing sealed sarcophagus -- background art only
   state.objectLoc[14] = -1;
   state.objectLoc[15] = 37;
   updateSceneOverlay(svg, { roomId: 37, state, world });
-  assert.ok(findLabels(svg).includes("Sealed Stone Sarcophagus"));
+  assert.ok(!findLabels(svg).includes("Sealed Stone Sarcophagus"));
 
-  // 3. Sarcophagus blasted open, revealing sleeping damsel
+  // 3. Sarcophagus blasted open, revealing sleeping damsel -- background art only
   state.objectLoc[15] = -1;
   state.objectLoc[16] = 37;
   updateSceneOverlay(svg, { roomId: 37, state, world });
-  assert.ok(findLabels(svg).includes("Sleeping Princess Sabrina"));
+  assert.ok(!findLabels(svg).includes("Sleeping Princess Sabrina"));
 
-  // 4. Sabrina awakened
+  // 4. Sabrina awakened -- no background variant for this state, so it still overlays
   state.objectLoc[16] = -1;
   state.objectLoc[38] = 37;
   updateSceneOverlay(svg, { roomId: 37, state, world });
@@ -249,4 +246,23 @@ test("Dynamic actors: wandering mice, werewolf, and vampire render across rooms"
   state.flags.VR = 0;
   updateSceneOverlay(svg, { roomId: 28, state, world });
   assert.ok(findLabels(svg).includes("Lethal Vampire"));
+});
+
+test("Room 9: displays fly swarm and piece of flypaper when present", async () => {
+  const data = await loadGameData();
+  const world = createWorld(data);
+  const state = createState(data);
+  const svg = createMockElement("svg");
+
+  // Room 9 initially has flies
+  state.objectLoc[7] = 9;
+  state.objectLoc[31] = -2;
+  updateSceneOverlay(svg, { roomId: 9, state, world });
+  assert.ok(findLabels(svg).includes("Swarm of Buzzing Flies"));
+  assert.ok(!findLabels(svg).includes("Piece of Flypaper"));
+
+  // If flypaper is in room 9, it renders on the floor
+  state.objectLoc[31] = 9;
+  updateSceneOverlay(svg, { roomId: 9, state, world });
+  assert.ok(findLabels(svg).includes("Piece of Flypaper"));
 });

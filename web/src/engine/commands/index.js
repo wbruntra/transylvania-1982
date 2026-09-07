@@ -37,6 +37,7 @@ import { sail } from "./sail.js";
 import { shoot } from "./shoot.js";
 import { take } from "./take.js";
 import { lock, unlock } from "./unlock.js";
+import { use } from "./use.js";
 import { wave } from "./wave.js";
 import { wear } from "./wear.js";
 import { MESSAGES } from "../messages.js";
@@ -71,7 +72,7 @@ export const COMMANDS = {
   // Tier 1 canned refusals (PORTING.md)
   hunt: notHere, // 210
   hold: dontUnderstand, // 230
-  use: dontUnderstand, // 230
+  use,
   break: cant, // 240
   clean: cant, // 240
   scrape: cant, // 240

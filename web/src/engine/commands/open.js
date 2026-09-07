@@ -14,7 +14,9 @@ export function open(context) {
     setNounMapEntry(state, 29, 19);
     placeObject(state, 20, 74);
     placeObject(state, 19, 38);
-    placeObject(state, 22, 38);
+    if (state.objectLoc[22] === -1 && !state.flags.GN) {
+      placeObject(state, 22, 38);
+    }
     placeObject(state, 37, 38);
     placeObject(state, 21, GONE);
     return ["AS YOU LIFT THE LID AN OVERPOWERING STENCH HITS YOU..."];

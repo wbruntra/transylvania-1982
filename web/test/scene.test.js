@@ -25,6 +25,34 @@ test("a room with no state-dependent art always resolves to its base picture", (
   assert.equal(firstCandidate(37, state), "art/room-37.webp");
 });
 
+test("the stump (room 1) switches art once acid burns the carving legible", () => {
+  const state = createState(world);
+  assert.equal(firstCandidate(1, state), "art/room-1.webp");
+
+  state.flags.SM = 1; // TRANS.bas:4867
+  assert.equal(firstCandidate(1, state), "art/room-1-runes.webp");
+});
+
+test("the tower (room 37) steps through vines, sarcophagus, sleeping Sabrina, then an empty coffin once she wakes or is carried off", () => {
+  const state = createState(world);
+  assert.equal(firstCandidate(37, state), "art/room-37.webp"); // vines (obj 14) still cover it
+
+  state.objectLoc[14] = CARRIED;
+  state.objectLoc[15] = 37; // TRANS.bas:7821 -- vines pulled, sarcophagus revealed
+  assert.equal(firstCandidate(37, state), "art/room-37-sarcophagus.webp");
+
+  state.objectLoc[15] = GONE;
+  state.objectLoc[16] = 37; // TRANS.bas:4933 -- button pushed, sleeping Sabrina revealed
+  assert.equal(firstCandidate(37, state), "art/room-37-open.webp");
+
+  state.objectLoc[16] = GONE;
+  state.objectLoc[38] = 37; // TRANS.bas:7915 -- awakened, standing beside the player
+  assert.equal(firstCandidate(37, state), "art/room-37-empty.webp");
+
+  state.objectLoc[38] = CARRIED; // carried off to win
+  assert.equal(firstCandidate(37, state), "art/room-37-empty.webp");
+});
+
 test("the cave door (rooms 9 and 10) switches art when DR is set", () => {
   const state = createState(world);
   assert.equal(state.flags.DR, 0, "starts locked");
