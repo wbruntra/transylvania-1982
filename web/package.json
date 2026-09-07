@@ -10,7 +10,7 @@
     "build": "vite build",
     "preview": "vite preview --port 8099",
     "pretest": "npm run sync-data",
-    "test": "node --test 'test/*.test.js'"
+    "test": "node --test test/*.test.js"
   },
   "devDependencies": {
     "vite": "^8.2.2"
