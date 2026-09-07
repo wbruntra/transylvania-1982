@@ -53,3 +53,9 @@
 - Tier 3 routines (LOAD, SHOOT/FIRE, PULL, POUR, PUSH/PRESS, RIDE/FLY, UNLOCK/LOCK, EAT/DRINK, CLIMB, OPEN, WAVE/SHOW, MOVE/PRY, SET/CAST/SAIL, READ, EXIT/IN & ENTER/OUT) ported with shared helpers (stairs 12000, ladder 5880, sarcophagus 7820, statue alien 7745, cross light 7769, pie-man 6107, special nav 5737).
 - Tier 4 per-turn block (7000-7180), endings (sunrise 27000, deaths 7015/7020/30000, win 9440), meta commands (SAVE 25000, RESTORE 50, HELP 4200, QUIT/END 30040), and known gap fallbacks (LIST 1110, KILL+PASSA 6130) fully ported.
 - Total status: **45 of 45 routines ported**, covering **all 89 verbs**. Complete port finished.
+
+## Deployment & Hosting
+- Public GitHub Repo: `https://github.com/wbruntra/transylvania-1982`
+- GitHub Pages URL: `https://wbruntra.github.io/transylvania-1982/`
+- Automated Deployment: `.github/workflows/deploy.yml` triggers on push to `main`, tests with Node 22, builds `web/` with `base: "./"` in `vite.config.js`, and publishes artifact to GitHub Pages.
+
