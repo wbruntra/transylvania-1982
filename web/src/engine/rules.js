@@ -74,7 +74,7 @@ export const RULES = [
   },
   {
     // TRANS.bas:4190 - Releasing mice in Room 7 distracts the cat guard
-    when: { verb: ["drop", "use", "feed", "give"], X: [31, 20], room: 7, objectInRoom: 24, objectCarried: 20 },
+    when: { verb: ["drop", "release", "feed", "give"], X: [31, 20], room: 7, objectInRoom: 24, objectCarried: 20 },
     then: {
       say: "THE MICE RUN AWAY AND THE CAT CHASES AFTER THEM.",
       placeObjects: { 20: -1, 24: -1 },

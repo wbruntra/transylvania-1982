@@ -7,6 +7,7 @@
 | 2026-09-06 | User | Map taking up 1/3 of the screen in normal view | Never place secondary UI like the map inline next to `#scene` inside `#stage` (and beware CSS specificity on class selectors overriding HTML `hidden`). The art must remain unobstructed in normal view. Instead, use an unobtrusive floating corner mini-map HUD (`140px × 105px`) and a slide-in drawer/modal sheet for the full chart, opened on demand via click, hotkey, or `MAP` command. |
 | 2026-09-06 | User | CSS hover transform on SVG prop overridden by element transform attribute | In SVG, CSS transform declarations override SVG presentation attributes outright. To prevent hovering from resetting the element's position to (0,0), wrap interactive props in two nested groups (`PROP_ROOTS` / `placeProp` / `propRoot`): outer carries the placement transform, inner carries the interactive CSS class and hover scale. |
 | 2026-09-08 | User | Changed git default branch from `master` to `main` without instruction | Never rename `master` to `main` or alter branch names. Preserve `master` as the default branch locally and on remote. |
+| 2026-09-08 | User | Auto-executing puzzle actions on generic USE bypassed the canonical verb requirement | Require canonical verbs (WAVE, POUR, FEED, UNLOCK, SHOOT, etc.) to solve puzzles; provide a mild hint system that acknowledges player phrasing (e.g. "HOW DO YOU WANT TO USE IT?", "YOU TOUCH IT, BUT NOTHING HAPPENS.") rather than cold "I DON'T UNDERSTAND." |
 
 
 ## User Preferences

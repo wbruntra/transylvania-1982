@@ -37,6 +37,7 @@ import { sail } from "./sail.js";
 import { shoot } from "./shoot.js";
 import { take } from "./take.js";
 import { lock, unlock } from "./unlock.js";
+import { touch } from "./touch.js";
 import { use } from "./use.js";
 import { wave } from "./wave.js";
 import { wear } from "./wear.js";
@@ -88,7 +89,7 @@ export const COMMANDS = {
   shake: nothingHappened, // 290
   sweep: nothingHappened, // 290
   dust: nothingHappened, // 290
-  touch: nothingHappened, // 290
+  touch, // 290
   turn: nothingUnusual, // 1599
   whistle, // 9000
   kiss, // 9600
