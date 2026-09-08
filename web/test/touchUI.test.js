@@ -15,8 +15,15 @@ test("computeActionChips generates contextual smart actions for iPad touch navig
   const cmds1 = chips1.map((c) => c.cmd);
 
   assert.ok(cmds1.includes("look stump"), "should offer LOOK STUMP");
-  assert.ok(cmds1.includes("go stump"), "should offer ENTER STUMP");
-  assert.ok(cmds1.includes("knock stump"), "should offer KNOCK STUMP");
+  assert.ok(!cmds1.includes("knock stump"), "should not spoil KNOCK STUMP before acid is used");
+  assert.ok(!cmds1.includes("pour acid"), "should not spoil POUR ACID");
+
+  // Once acid has revealed the inscription, KNOCK and ENTER are revealed
+  state.flags.SM = 1;
+  const chips1AfterAcid = computeActionChips(room1, state, world);
+  const cmds1AfterAcid = chips1AfterAcid.map((c) => c.cmd);
+  assert.ok(cmds1AfterAcid.includes("knock stump"), "should offer KNOCK STUMP once inscription revealed");
+  assert.ok(cmds1AfterAcid.includes("go stump"), "should offer ENTER STUMP once inscription revealed");
 
   // 2. Room 3 (Forest with note): should offer GET NOTE
   const room3 = world.room(3);
@@ -54,7 +61,7 @@ test("computeActionChips generates contextual smart actions for iPad touch navig
   state.room = 37;
   state.flags.SH = 0;
   const chips37Vines = computeActionChips(room37, state, world);
-  assert.ok(chips37Vines.some((c) => c.cmd === "cut vines"), "should offer CUT VINES when vines present");
+  assert.ok(chips37Vines.some((c) => c.cmd === "cut vines"), "should offer PULL VINES when vines present");
 
   state.flags.SH = 1;
   state.flags.PO = 0;
@@ -63,18 +70,18 @@ test("computeActionChips generates contextual smart actions for iPad touch navig
 
   state.flags.PO = 1;
   const chips37Wake = computeActionChips(room37, state, world);
-  assert.ok(chips37Wake.some((c) => c.cmd === "wake damsel"), "should offer WAKE SABRINA when coffin open");
+  assert.ok(chips37Wake.some((c) => c.cmd === "look damsel"), "should offer LOOK SABRINA without spoiling wake verb");
 
-  // 6. Cave (Room 9) Flies & Flypaper
+  // 6. Cave (Room 9) Flies
   const room9 = world.room(9);
   state.room = 9;
   state.objectLoc[7] = 9;
   state.objectLoc[31] = -2; // Carried flypaper
   const chips9 = computeActionChips(room9, state, world);
-  assert.ok(chips9.some((c) => c.cmd === "catch flies"), "should offer CATCH FLIES in room 9");
-  assert.ok(chips9.some((c) => c.cmd === "use flypaper"), "should offer USE FLYPAPER in room 9");
+  assert.ok(chips9.some((c) => c.cmd === "look flies"), "should offer LOOK FLIES in room 9");
+  assert.ok(!chips9.some((c) => c.cmd === "use flypaper"), "should not spoil USE FLYPAPER ahead of time");
 
-  // 7. Room 7 Cat Guard and Mice Chips
+  // 7. Room 7 Cat Guard
   const room7 = world.room(7);
   state.room = 7;
   state.objectLoc[24] = 7; // Cat here
@@ -86,11 +93,7 @@ test("computeActionChips generates contextual smart actions for iPad touch navig
   assert.ok(!cmds7Guarded.includes("get acid"), "should not offer GET ACID while cat guards room 7");
   assert.ok(!cmds7Guarded.includes("get broom"), "should not offer GET BROOM while cat guards room 7");
   assert.ok(cmds7Guarded.includes("look cat"), "should offer LOOK CAT while cat guards room 7");
-
-  state.objectLoc[20] = -2; // Player carried mice
-  const chips7WithMice = computeActionChips(room7, state, world);
-  const cmds7WithMice = chips7WithMice.map((c) => c.cmd);
-  assert.ok(cmds7WithMice.includes("drop mice"), "should offer RELEASE MICE when carrying mice in room 7");
+  assert.ok(!cmds7Guarded.includes("drop mice"), "should not spoil RELEASE MICE");
 
   state.objectLoc[24] = -1; // Cat chased away
   const chips7Cleared = computeActionChips(room7, state, world);

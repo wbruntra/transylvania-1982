@@ -16,22 +16,39 @@ export function wave({ world, state, command }) {
     return catchFlies(world, state);
   }
   // 7700 IF (X=63 OR X=115) AND P=4 AND P%(3)=-2 AND P%(5)=-2: free alien from statue
-  if (
-    (command.X === 63 || command.X === 115) &&
-    state.room === 4 &&
-    isCarried(state, 3) &&
-    isCarried(state, 5)
-  ) {
-    return alienFireball(world, state);
+  const isRing =
+    command.X === 63 ||
+    command.X === 115 ||
+    command.directX === 63 ||
+    command.indirectX === 63 ||
+    command.directX === 115 ||
+    command.noun?.includes("ring") ||
+    (state.room === 4 &&
+      (command.directX === 2 || command.indirectX === 2 || command.noun?.includes("statue")));
+
+  if (isRing && state.room === 4) {
+    if (isCarried(state, 3) && isCarried(state, 5)) {
+      return alienFireball(world, state);
+    }
+    if (isCarried(state, 5)) {
+      return ["THE RING GLOWS BRIEFLY WITH A SOFT WHITE FLAME, BUT NOTHING HAPPENS."];
+    }
   }
 
   // 7701 IF X=26 AND P%(6)=-2: cross light (or bare WAVE when vampire is present)
-  if ((command.X === 26 || (!command.X && state.objectLoc[39] === state.room)) && isCarried(state, 6)) {
+  const isCross =
+    command.X === 26 ||
+    command.directX === 26 ||
+    command.indirectX === 26 ||
+    command.noun?.includes("cross") ||
+    (!command.X && state.objectLoc[39] === state.room);
+
+  if (isCross && isCarried(state, 6)) {
     return crossLight(world, state);
   }
 
   // 7702 IF X=28 THEN 7780: elixir
-  if (command.X === 28) {
+  if (command.X === 28 || command.directX === 28 || command.noun?.includes("elixir")) {
     if (!isCarried(state, 36)) return [MESSAGES.notHere];
     state.flags.SH = 1;
     return [MESSAGES.ok];

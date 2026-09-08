@@ -261,7 +261,10 @@ export const RULES = [
  * @param {import("./commands/index.js").CommandContext} context
  */
 export function ruleMatches({ when }, { world, state, command }) {
-  if (when.verb !== undefined && when.verb !== command.verb) return false;
+  if (when.verb !== undefined) {
+    const allowedVerbs = Array.isArray(when.verb) ? when.verb : [when.verb];
+    if (!allowedVerbs.includes(command.verb)) return false;
+  }
 
   const I =
     command.I ??
@@ -277,11 +280,16 @@ export function ruleMatches({ when }, { world, state, command }) {
     if (world.room(state.room).type > when.maxRoomType) return false;
   }
 
-  const X =
-    command.X ?? (world ? resolveNoun(world, command.noun, state?.room) : null);
   if (when.X !== undefined) {
     const allowed = Array.isArray(when.X) ? when.X : [when.X];
-    if (!allowed.includes(X)) return false;
+    const candidateXs = [command.X, command.directX, command.indirectX].filter(
+      (x) => x !== null && x !== undefined,
+    );
+    if (candidateXs.length === 0 && world && command.noun) {
+      const fallbackX = resolveNoun(world, command.noun, state?.room);
+      if (fallbackX) candidateXs.push(fallbackX);
+    }
+    if (!candidateXs.some((x) => allowed.includes(x))) return false;
   }
 
   if (when.noun !== undefined) {

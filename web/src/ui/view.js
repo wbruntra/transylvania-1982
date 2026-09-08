@@ -66,13 +66,13 @@ export function computeActionChips(room, state, world) {
     }
   }
 
-  // 3. Room-specific puzzle actions
+  // 3. Room-specific exploration actions (non-spoiler)
   if (roomId === 1) { // Stump
     chips.push({ cmd: "look stump", label: "LOOK STUMP", icon: "🪵" });
-    chips.push({ cmd: "go stump", label: "ENTER STUMP", icon: "🚪" });
-    chips.push({ cmd: "knock stump", label: "KNOCK STUMP", icon: "🚪" });
-    if (isCarried(state, 1)) { // acid
-      chips.push({ cmd: "pour acid", label: "POUR ACID", icon: "🧪" });
+    // Only offer knock/enter once acid has burned the inscription legible
+    if (state.flags?.SM) {
+      chips.push({ cmd: "go stump", label: "ENTER STUMP", icon: "🚪" });
+      chips.push({ cmd: "knock stump", label: "KNOCK STUMP", icon: "🚪" });
     }
   } else if (roomId === 4) { // Clearing / Alien statue
     chips.push({ cmd: "look statue", label: "LOOK STATUE", icon: "🛸" });
@@ -84,35 +84,24 @@ export function computeActionChips(room, state, world) {
     }
   } else if (roomId === 9 || roomId === 10) { // Cave Door & Flies
     if (roomId === 9 && state.objectLoc[7] === 9) {
-      if (isCarried(state, 31) || state.objectLoc[31] === 9) {
-        chips.push({ cmd: "catch flies", label: "CATCH FLIES", icon: "🪰" });
-        chips.push({ cmd: "use flypaper", label: "USE FLYPAPER", icon: "🪰" });
-      } else {
-        chips.push({ cmd: "catch flies", label: "CATCH FLIES", icon: "🪰" });
-      }
+      chips.push({ cmd: "look flies", label: "LOOK FLIES", icon: "🪰" });
     }
     if (roomId === 9 && state.objectLoc[31] === 9) {
       chips.push({ cmd: "get flypaper", label: "GET FLYPAPER", icon: "🪰" });
     }
     if (!state.flags?.DR) {
-      if (isCarried(state, 11)) {
-        chips.push({ cmd: "unlock door", label: "UNLOCK DOOR", icon: "🗝️" });
-      }
       chips.push({ cmd: "open door", label: "OPEN DOOR", icon: "🚪" });
     } else {
       chips.push({ cmd: "go door", label: "GO DOOR", icon: "🚪" });
     }
   } else if (roomId === 7) { // Clay Hut (Cat Guard)
     if (state.objectLoc[24] === 7) {
-      if (isCarried(state, 20)) {
-        chips.push({ cmd: "drop mice", label: "RELEASE MICE", icon: "🐀" });
-      } else {
-        chips.push({ cmd: "look cat", label: "LOOK CAT", icon: "🐱" });
-      }
+      chips.push({ cmd: "look cat", label: "LOOK CAT", icon: "🐱" });
     }
   } else if (roomId === 16) { // Bullfrog
-    chips.push({ cmd: "feed frog", label: "FEED FROG", icon: "🐸" });
+    chips.push({ cmd: "look frog", label: "LOOK FROG", icon: "🐸" });
   } else if (roomId === 21) { // Cabin
+    chips.push({ cmd: "look antlers", label: "LOOK ANTLERS", icon: "🦌" });
     chips.push({ cmd: "pull antlers", label: "PULL ANTLERS", icon: "🦌" });
   } else if (roomId === 22) { // Annex
     chips.push({ cmd: "pull wall", label: "REVOLVE WALL", icon: "🔄" });
@@ -122,14 +111,14 @@ export function computeActionChips(room, state, world) {
     chips.push({ cmd: "board boat", label: "BOARD BOAT", icon: "⛵" });
     chips.push({ cmd: "sail boat", label: "SAIL BOAT", icon: "⛵" });
   } else if (roomId === 26) { // Goblin
-    chips.push({ cmd: "say ijnid", label: "SAY IJNID", icon: "🗣️" });
+    chips.push({ cmd: "look goblin", label: "LOOK GOBLIN", icon: "👺" });
   } else if (roomId === 37) { // Sabrina Tower
     if (!state.flags?.SH) {
-      chips.push({ cmd: "cut vines", label: "CUT VINES", icon: "🌿" });
+      chips.push({ cmd: "cut vines", label: "PULL VINES", icon: "🌿" });
     } else if (!state.flags?.PO) {
       chips.push({ cmd: "open coffin", label: "OPEN COFFIN", icon: "⚰️" });
     } else {
-      chips.push({ cmd: "wake damsel", label: "WAKE SABRINA", icon: "👸" });
+      chips.push({ cmd: "look damsel", label: "LOOK SABRINA", icon: "👸" });
     }
   }
 
@@ -142,9 +131,6 @@ export function computeActionChips(room, state, world) {
   }
   if (isCarried(state, 3)) { // Cloak
     chips.push({ cmd: "wear cloak", label: "WEAR CLOAK", icon: "🧥" });
-  }
-  if (isCarried(state, 36)) { // Elixir
-    chips.push({ cmd: "drink elixir", label: "DRINK ELIXIR", icon: "🧪" });
   }
   if (isCarried(state, 25) && state.objectLoc[24] !== roomId) {
     chips.push({ cmd: "ride broom", label: "RIDE BROOM", icon: "🧹" });

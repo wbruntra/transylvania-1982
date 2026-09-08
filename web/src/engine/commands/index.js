@@ -73,6 +73,7 @@ export const COMMANDS = {
   hunt: notHere, // 210
   hold: dontUnderstand, // 230
   use,
+  put: use,
   break: cant, // 240
   clean: cant, // 240
   scrape: cant, // 240

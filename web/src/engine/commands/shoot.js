@@ -20,7 +20,15 @@ export function shoot({ state, command }) {
   }
 
   // 4605 IF P%(34)=P AND (X=34 OR bare SHOOT) THEN ...
-  if (state.objectLoc[34] === state.room && (command.X === 34 || !command.X)) {
+  const targetsWolf =
+    command.X === 34 ||
+    command.directX === 34 ||
+    command.indirectX === 34 ||
+    command.noun?.includes("werewolf") ||
+    command.noun?.includes("wolf") ||
+    !command.X;
+
+  if (state.objectLoc[34] === state.room && targetsWolf) {
     state.flags.WF = 1;
     placeObject(state, 34, GONE);
     setObjectName(state, 17, "SMOKING FLINTLOCK PISTOL.");
