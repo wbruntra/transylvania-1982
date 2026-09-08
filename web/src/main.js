@@ -96,6 +96,8 @@ async function main() {
   });
 
   let view;
+  let gameOverTimestamp = 0;
+  let wasGameOver = false;
 
   const render = () => {
     const currentRoom = engine.world.room(engine.state.room);
@@ -105,9 +107,15 @@ async function main() {
       view.update({ room: currentRoom, state: engine.state, world: engine.world });
     }
     if (engine.isGameOver()) {
+      if (!wasGameOver) {
+        gameOverTimestamp = Date.now();
+        wasGameOver = true;
+      }
       const info = getGameOverInfo(engine.state);
       gameOverOverlay.show(info);
     } else {
+      wasGameOver = false;
+      gameOverTimestamp = 0;
       gameOverOverlay.hide();
     }
   };
@@ -133,6 +141,7 @@ async function main() {
 
   handleCommand = function(input) {
     if (engine.isGameOver()) {
+      if (Date.now() - gameOverTimestamp < 400) return;
       input = "restart";
     }
 
@@ -173,6 +182,7 @@ async function main() {
 
   window.addEventListener("keydown", (event) => {
     if (!engine.isGameOver()) return;
+    if (Date.now() - gameOverTimestamp < 450) return;
     if (["Shift", "Control", "Alt", "Meta", "CapsLock", "Tab"].includes(event.key)) {
       return;
     }

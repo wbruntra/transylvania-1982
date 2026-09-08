@@ -174,14 +174,23 @@ export function createView({ onCommand }) {
   function submitInput() {
     const value = input.value;
     input.value = "";
-    input.focus();
     onCommand(value);
   }
 
-  if (submit) submit.addEventListener("click", submitInput);
+  if (submit) {
+    submit.addEventListener("click", (event) => {
+      event.stopPropagation();
+      submitInput();
+    });
+  }
+
   if (input) {
     input.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") submitInput();
+      if (event.key === "Enter") {
+        event.preventDefault();
+        event.stopPropagation();
+        submitInput();
+      }
     });
   }
 
@@ -310,6 +319,17 @@ export function createView({ onCommand }) {
     update({ room, state, world }) {
       updateExits(room, state);
       updateChips(room, state, world);
+      if (input) {
+        if (state?.isGameOver) {
+          input.disabled = true;
+          input.blur();
+        } else {
+          input.disabled = false;
+        }
+      }
+      if (submit) {
+        submit.disabled = Boolean(state?.isGameOver);
+      }
     },
   };
 }
