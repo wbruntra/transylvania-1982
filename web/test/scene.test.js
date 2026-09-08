@@ -33,6 +33,17 @@ test("the stump (room 1) switches art once acid burns the carving legible", () =
   assert.equal(firstCandidate(1, state), "art/room-1-runes.webp");
 });
 
+test("the cemetery (room 5) steps through gravestone, moved gravestone with a locked grate, then an open grate with a ladder down", () => {
+  const state = createState(world);
+  assert.equal(firstCandidate(5, state), "art/room-5.webp");
+
+  state.objectLoc[13] = 5; // move gravestone (TRANS.bas:7815)
+  assert.equal(firstCandidate(5, state), "art/room-5-moved.webp");
+
+  state.flags.GT = 1; // unlock grate
+  assert.equal(firstCandidate(5, state), "art/room-5-open.webp");
+});
+
 test("the tower (room 37) steps through vines, sarcophagus, sleeping Sabrina, then an empty coffin once she wakes or is carried off", () => {
   const state = createState(world);
   assert.equal(firstCandidate(37, state), "art/room-37.webp"); // vines (obj 14) still cover it

@@ -539,6 +539,17 @@ test("tier 3 puzzle routines work as expected", async () => {
   engine.run("climb ladder");
   assert.equal(engine.state.room, 37);
 
+  // CLIMB LADDER also works as an alias for ENTER GRATE at the cemetery
+  // shaft (room 5), since there's no literal ladder object there for a
+  // player to name any other way.
+  engine.state.room = 5;
+  engine.state.objectLoc[13] = 5;
+  engine.state.flags.GT = 0;
+  assert.deepEqual(engine.run("climb ladder"), [MESSAGES.locked]);
+  engine.state.flags.GT = 1;
+  engine.run("climb ladder");
+  assert.equal(engine.state.room, 11);
+
   // --- 7500: OPEN ---
   // Coffin (29) at room 38
   engine.state.room = 38;

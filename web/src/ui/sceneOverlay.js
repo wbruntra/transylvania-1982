@@ -287,10 +287,13 @@ function renderRoom4(overlay, state, onAction) {
 
 /**
  * Room 5: Cemetery
- * Displays wooden cross, moved gravestone, and iron grate (closed vs open shaft).
+ * Displays the wooden cross. The gravestone/grate/ladder progression is
+ * painted into the background art instead (BACKGROUND_VARIANTS[5]), so
+ * there is nothing to overlay for it -- "move gravestone", "unlock grate"
+ * and "enter grate" (or "climb ladder") still work as typed commands.
  */
 function renderRoom5(overlay, state, onAction) {
-  // 1. Wooden Cross (Obj 6)
+  // Wooden Cross (Obj 6)
   if (state.objectLoc[6] === 5) {
     const g = createInteractiveGroup("Wooden Cross", () => onAction?.("get cross"));
     placeProp(g, "translate(310, 680)");
@@ -300,7 +303,7 @@ function renderRoom5(overlay, state, onAction) {
 
       <!-- Vertical timber beam -->
       <rect x="-9" y="-80" width="18" height="150" rx="3" fill="url(#woodCrossGrad)" stroke="#1a0f08" stroke-width="1.8" filter="url(#paperShadow)"/>
-      
+
       <!-- Horizontal crossbar -->
       <rect x="-48" y="-54" width="96" height="16" rx="3" fill="url(#woodCrossGrad)" stroke="#1a0f08" stroke-width="1.8" filter="url(#paperShadow)"/>
 
@@ -313,63 +316,6 @@ function renderRoom5(overlay, state, onAction) {
         <text x="0" y="-96" text-anchor="middle" class="prop-badge-text">✝️ CROSS</text>
       </g>
     `;
-    overlay.appendChild(propRoot(g));
-  }
-
-  // 2. Grate behind gravestone (Obj 13)
-  if (state.objectLoc[13] === 5) {
-    const isOpen = state.flags.GT === 1;
-    const g = createInteractiveGroup(
-      isOpen ? "Open Shaft Down to Catacombs" : "Locked Rusty Iron Grate",
-      () => onAction?.(isOpen ? "go down" : "unlock grate"),
-    );
-    placeProp(g, "translate(660, 750)");
-
-    if (isOpen) {
-      // Open grate: dark vertical pit with ladder descending
-      g.innerHTML += `
-        <!-- Earth opening & pit -->
-        <polygon points="-85,-35 85,-35 95,45 -95,45" fill="#020617" stroke="#475569" stroke-width="3"/>
-        <rect x="-70" y="-25" width="140" height="60" fill="#000000"/>
-
-        <!-- Descending ladder rungs -->
-        <line x1="-30" y1="-20" x2="-30" y2="35" stroke="#64748b" stroke-width="3"/>
-        <line x1="30" y1="-20" x2="30" y2="35" stroke="#64748b" stroke-width="3"/>
-        <line x1="-30" y1="-10" x2="30" y2="-10" stroke="#94a3b8" stroke-width="2.5"/>
-        <line x1="-30" y1="5" x2="30" y2="5" stroke="#94a3b8" stroke-width="2.5"/>
-        <line x1="-30" y1="20" x2="30" y2="20" stroke="#94a3b8" stroke-width="2.5"/>
-
-        <!-- Swung-open grate door leaning back -->
-        <polygon points="-80,-35 -85,-110 5,-105 10,-35" fill="none" stroke="#94a3b8" stroke-width="2.5" stroke-dasharray="8,4"/>
-
-        <g class="prop-badge">
-          <rect x="-60" y="-80" width="120" height="22" rx="11" fill="rgba(6, 9, 18, 0.95)" stroke="#38bdf8" stroke-width="1.2"/>
-          <text x="0" y="-65" text-anchor="middle" class="prop-badge-text">🪜 LADDER DOWN</text>
-        </g>
-      `;
-    } else {
-      // Closed locked iron grate
-      g.innerHTML += `
-        <polygon points="-85,-35 85,-35 95,45 -95,45" fill="#18181b" stroke="#52525b" stroke-width="3.5"/>
-        <!-- Grate grid bars -->
-        <line x1="-60" y1="-30" x2="-70" y2="40" stroke="#71717a" stroke-width="3"/>
-        <line x1="-30" y1="-32" x2="-35" y2="42" stroke="#71717a" stroke-width="3"/>
-        <line x1="0" y1="-33" x2="0" y2="43" stroke="#71717a" stroke-width="3"/>
-        <line x1="30" y1="-32" x2="35" y2="42" stroke="#71717a" stroke-width="3"/>
-        <line x1="60" y1="-30" x2="70" y2="40" stroke="#71717a" stroke-width="3"/>
-        <line x1="-80" y1="-10" x2="80" y2="-10" stroke="#71717a" stroke-width="3"/>
-        <line x1="-85" y1="18" x2="85" y2="18" stroke="#71717a" stroke-width="3"/>
-
-        <!-- Padlock in center -->
-        <rect x="-12" y="0" width="24" height="20" rx="3" fill="#b45309" stroke="#fbbf24" stroke-width="1.5"/>
-        <path d="M -7 0 L -7 -8 A 7 7 0 0 1 7 -8 L 7 0" fill="none" stroke="#e2e8f0" stroke-width="2.2"/>
-
-        <g class="prop-badge">
-          <rect x="-64" y="-70" width="128" height="22" rx="11" fill="rgba(6, 9, 18, 0.95)" stroke="#fbbf24" stroke-width="1.2"/>
-          <text x="0" y="-55" text-anchor="middle" class="prop-badge-text">🔒 LOCKED GRATE</text>
-        </g>
-      `;
-    }
     overlay.appendChild(propRoot(g));
   }
 }
@@ -1179,7 +1125,7 @@ function renderWerewolf(overlay, state, onAction) {
     <!-- Red beast threat aura -->
     <ellipse cx="0" cy="-190" rx="130" ry="190" fill="none" stroke="#dc2626" stroke-width="3" opacity="0.6" filter="url(#bloodGlow)"/>
 
-    <image href="art/props/werewolf.webp" x="-230" y="-460" width="460" height="460" filter="url(#paperShadow)"/>
+    <image href="art/props/werewolf.webp" x="-184" y="-368" width="368" height="368" filter="url(#paperShadow)"/>
 
     <g class="prop-badge">
       <rect x="-70" y="-490" width="140" height="24" rx="12" fill="rgba(6, 9, 18, 0.95)" stroke="#ef4444" stroke-width="1.4"/>
@@ -1202,7 +1148,7 @@ function renderVampire(overlay, state, onAction) {
     <!-- Hypnotic supernatural aura -->
     <ellipse cx="0" cy="-190" rx="110" ry="190" fill="none" stroke="#991b1b" stroke-width="2.5" opacity="0.65" filter="url(#bloodGlow)"/>
 
-    <image href="art/props/vampire.webp" x="-226" y="-480" width="452" height="480" filter="url(#paperShadow)"/>
+    <image href="art/props/vampire.webp" x="-181" y="-384" width="362" height="384" filter="url(#paperShadow)"/>
 
     <g class="prop-badge">
       <rect x="-65" y="-510" width="130" height="24" rx="12" fill="rgba(6, 9, 18, 0.95)" stroke="#dc2626" stroke-width="1.4"/>

@@ -38,6 +38,13 @@ const BACKGROUND_VARIANTS = {
   // 7745: the alien statue's destruction leaves a scorched 30-foot circle
   // (object 29) that no prop overlay could cover convincingly.
   4: (state) => (state.objectLoc[2] === -1 ? "-burnt" : ""),
+  // MOVE GRAVESTONE reveals the grate (object 13, TRANS.bas:7815); UNLOCK
+  // GRATE then opens it (GT flag). Three pictures instead of a grate-shaped
+  // overlay, so the ladder down reads clearly once it's open.
+  5: (state) => {
+    if (state.objectLoc[13] !== 5) return "";
+    return state.flags.GT ? "-open" : "-moved";
+  },
   // The vines (object 14) hide a sarcophagus (15) that PULL VINES reveals;
   // PUSH BUTTON then blasts its lid off, leaving the sleeping damsel (16)
   // lying inside. Once she wakes (38) she's standing beside the player, not
