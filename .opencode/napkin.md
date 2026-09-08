@@ -8,6 +8,7 @@
 | 2026-09-06 | User | CSS hover transform on SVG prop overridden by element transform attribute | In SVG, CSS transform declarations override SVG presentation attributes outright. To prevent hovering from resetting the element's position to (0,0), wrap interactive props in two nested groups (`PROP_ROOTS` / `placeProp` / `propRoot`): outer carries the placement transform, inner carries the interactive CSS class and hover scale. |
 | 2026-09-08 | User | Changed git default branch from `master` to `main` without instruction | Never rename `master` to `main` or alter branch names. Preserve `master` as the default branch locally and on remote. |
 | 2026-09-08 | User | Auto-executing puzzle actions on generic USE bypassed the canonical verb requirement | Require canonical verbs (WAVE, POUR, FEED, UNLOCK, SHOOT, etc.) to solve puzzles; provide a mild hint system that acknowledges player phrasing (e.g. "HOW DO YOU WANT TO USE IT?", "YOU TOUCH IT, BUT NOTHING HAPPENS.") rather than cold "I DON'T UNDERSTAND." |
+| 2026-09-08 | User | Scene image collapsed to 0px height on mobile | `#stage` has `container-type: size;` in desktop CSS, which applies size containment in both axes (calculating height as having no contents). When switching `#stage` to `height: auto` in a flex column on mobile, size containment caused `#stage` to collapse to 0px with `overflow: hidden`. Always reset `container-type: normal;` on `#stage` in mobile queries and use `aspect-ratio: 1 / 1; width: 100%;` to establish the square frame. |
 
 
 ## User Preferences

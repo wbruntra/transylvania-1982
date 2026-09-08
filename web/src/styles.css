@@ -1446,7 +1446,9 @@ html, body {
   #stage {
     flex: 0 0 auto;
     width: 100%;
+    aspect-ratio: 1 / 1;
     height: auto;
+    container-type: normal;
     border-radius: 0;
     border: none;
     border-bottom: 1px solid var(--border-subtle);
@@ -1465,9 +1467,9 @@ html, body {
 
   .stage-frame {
     width: 100%;
-    height: auto;
+    height: 100%;
     max-width: 100%;
-    max-height: none;
+    max-height: 100%;
     gap: 0;
     display: flex;
     align-items: center;
@@ -1475,10 +1477,11 @@ html, body {
   }
 
   #scene {
-    width: min(100%, calc(100dvh - 180px));
-    height: auto;
+    width: 100%;
+    height: 100%;
     aspect-ratio: 1 / 1;
     max-width: 100%;
+    max-height: 100%;
     border-radius: 0;
     border: none;
     box-shadow: none;
