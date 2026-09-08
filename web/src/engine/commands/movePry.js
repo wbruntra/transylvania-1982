@@ -17,7 +17,13 @@ export function movePry({ world, state, command }) {
   }
 
   // 7810 IF X<>25 OR P<>5 THEN 290 (GRAVE)
-  if (command.X !== 25 || state.room !== 5) {
+  const isGravestone =
+    command.X === 25 ||
+    command.X === 128 ||
+    command.noun?.includes("grave") ||
+    command.noun?.includes("stone");
+
+  if (!isGravestone || state.room !== 5) {
     return [MESSAGES.nothingHappened];
   }
 

@@ -328,4 +328,59 @@ test("final sequence: wave and pour messaging and talking to Sabrina", async () 
   );
 });
 
+test("cemetery gravestone: PUSH, PULL, and MOVE gravestone / stone reveal the grate", async () => {
+  const engine = await createTestEngine();
+  const { state } = engine;
+
+  // Move to cemetery (room 5)
+  state.room = 5;
+  state.objectLoc[13] = -1; // grate not yet revealed
+
+  // 1. PUSH GRAVESTONE reveals the grate without "IT WON'T BUDGE"
+  const pushRes = engine.execute("push gravestone");
+  assert.ok(
+    !pushRes.messages.some((m) => m.includes("WON'T BUDGE")),
+    "push gravestone should not say IT WON'T BUDGE",
+  );
+  assert.ok(
+    pushRes.messages.some((m) => m.includes("YOU FOUND A GRATE BEHIND THE GRAVESTONE")),
+    "push gravestone should reveal the grate",
+  );
+  assert.equal(state.objectLoc[13], 5, "grate should be in room 5");
+
+  // Reset grate
+  state.objectLoc[13] = -1;
+
+  // 2. PUSH STONE also reveals the grate
+  const pushStoneRes = engine.execute("push stone");
+  assert.ok(
+    pushStoneRes.messages.some((m) => m.includes("YOU FOUND A GRATE BEHIND THE GRAVESTONE")),
+    "push stone should reveal the grate",
+  );
+  assert.equal(state.objectLoc[13], 5);
+
+  // Reset grate
+  state.objectLoc[13] = -1;
+
+  // 3. PULL GRAVESTONE also reveals the grate
+  const pullRes = engine.execute("pull gravestone");
+  assert.ok(
+    pullRes.messages.some((m) => m.includes("YOU FOUND A GRATE BEHIND THE GRAVESTONE")),
+    "pull gravestone should reveal the grate",
+  );
+  assert.equal(state.objectLoc[13], 5);
+
+  // Reset grate
+  state.objectLoc[13] = -1;
+
+  // 4. MOVE STONE also reveals the grate
+  const moveStoneRes = engine.execute("move stone");
+  assert.ok(
+    moveStoneRes.messages.some((m) => m.includes("YOU FOUND A GRATE BEHIND THE GRAVESTONE")),
+    "move stone should reveal the grate",
+  );
+  assert.equal(state.objectLoc[13], 5);
+});
+
+
 

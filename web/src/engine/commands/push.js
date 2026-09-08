@@ -1,11 +1,37 @@
-// 4900: PUSH / PRESS. The box button (noun 76).
+// 4900: PUSH / PRESS. The box button (noun 76), gravestone (noun 25), and interactive objects.
 
 import { GONE } from "../constants.js";
 import { MESSAGES } from "../messages.js";
 import { isCarried, placeObject } from "../state.js";
+import { movePry } from "./movePry.js";
 
 /** @type {import("./index.js").CommandHandler} */
-export function push({ state, command }) {
+export function push(context) {
+  const { world, state, command } = context;
+
+  // In Room 5, PUSH GRAVESTONE / STONE does the same thing as MOVE / PRY
+  const isGravestone =
+    command.X === 25 ||
+    command.X === 128 ||
+    command.noun?.includes("grave") ||
+    command.noun?.includes("stone");
+  if (state.room === 5 && isGravestone) {
+    return movePry(context);
+  }
+
+  // In Room 37, PUSH VINES does the same as MOVE VINES / PULL VINES
+  if (state.room === 37 && (command.X === 69 || command.noun?.includes("vine"))) {
+    return movePry(context);
+  }
+
+  // In Room 21, PUSH WALL / PUSH ANTLERS
+  if (
+    state.room === 21 &&
+    (command.X === 102 || command.X === 46 || command.noun?.includes("wall") || command.noun?.includes("antle"))
+  ) {
+    return movePry(context);
+  }
+
   // 4900 IF X<>76 THEN 260 (BUTTO)
   if (command.X !== 76) return [MESSAGES.wontBudge];
 

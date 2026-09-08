@@ -1,12 +1,25 @@
-// 4700: PULL. Antlers spin wall between rooms 21 and 22; vines reveal sarcophagus.
+// 4700: PULL. Antlers spin wall between rooms 21 and 22; vines reveal sarcophagus; gravestone in cemetery.
 
 import { revealSarcophagus } from "../helpers.js";
 import { MESSAGES } from "../messages.js";
+import { movePry } from "./movePry.js";
 
 /** @type {import("./index.js").CommandHandler} */
-export function pull({ world, state, command }) {
+export function pull(context) {
+  const { world, state, command } = context;
+
+  // In Room 5, PULL GRAVESTONE does the same as MOVE GRAVESTONE
+  const isGravestone =
+    command.X === 25 ||
+    command.X === 128 ||
+    command.noun?.includes("grave") ||
+    command.noun?.includes("stone");
+  if (state.room === 5 && isGravestone) {
+    return movePry(context);
+  }
+
   // 4700 IF X=69 THEN 7820 (vines)
-  if (command.X === 69) {
+  if (command.X === 69 || command.noun?.includes("vine")) {
     return revealSarcophagus(world, state);
   }
 

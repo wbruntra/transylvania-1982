@@ -79,8 +79,11 @@ export function computeActionChips(room, state, world) {
     }
   } else if (roomId === 4) { // Clearing / Alien statue
     chips.push({ cmd: "look statue", label: "LOOK STATUE", icon: "🛸" });
-  } else if (roomId === 5) { // Grate
-    if (!state.flags?.GT && state.objectLoc[13] !== 5) {
+  } else if (roomId === 5) { // Cemetery / Gravestone / Grate
+    if (state.objectLoc[13] !== 5) {
+      chips.push({ cmd: "read gravestone", label: "READ GRAVESTONE", icon: "🪦" });
+      chips.push({ cmd: "move gravestone", label: "MOVE GRAVESTONE", icon: "🪦" });
+    } else if (!state.flags?.GT) {
       chips.push({ cmd: "open grate", label: "OPEN GRATE", icon: "🕳️" });
     } else {
       chips.push({ cmd: "down", label: "CLIMB DOWN", icon: "🕳️" });

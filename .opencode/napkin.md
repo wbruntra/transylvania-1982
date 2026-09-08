@@ -9,6 +9,7 @@
 | 2026-09-08 | User | Changed git default branch from `master` to `main` without instruction | Never rename `master` to `main` or alter branch names. Preserve `master` as the default branch locally and on remote. |
 | 2026-09-08 | User | Auto-executing puzzle actions on generic USE bypassed the canonical verb requirement | Require canonical verbs (WAVE, POUR, FEED, UNLOCK, SHOOT, etc.) to solve puzzles; provide a mild hint system that acknowledges player phrasing (e.g. "HOW DO YOU WANT TO USE IT?", "YOU TOUCH IT, BUT NOTHING HAPPENS.") rather than cold "I DON'T UNDERSTAND." |
 | 2026-09-08 | User | Scene image collapsed to 0px height on mobile | `#stage` has `container-type: size;` in desktop CSS, which applies size containment in both axes (calculating height as having no contents). When switching `#stage` to `height: auto` in a flex column on mobile, size containment caused `#stage` to collapse to 0px with `overflow: hidden`. Always reset `container-type: normal;` on `#stage` in mobile queries and use `aspect-ratio: 1 / 1; width: 100%;` to establish the square frame. |
+| 2026-09-08 | User | PUSH GRAVESTONE refused with "IT WON'T BUDGE." while MOVE GRAVESTONE succeeded | In TRANS.bas:4900, PUSH was narrowly reserved for the metal box button (noun 76), refusing everything else with line 260. Support PUSH, PULL, and MOVE symmetrically for interactive environmental fixtures (gravestone in cemetery room 5, vines in room 37, revolving wall/antlers in room 21), eliminating confusing refusals. |
 
 
 ## User Preferences
