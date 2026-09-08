@@ -49,6 +49,9 @@
   - Explanatory overlay rendered over the background image inside `#scene` detailing the cause of game end: werewolf kill (distinguishing between shooting with an empty pistol vs general ambush), vampire bite, sunrise/timeout, or sailing across the lake.
   - Victory scene displays dedicated graphic-novel artwork (`art/victory.webp` / `art/victory.jpg`) illustrating the hero sneaking away in peasant clothes from the King's castle courtyard under moonlight while plotting Sabrina's rescue from her father.
   - "Press any key to restart" is made literal: a global keydown listener and tap/click handlers on the overlay, restart button, and action chips immediately invoke `restart`.
+- Synchronized Scene Loading & Image Preloader:
+  - Prevent props or overlay items from rendering before the scene background is loaded: in `scene.js`, clear/hide the SVG overlay immediately on room transition, asynchronously load the candidate background image via `loadCandidate()`, and only reveal the SVG props, scene label, and background together once the image is ready.
+  - Proactive preloading: `preloadSurroundings()` preloads adjacent rooms connected by exits, while `preloadAllRooms()` runs in idle batches to cache room artwork in advance, eliminating pop-in on web/GitHub Pages.
 
 ## Patterns That Don't Work
 - Matching nouns only against object names: fails for scenery (trees, wall, stump) and misses alias chains in `noun_map_N`.

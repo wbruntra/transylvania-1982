@@ -9,7 +9,7 @@ import { isDebugInventoryEnabled, toggleDebugInventory } from "./ui/debugMode.js
 import { createEffects } from "./ui/effects.js";
 import { createGameOverOverlay } from "./ui/gameOverOverlay.js";
 import { createMap } from "./ui/map.js";
-import { createScene } from "./ui/scene.js";
+import { createScene, preloadAllRooms } from "./ui/scene.js";
 import { createView } from "./ui/view.js";
 
 async function main() {
@@ -209,6 +209,7 @@ async function main() {
   }
 
   render();
+  preloadAllRooms(engine.world, scene.getArtMode());
   view.focus();
 }
 

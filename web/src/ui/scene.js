@@ -81,6 +81,94 @@ export function artCandidates(room, state, mode = "enhanced") {
   return enhanced;
 }
 
+const preloadedUrls = new Set();
+
+/** Preloads an image into browser cache */
+export function preloadImage(url) {
+  if (!url || preloadedUrls.has(url)) return;
+  preloadedUrls.add(url);
+  if (typeof Image !== "undefined") {
+    const img = new Image();
+    img.src = url;
+  }
+}
+
+/** Preloads the art for a given room */
+export function preloadRoomArt(world, roomId, state, mode) {
+  if (!world || !roomId) return;
+  try {
+    const room = typeof roomId === "number" ? world.room(roomId) : null;
+    if (room) {
+      const candidates = artCandidates(room, state, mode);
+      if (candidates[0]) preloadImage(candidates[0]);
+    } else if (roomId === "victory") {
+      preloadImage("art/victory.webp");
+    }
+  } catch {}
+}
+
+/** Preloads all adjacent rooms connected by exits */
+export function preloadSurroundings(world, currentRoomId, state, mode) {
+  if (!world || !currentRoomId) return;
+  try {
+    const room = world.room(currentRoomId);
+    if (!room || !room.exits) return;
+    for (const destId of Object.values(room.exits)) {
+      if (destId > 0) {
+        preloadRoomArt(world, destId, state, mode);
+      }
+    }
+  } catch {}
+}
+
+/** Background idle preloader for all game rooms */
+export function preloadAllRooms(world, mode) {
+  if (!world || !world.rooms) return;
+  preloadImage("art/victory.webp");
+  const roomIds = [...world.rooms.keys()];
+  let index = 0;
+  function step() {
+    const slice = roomIds.slice(index, index + 4);
+    index += 4;
+    for (const id of slice) {
+      preloadRoomArt(world, id, null, mode);
+    }
+    if (index < roomIds.length) {
+      if (typeof requestIdleCallback === "function") {
+        requestIdleCallback(step, { timeout: 2000 });
+      } else {
+        setTimeout(step, 200);
+      }
+    }
+  }
+  if (typeof requestIdleCallback === "function") {
+    requestIdleCallback(step, { timeout: 1500 });
+  } else {
+    setTimeout(step, 300);
+  }
+}
+
+/** Loads an image candidate asynchronously and resolves once decoded/ready */
+function loadCandidate(url) {
+  return new Promise((resolve, reject) => {
+    if (typeof Image === "undefined") {
+      resolve(url);
+      return;
+    }
+    const img = new Image();
+    img.onload = () => {
+      preloadedUrls.add(url);
+      resolve(url);
+    };
+    img.onerror = () => reject(new Error(`Failed to load ${url}`));
+    img.src = url;
+    if (img.complete && img.naturalWidth !== 0) {
+      preloadedUrls.add(url);
+      resolve(url);
+    }
+  });
+}
+
 /**
  * @param {HTMLElement} container
  * @param {HTMLElement} label
@@ -106,6 +194,7 @@ export function createScene(container, label, overlaySvg, onAction) {
   );
   /** @type {{room: import("../data/gameData.js").RawRoom, state?: import("../engine/state.js").GameState, world?: unknown} | null} */
   let lastShown = null;
+  let currentShowId = 0;
 
   /** @param {import("../data/gameData.js").RawRoom} room */
   function paintPlaceholder(room) {
@@ -119,13 +208,6 @@ export function createScene(container, label, overlaySvg, onAction) {
     }
   }
 
-  image.onload = () => {
-    if (backdrop && image.src) {
-      backdrop.style.backgroundImage = `url("${image.src}")`;
-      backdrop.style.opacity = "0.45";
-    }
-  };
-
   return {
     /**
      * @param {import("../data/gameData.js").RawRoom} room
@@ -134,46 +216,80 @@ export function createScene(container, label, overlaySvg, onAction) {
      */
     show(room, state, world) {
       lastShown = { room, state, world };
-      // Try each candidate in turn; fall back to the gradient when none load.
-      const candidates = artCandidates(room, state, mode);
-      container.style.background = "#000";
-      image.style.display = "block";
+      const showId = ++currentShowId;
 
-      function tryNext() {
-        const next = candidates.shift();
-        if (next) {
-          image.src = next;
+      // Hide and clear SVG overlay immediately so old or premature props NEVER display
+      // before the new background image is actually loaded and ready!
+      if (overlaySvg) {
+        overlaySvg.innerHTML = "";
+        overlaySvg.style.visibility = "hidden";
+      }
+
+      const candidates = artCandidates(room, state, mode);
+
+      async function resolveAndDisplay() {
+        let loadedUrl = null;
+
+        for (const candidate of candidates) {
+          try {
+            await loadCandidate(candidate);
+            loadedUrl = candidate;
+            break;
+          } catch {
+            // Try next candidate
+          }
+        }
+
+        // If another show() was requested while loading, discard this stale response
+        if (showId !== currentShowId) return;
+
+        if (loadedUrl) {
+          image.src = loadedUrl;
+          image.style.display = "block";
+          container.style.background = "#000";
+          if (backdrop) {
+            backdrop.style.backgroundImage = `url("${loadedUrl}")`;
+            backdrop.style.opacity = "0.45";
+          }
         } else {
           paintPlaceholder(room);
         }
-      }
 
-      image.onerror = tryNext;
-      tryNext();
+        // Now that the background image is loaded and ready, render the SVG props
+        if (overlaySvg && state && world) {
+          if (
+            state.isGameOver &&
+            (state.gameOverReason === "win" || (!state.isDead && state.objectLoc?.[38] === -2))
+          ) {
+            overlaySvg.innerHTML = "";
+          } else {
+            updateSceneOverlay(overlaySvg, {
+              roomId: room.id,
+              state,
+              world,
+              onAction,
+            });
+          }
+          overlaySvg.style.visibility = "visible";
+        }
 
-      // Render dynamic SVG overlay assets for interactive scene variations
-      if (overlaySvg && state && world) {
-        if (state.isGameOver && (state.gameOverReason === "win" || (!state.isDead && state.objectLoc?.[38] === -2))) {
-          overlaySvg.innerHTML = "";
+        // Update scene label in unison
+        if (state?.isGameOver) {
+          label.textContent =
+            state.gameOverReason === "win" || (!state.isDead && state.objectLoc?.[38] === -2)
+              ? "VICTORY · KING'S CASTLE"
+              : `GAME OVER · ROOM ${room.id}`;
         } else {
-          updateSceneOverlay(overlaySvg, {
-            roomId: room.id,
-            state,
-            world,
-            onAction,
-          });
+          label.textContent = `ROOM ${room.id} · TYPE ${room.type}`;
+        }
+
+        // Proactively preload adjacent surrounding rooms
+        if (world) {
+          preloadSurroundings(world, room.id, state, mode);
         }
       }
 
-      // Identifiers: show VICTORY or GAME OVER when finished, else standard room info
-      if (state?.isGameOver) {
-        label.textContent =
-          state.gameOverReason === "win" || (!state.isDead && state.objectLoc?.[38] === -2)
-            ? "VICTORY · KING'S CASTLE"
-            : `GAME OVER · ROOM ${room.id}`;
-      } else {
-        label.textContent = `ROOM ${room.id} · TYPE ${room.type}`;
-      }
+      resolveAndDisplay();
     },
 
     /** @returns {"enhanced" | "classic"} */
