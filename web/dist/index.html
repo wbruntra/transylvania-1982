@@ -7,8 +7,8 @@
       content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1"
     />
     <title>Transylvania (1982) — Illustrated Adventure</title>
-    <script type="module" crossorigin src="./assets/index-B4woxJoQ.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-cBWUQDvo.css">
+    <script type="module" crossorigin src="./assets/index-CDx1nBXz.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BiHlIQ0Q.css">
   </head>
   <body>
     <div id="app">
@@ -18,6 +18,28 @@
           <div id="scene">
             <svg id="sceneOverlay" class="scene-overlay" viewBox="0 0 1024 1024"></svg>
             <div class="label" id="sceneLabel"></div>
+
+            <!-- Game Over & Victory Overlay -->
+            <div id="gameOverOverlay" class="game-over-overlay" hidden aria-modal="true" role="dialog" aria-label="Game Over">
+              <div class="game-over-backdrop"></div>
+              <div class="game-over-card" id="gameOverCard">
+                <div class="game-over-badge" id="gameOverBadge">
+                  <span class="badge-icon" id="gameOverBadgeIcon">🏆</span>
+                  <span id="gameOverBadgeText">VICTORY</span>
+                </div>
+                <h2 class="game-over-title" id="gameOverTitle">QUEST COMPLETE!</h2>
+                <div class="game-over-desc" id="gameOverDesc"></div>
+                <div class="game-over-actions">
+                  <button id="gameOverRestartBtn" class="game-over-restart-btn" type="button">
+                    <span class="btn-icon">🔄</span>
+                    <span id="gameOverRestartText">PLAY AGAIN</span>
+                  </button>
+                </div>
+                <div class="game-over-hint">
+                  <span class="key-hint-badge">KEY</span> Press any key or tap button to restart
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- Command Input Row -->

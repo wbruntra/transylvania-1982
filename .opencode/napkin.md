@@ -45,6 +45,10 @@
 - Two-Noun Intent Parsing & Spoiler-Free Action Chips:
   - Multi-word and prepositional inputs (`USE <X> ON <Y>`, `PUT <X> IN <Y>`, `FEED <X> TO <Y>`, `UNLOCK <X> WITH <Y>`, `SHOOT <X> WITH <Y>`, `POINT <X> AT <Y>`) are parsed cleanly into direct/indirect objects and routed to their semantic handlers without requiring the player to guess narrow 1982 verb pairs.
   - Action chips must strictly facilitate exploration (`LOOK`, `GET`, `READ`, `OPEN`, `PULL`) and life-or-death reactions (`SHOOT WEREWOLF`, `WAVE CROSS`), never pre-baking puzzle solutions (no `SAY IJNID`, `POUR ACID`, `FEED FROG`, `RELEASE MICE`, `WAKE SABRINA`). Stump knocking only reveals after acid makes the carving legible.
+- Game Over & Victory Overlay:
+  - Explanatory overlay rendered over the background image inside `#scene` detailing the cause of game end: werewolf kill (distinguishing between shooting with an empty pistol vs general ambush), vampire bite, sunrise/timeout, or sailing across the lake.
+  - Victory scene displays dedicated graphic-novel artwork (`art/victory.webp` / `art/victory.jpg`) illustrating the hero sneaking away in peasant clothes from the King's castle courtyard under moonlight while plotting Sabrina's rescue from her father.
+  - "Press any key to restart" is made literal: a global keydown listener and tap/click handlers on the overlay, restart button, and action chips immediately invoke `restart`.
 
 ## Patterns That Don't Work
 - Matching nouns only against object names: fails for scenery (trees, wall, stump) and misses alias chains in `noun_map_N`.

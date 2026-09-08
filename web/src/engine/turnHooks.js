@@ -61,6 +61,10 @@ export function createTurnHookManager({ world, state, randomEvents = false, rng 
         }
         messages.push("PRESS ANY KEY TO RESTART THE GAME.");
         state.isGameOver = true;
+        state.isDead = true;
+        state.gameOverReason = "time";
+        state.gameOverDetails =
+          "The clock struck 5:00 AM and the sun rose over Transylvania. The time limit expired, and Princess Sabrina perished before you could lift the curse!";
         return messages;
       }
     }
@@ -72,6 +76,9 @@ export function createTurnHookManager({ world, state, randomEvents = false, rng 
       messages.push("PRESS ANY KEY TO RESTART THE GAME.");
       state.isGameOver = true;
       state.isDead = true;
+      state.gameOverReason = "vampire";
+      state.gameOverDetails =
+        "You felt a sharp pinch on your neck, the room spun, and you blacked out. The vampire drained your blood and claimed you as one of the undead!";
       return messages;
     }
 
@@ -82,6 +89,10 @@ export function createTurnHookManager({ world, state, randomEvents = false, rng 
       messages.push("PRESS ANY KEY TO RESTART THE GAME.");
       state.isGameOver = true;
       state.isDead = true;
+      state.gameOverReason = "werewolf";
+      state.gameOverDetails = state.lastActionUnloadedShot
+        ? "You tried to shoot the werewolf, but your flintlock pistol was empty! The furry fiend lunged and had you for dinner before you could reload."
+        : "The ferocious werewolf ambushed you in the dark forest and had you for dinner before you could defend yourself.";
       return messages;
     }
 

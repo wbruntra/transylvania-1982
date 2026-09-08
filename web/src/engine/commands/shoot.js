@@ -13,8 +13,11 @@ export function shoot({ state, command }) {
 
   // 4600 IF NOT GN -> CLICK - THE PISTOL IS EMPTY.
   if (!state.flags.GN) {
+    state.lastActionUnloadedShot = true;
     return [MESSAGES.pistolEmpty];
   }
+
+  state.lastActionUnloadedShot = false;
 
   // 4600 IF I=61 AND X<>33 THEN 240
   if (command.I === 61 && command.X !== 33) {

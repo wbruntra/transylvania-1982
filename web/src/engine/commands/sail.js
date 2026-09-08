@@ -26,6 +26,10 @@ export function sail({ state, command }) {
   // 9440-9450: Win ending! 9450 falls through to 30040, the same restart
   // prompt every other ending reaches, so the game is over here too.
   state.isGameOver = true;
+  state.isDead = false;
+  state.gameOverReason = "win";
+  state.gameOverDetails =
+    "You safely sailed Princess Sabrina across the lake back to her father's kingdom! But the ungrateful King immediately ordered you to deepest Africa to save his other daughter... So tonight, disguised in humble peasant dress, you slip away into the moonlit castle courtyard, plotting your daring escape with Sabrina!";
   return [
     "AFTER A PRECARIOUS FEW MINUTES, THE JOURNEY GOES SMOOTHLY. A SOMEWHAT TIRED AND BEWILDERED PRINCESS SABRINA GRACIOUSLY THANKS YOU AS YOU RETURN TO HER KINGDOM. THE KING IS SUITABLY IMPRESSED AND ASKS THAT YOU BE SENT TO DEEPEST AFRICA TO SAVE HIS OTHER DAUGHTER. THAT EVENING, YOU SNEAK OUT IN PEASANT DRESS, PLOTTING YOUR RESCUE OF SABRINA FROM THE KING'S CASTLE...WELL DONE!",
     "PRESS ANY KEY TO RESTART THE GAME.",

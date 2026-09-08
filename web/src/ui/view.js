@@ -14,6 +14,9 @@ import { objectsInRoom } from "../engine/world.js";
  */
 export function computeActionChips(room, state, world) {
   if (!room || !state || !world) return [];
+  if (state.isGameOver) {
+    return [{ cmd: "restart", label: "RESTART GAME", icon: "🔄" }];
+  }
   /** @type {Array<{cmd: string, label: string, icon?: string, danger?: boolean}>} */
   const chips = [];
   const roomId = room.id;
@@ -219,13 +222,14 @@ export function createView({ onCommand }) {
   function updateExits(room, state) {
     if (!room) return;
     const exits = room.exits || {};
+    const isOver = Boolean(state?.isGameOver);
     const exitMap = {
-      n: exits.N > 0,
-      s: exits.S > 0,
-      w: exits.W > 0,
-      e: exits.E > 0,
-      u: exits.U > 0,
-      d: exits.D > 0 || (room.id === 5 && Boolean(state?.flags?.GT)),
+      n: !isOver && exits.N > 0,
+      s: !isOver && exits.S > 0,
+      w: !isOver && exits.W > 0,
+      e: !isOver && exits.E > 0,
+      u: !isOver && exits.U > 0,
+      d: !isOver && (exits.D > 0 || (room.id === 5 && Boolean(state?.flags?.GT))),
     };
 
     dpadButtons.forEach((btn) => {

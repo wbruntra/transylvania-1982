@@ -104,6 +104,9 @@ export function createState(world, options = {}) {
     visitedRooms: [START_ROOM],
     isGameOver: false,
     isDead: false,
+    gameOverReason: null,
+    gameOverDetails: "",
+    lastActionUnloadedShot: false,
   };
 }
 
@@ -227,5 +230,8 @@ export function deserializeState(json) {
       : [parsed.room ?? START_ROOM],
     isGameOver: Boolean(parsed.isGameOver),
     isDead: Boolean(parsed.isDead),
+    gameOverReason: parsed.gameOverReason ?? null,
+    gameOverDetails: parsed.gameOverDetails ?? "",
+    lastActionUnloadedShot: Boolean(parsed.lastActionUnloadedShot),
   };
 }

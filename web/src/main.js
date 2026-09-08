@@ -3,9 +3,11 @@
 
 import { fetchGameData } from "./data/gameData.js";
 import { createEngine } from "./engine/engine.js";
+import { getGameOverInfo } from "./engine/gameOver.js";
 import { createDebug } from "./ui/debug.js"; // TEMPORARY -- see ui/debug.js
 import { isDebugInventoryEnabled, toggleDebugInventory } from "./ui/debugMode.js";
 import { createEffects } from "./ui/effects.js";
+import { createGameOverOverlay } from "./ui/gameOverOverlay.js";
 import { createMap } from "./ui/map.js";
 import { createScene } from "./ui/scene.js";
 import { createView } from "./ui/view.js";
@@ -88,6 +90,11 @@ async function main() {
     });
   }
 
+  const gameOverOverlay = createGameOverOverlay({
+    overlayElement: /** @type {HTMLElement} */ (document.getElementById("gameOverOverlay")),
+    onRestart: () => handleCommand("restart"),
+  });
+
   let view;
 
   const render = () => {
@@ -96,6 +103,12 @@ async function main() {
     updateMap();
     if (view) {
       view.update({ room: currentRoom, state: engine.state, world: engine.world });
+    }
+    if (engine.isGameOver()) {
+      const info = getGameOverInfo(engine.state);
+      gameOverOverlay.show(info);
+    } else {
+      gameOverOverlay.hide();
     }
   };
 
@@ -119,6 +132,10 @@ async function main() {
   }
 
   handleCommand = function(input) {
+    if (engine.isGameOver()) {
+      input = "restart";
+    }
+
     const trimmed = input.trim().toLowerCase();
     if (trimmed === "map" || trimmed === "m") {
       map.open();
@@ -153,6 +170,17 @@ async function main() {
     // a line of text scrolling past is not the only signal.
     if (events?.length) effects.play(events);
   };
+
+  window.addEventListener("keydown", (event) => {
+    if (!engine.isGameOver()) return;
+    if (["Shift", "Control", "Alt", "Meta", "CapsLock", "Tab"].includes(event.key)) {
+      return;
+    }
+    if (event.key === " " || event.key === "Enter") {
+      event.preventDefault();
+    }
+    handleCommand("restart");
+  });
 
   view = createView({
     onCommand: handleCommand,

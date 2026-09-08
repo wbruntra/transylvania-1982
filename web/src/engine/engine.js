@@ -94,6 +94,10 @@ export function createEngine(data, options = {}) {
       const roomBefore = state.room;
       const context = { world, state, command };
 
+      if (command.verb !== "shoot") {
+        state.lastActionUnloadedShot = false;
+      }
+
       // Room- and object-specific overrides win over the generic handler.
       let result = runRules(context);
       if (result === null) {

@@ -69,6 +69,9 @@ const ART_MODE_KEY = "transylvania-art-mode";
  * @returns {string[]}
  */
 export function artCandidates(room, state, mode = "enhanced") {
+  if (state?.isGameOver && (state?.gameOverReason === "win" || (!state?.isDead && state?.objectLoc?.[38] === -2))) {
+    return ["art/victory.webp", "art/victory.jpg", "art/victory.png"];
+  }
   const variant = state ? BACKGROUND_VARIANTS[room.id]?.(state) ?? "" : "";
   const enhanced = [`art/room-${room.id}${variant}.webp`, `art/room-${room.id}.webp`, `art/room-${room.id}.png`];
   // Classic art has no state variants (it's a direct render of the 1982
@@ -150,17 +153,27 @@ export function createScene(container, label, overlaySvg, onAction) {
 
       // Render dynamic SVG overlay assets for interactive scene variations
       if (overlaySvg && state && world) {
-        updateSceneOverlay(overlaySvg, {
-          roomId: room.id,
-          state,
-          world,
-          onAction,
-        });
+        if (state.isGameOver && (state.gameOverReason === "win" || (!state.isDead && state.objectLoc?.[38] === -2))) {
+          overlaySvg.innerHTML = "";
+        } else {
+          updateSceneOverlay(overlaySvg, {
+            roomId: room.id,
+            state,
+            world,
+            onAction,
+          });
+        }
       }
 
-      // Just the identifiers: the description belongs in the log, and printing
-      // a truncated copy of it over the artwork only obscured the picture.
-      label.textContent = `ROOM ${room.id} · TYPE ${room.type}`;
+      // Identifiers: show VICTORY or GAME OVER when finished, else standard room info
+      if (state?.isGameOver) {
+        label.textContent =
+          state.gameOverReason === "win" || (!state.isDead && state.objectLoc?.[38] === -2)
+            ? "VICTORY · KING'S CASTLE"
+            : `GAME OVER · ROOM ${room.id}`;
+      } else {
+        label.textContent = `ROOM ${room.id} · TYPE ${room.type}`;
+      }
     },
 
     /** @returns {"enhanced" | "classic"} */

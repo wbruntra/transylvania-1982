@@ -22,6 +22,9 @@ export function help({ command }) {
 /** @type {import("./index.js").CommandHandler} */
 export function quit({ state }) {
   state.isGameOver = true;
+  state.gameOverReason = "quit";
+  state.gameOverDetails =
+    "You abandoned your quest, leaving Transylvania and Princess Sabrina to their dark fates.";
   return ["PRESS ANY KEY TO RESTART THE GAME."];
 }
 
