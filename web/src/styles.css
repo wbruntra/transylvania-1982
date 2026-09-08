@@ -1427,43 +1427,47 @@ html, body {
 
 /* ==========================================================================
    MOBILE PHONES & COMPACT PORTRAIT (< 680px)
-   Simultaneous visibility: Scene, Text Display, Input Bar, + Compact Arrow Navigation
+   Simultaneous visibility: Full-width square scene, text display, input bar, + compact arrow navigation
    ========================================================================== */
 @media (max-width: 680px), ((max-width: 920px) and (orientation: portrait) and (max-height: 850px)) {
   #app {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    padding: 6px;
-    padding-top: max(6px, env(safe-area-inset-top));
+    gap: 0;
+    padding: 0;
+    padding-top: max(0px, env(safe-area-inset-top));
     padding-bottom: max(6px, env(safe-area-inset-bottom));
-    padding-left: max(6px, env(safe-area-inset-left));
-    padding-right: max(6px, env(safe-area-inset-right));
     height: 100dvh;
     max-height: 100dvh;
     overflow: hidden;
   }
 
-  /* 1. Sized Scene: clean compact square, crisp view without dominating viewport */
+  /* 1. Full-Width Square Scene: spans 100% of screen width edge-to-edge */
   #stage {
     flex: 0 0 auto;
     width: 100%;
-    height: clamp(140px, 26vh, 210px);
-    border-radius: 10px;
-    border: 1px solid var(--border-subtle);
+    height: auto;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid var(--border-subtle);
     box-shadow: none;
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    background: #000;
+  }
+
+  #sceneBackdrop {
+    display: none;
   }
 
   .stage-frame {
     width: 100%;
-    height: 100%;
+    height: auto;
     max-width: 100%;
-    max-height: 100%;
+    max-height: none;
     gap: 0;
     display: flex;
     align-items: center;
@@ -1471,19 +1475,20 @@ html, body {
   }
 
   #scene {
-    height: 100%;
-    width: auto;
+    width: min(100%, calc(100dvh - 180px));
+    height: auto;
     aspect-ratio: 1 / 1;
     max-width: 100%;
-    border-radius: 8px;
+    border-radius: 0;
+    border: none;
     box-shadow: none;
   }
 
   #scene .label {
-    bottom: 6px;
-    left: 6px;
-    font-size: 8.5px;
-    padding: 2px 7px;
+    bottom: 8px;
+    left: 8px;
+    font-size: 9px;
+    padding: 3px 8px;
   }
 
   /* Hide mini-map card on mobile so it never obscures the scene art (accessible via MAP header button) */
@@ -1491,12 +1496,42 @@ html, body {
     display: none !important;
   }
 
+  /* Game Over overlay compact sizing on mobile */
+  .game-over-overlay {
+    padding: 8px;
+  }
+
+  .game-over-card {
+    padding: 10px 12px;
+    border-radius: 8px;
+  }
+
+  .game-over-title {
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+  }
+
+  .game-over-desc {
+    font-size: 0.78rem;
+    line-height: 1.35;
+    margin-bottom: 8px;
+  }
+
+  .game-over-restart-btn {
+    padding: 8px 18px;
+    min-height: 38px;
+    font-size: 0.85rem;
+  }
+
   /* 2. Console: flex column filling all remaining height */
   #console {
     flex: 1 1 0%;
     min-height: 0;
-    border-radius: 10px;
-    padding: 8px;
+    border-radius: 0;
+    border: none;
+    padding: 8px 10px;
+    padding-left: max(10px, env(safe-area-inset-left));
+    padding-right: max(10px, env(safe-area-inset-right));
     gap: 5px;
     box-shadow: none;
     display: flex;
@@ -1690,6 +1725,18 @@ html, body {
 @media (max-height: 520px) {
   #stage {
     height: clamp(60px, 16vh, 90px);
+  }
+
+  .stage-frame {
+    height: 100%;
+    width: auto;
+  }
+
+  #scene {
+    height: 100%;
+    width: auto;
+    max-height: 100%;
+    aspect-ratio: 1 / 1;
   }
 
   .touch-deck,

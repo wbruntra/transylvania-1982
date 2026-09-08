@@ -58,9 +58,10 @@
 - Flat Border Styling (No Overlapping Shadows):
   - Removed all outer drop shadows from `#stage`, `#scene`, and `#console` across all versions (`box-shadow: none;`). The image box no longer casts dark shadows over the text box, maximizing clarity and readability.
 - Mobile Phone Playability (< 680px & Mobile Portrait):
-  - Stage is sized compactly (`clamp(140px, 26vh, 210px)`) to present a centered, crisp square scene without overwhelming the screen. The mini-map HUD is hidden on small screens (accessible via the MAP header button).
-  - Text display (`#log`) occupies all remaining vertical space (`flex: 1`, min-height 80px), ensuring 8-15 lines of story and room descriptions are readable without cramped truncation.
-  - Directional Arrow Pad is condensed into a sleek, 32px horizontal bar (`[◀ W] [▲ N] [▼ S] [▶ E] [⇡ UP] [⇣ DN]`) with dynamic exit illumination, giving thumb-accessible navigation while saving 118px of vertical room.
+  - Square Scene Image spans full screen width edge-to-edge (`width: min(100%, calc(100dvh - 180px)); aspect-ratio: 1 / 1; border-radius: 0;`), providing immersive, crisp artwork with enlarged touchable SVG props, flush against the screen bezels.
+  - Floating mini-map HUD is hidden on mobile screens (accessible anytime via the MAP header button).
+  - Text display (`#log`) occupies remaining vertical space (`flex: 1`, min-height 60px), with generous readability and scrolling.
+  - Directional Arrow Pad is condensed into a sleek, 32px horizontal bar (`[◀ W] [▲ N] [▼ S] [▶ E] [⇡ UP] [⇣ DN]`) with dynamic exit illumination, saving 118px of vertical room.
   - Command input bar (`#row`) dynamically docks to the bottom of the console on mobile, staying above the keyboard when focused without triggering viewport auto-zoom (`font-size: 16px`).
 
 ## Patterns That Don't Work
