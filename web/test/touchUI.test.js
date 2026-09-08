@@ -72,6 +72,10 @@ test("computeActionChips generates contextual smart actions for iPad touch navig
   const chips37Wake = computeActionChips(room37, state, world);
   assert.ok(chips37Wake.some((c) => c.cmd === "look damsel"), "should offer LOOK SABRINA without spoiling wake verb");
 
+  state.objectLoc[38] = 37;
+  const chips37Awake = computeActionChips(room37, state, world);
+  assert.ok(chips37Awake.some((c) => c.cmd === "talk princess"), "should offer TALK TO SABRINA once awake");
+
   // 6. Cave (Room 9) Flies
   const room9 = world.room(9);
   state.room = 9;

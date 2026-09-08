@@ -67,6 +67,7 @@ export const VERBS = {
   close: { words: ["close"], takesObject: true },
   clap: { words: ["clap"], takesObject: false },
   say: { words: ["say", "yell"], takesObject: true },
+  talk: { words: ["talk", "speak", "chat", "ask", "converse"], takesObject: true },
   strike: { words: ["strike", "strik", "knock", "hit"], takesObject: true },
   listen: { words: ["listen", "liste"], takesObject: false },
 

@@ -429,7 +429,7 @@ test("tier 3 puzzle routines work as expected", async () => {
   engine.state.objectLoc[16] = 37;
   engine.state.flags.SH = 1;
   assert.deepEqual(engine.run("pour elixir"), [
-    MESSAGES.ok,
+    MESSAGES.pourEnergizedElixir,
     MESSAGES.lightningInDistance,
   ]);
   assert.equal(engine.state.flags.PO, 1);
@@ -583,7 +583,7 @@ test("tier 3 puzzle routines work as expected", async () => {
   // Wave elixir (28) sets SH
   engine.state.objectLoc[36] = CARRIED;
   engine.state.flags.SH = 0;
-  assert.deepEqual(engine.run("wave elixir"), [MESSAGES.ok]);
+  assert.deepEqual(engine.run("wave elixir"), [MESSAGES.elixirEnergized]);
   assert.equal(engine.state.flags.SH, 1);
 
   // --- 7800: MOVE / PRY ---

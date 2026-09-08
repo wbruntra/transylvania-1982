@@ -52,6 +52,9 @@
 - Synchronized Scene Loading & Image Preloader:
   - Prevent props or overlay items from rendering before the scene background is loaded: in `scene.js`, clear/hide the SVG overlay immediately on room transition, asynchronously load the candidate background image via `loadCandidate()`, and only reveal the SVG props, scene label, and background together once the image is ready.
   - Proactive preloading: `preloadSurroundings()` preloads adjacent rooms connected by exits, while `preloadAllRooms()` runs in idle batches to cache room artwork in advance, eliminating pop-in on web/GitHub Pages.
+- Final Sequence Messaging & Character Conversation:
+  - Each step of the three-part waking ritual gives clear, evocative confirmation: `WAVE ELIXIR` confirms the ingredients swirl vigorously and glow with warm magical energy; `POUR ELIXIR` confirms the energized elixir envelops Sabrina in a shimmering aura; `CLAP` awakens her.
+  - Non-turn-consuming conversation (`TALK` / `SPEAK` / `SAY TO`): talking to awake Sabrina produces `"PRINCESS SABRINA SAYS, 'LET'S GET OUT OF HERE!'"`; talking while asleep explains she is in deep magical slumber. Contextual action chip `[💬 TALK TO SABRINA]` is offered whenever Sabrina is awake in the room or carried. Also supports flavorful dialogue for other world creatures (goblin, bullfrog, black cat, werewolf, vampire, alien statue).
 
 ## Patterns That Don't Work
 - Matching nouns only against object names: fails for scenery (trees, wall, stump) and misses alias chains in `noun_map_N`.

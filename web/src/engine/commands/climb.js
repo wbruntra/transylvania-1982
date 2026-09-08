@@ -17,6 +17,14 @@ export function climb({ world, state, command }) {
 
   // 6710 IF X=59 THEN 5880 (LADDE)
   if (command.X === 59) {
+    // TRANS.bas has no ladder object at the cemetery grate -- ENTER GRATE
+    // (5790/6010) is the canonical way down -- but a player picturing a
+    // ladder in that shaft is reasonable, so honor CLIMB LADDER there too.
+    if (state.objectLoc[13] === state.room) {
+      if (!state.flags.GT) return [MESSAGES.locked];
+      state.room = 11;
+      return [];
+    }
     return ladderMovement(world, state);
   }
 

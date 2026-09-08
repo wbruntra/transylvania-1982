@@ -138,6 +138,9 @@ export function computeActionChips(room, state, world) {
   if (isCarried(state, 25) && state.objectLoc[24] !== roomId) {
     chips.push({ cmd: "ride broom", label: "RIDE BROOM", icon: "🧹" });
   }
+  if (isCarried(state, 38) || state.objectLoc[38] === roomId) {
+    chips.push({ cmd: "talk princess", label: "TALK TO SABRINA", icon: "💬" });
+  }
 
   // Always offer standard quick look and inventory if room is quiet
   if (chips.length < 3) {

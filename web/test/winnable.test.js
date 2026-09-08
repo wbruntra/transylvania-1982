@@ -165,9 +165,10 @@ const WALKTHROUGH = [
   { do: "push button", say: "IN A VIOLENT BLAST THE LID FLIES OFF AND EXPLODES IN" },
   // "WAVE THE CONTAINER TO ENERGIZE THE INGREDIENTS AND POUR CONTENTS ON THE
   // SUBJECT. TO COMPLETE THE SPELL, CLAP YOUR HANDS." -- the magic book, 9720.
-  { do: "wave elixir", say: MESSAGES.ok },
-  { do: "pour elixir", say: MESSAGES.lightningInDistance },
+  { do: "wave elixir", say: MESSAGES.elixirEnergized },
+  { do: "pour elixir", say: MESSAGES.pourEnergizedElixir },
   { do: "clap", say: "THE DAMSEL STIRS A LITTLE AND FINALLY AWAKENS." },
+  { do: "talk princess", say: "LET'S GET OUT OF HERE" },
   { do: "take princess", say: MESSAGES.ok },
 
   // --- Carry her to the lake ----------------------------------------------

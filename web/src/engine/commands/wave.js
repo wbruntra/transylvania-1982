@@ -50,8 +50,11 @@ export function wave({ world, state, command }) {
   // 7702 IF X=28 THEN 7780: elixir
   if (command.X === 28 || command.directX === 28 || command.noun?.includes("elixir")) {
     if (!isCarried(state, 36)) return [MESSAGES.notHere];
+    if (state.flags.SH) {
+      return [MESSAGES.elixirAlreadyEnergized];
+    }
     state.flags.SH = 1;
-    return [MESSAGES.ok];
+    return [MESSAGES.elixirEnergized];
   }
 
   return [MESSAGES.nothingHappened];

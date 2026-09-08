@@ -32,9 +32,11 @@ export function pour({ state, command }) {
 
   // 4840 IF P<>37 OR P%(16)<>37 THEN 4856
   if (state.room === 37 && (state.objectLoc[16] === 37 || state.flags.SH)) {
-    state.flags.SH = 1;
-    state.flags.PO = 1;
-    return [MESSAGES.ok, MESSAGES.lightningInDistance];
+    if (state.flags.SH) {
+      state.flags.PO = 1;
+      return [MESSAGES.pourEnergizedElixir, MESSAGES.lightningInDistance];
+    }
+    return [MESSAGES.pourDullElixir];
   }
 
   return [MESSAGES.nothingHappened];

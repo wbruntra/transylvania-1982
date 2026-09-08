@@ -237,3 +237,95 @@ test("hint system: shooting unloaded pistol produces CLICK - THE PISTOL IS EMPTY
   );
 });
 
+test("final sequence: wave and pour messaging and talking to Sabrina", async () => {
+  const engine = await createTestEngine();
+  const { state } = engine;
+
+  state.room = 37;
+  state.objectLoc[36] = -2; // carry elixir
+  state.objectLoc[16] = 37; // sleeping damsel
+
+  // 1. Talk to sleeping damsel
+  const talkSleep = engine.execute("talk princess");
+  assert.ok(
+    talkSleep.messages.some((m) => m.includes("DEEP IN A MAGICAL SLUMBER")),
+    "talking to sleeping princess should describe deep slumber",
+  );
+
+  // 2. Wave elixir energizes ingredients
+  const waveRes = engine.execute("wave elixir");
+  assert.ok(
+    waveRes.messages.some((m) => m.includes("BEGIN TO GLOW WITH WARM MAGICAL ENERGY")),
+    "wave elixir should report swirling and glowing magical energy",
+  );
+  assert.equal(state.flags.SH, 1);
+
+  // Waving again reports already glowing
+  const waveAgain = engine.execute("wave elixir");
+  assert.ok(
+    waveAgain.messages.some((m) => m.includes("ALREADY GLOWING")),
+    "waving again should report already energized",
+  );
+
+  // 3. Pour energized elixir
+  const pourRes = engine.execute("pour elixir");
+  assert.ok(
+    pourRes.messages.some((m) => m.includes("A SHIMMERING AURA ENVELOPS HER FORM")),
+    "pour elixir should describe shimmering aura",
+  );
+  assert.ok(
+    pourRes.messages.some((m) => m.includes("YOU SEE LIGHTNING OFF IN THE DISTANCE")),
+    "pour elixir should show lightning",
+  );
+  assert.equal(state.flags.PO, 1);
+
+  // 4. Clap awakens Sabrina
+  const clapRes = engine.execute("clap");
+  assert.ok(
+    clapRes.messages.some((m) => m.includes("FINALLY AWAKENS")),
+    "clap should wake Sabrina",
+  );
+  assert.equal(state.objectLoc[16], -1);
+  assert.equal(state.objectLoc[38], 37);
+
+  // 5. Talk to awake princess
+  const talkAwake = engine.execute("talk princess");
+  assert.ok(
+    talkAwake.messages.some((m) => m.includes("LET'S GET OUT OF HERE")),
+    "talking to awake princess should say let's get out of here",
+  );
+
+  // Synonyms: speak to sabrina, talk to damsel, talk girl, say to princess
+  const talkSabrina = engine.execute("speak to sabrina");
+  assert.ok(
+    talkSabrina.messages.some((m) => m.includes("LET'S GET OUT OF HERE")),
+    "speak to sabrina should work",
+  );
+
+  const talkDamsel = engine.execute("talk to damsel");
+  assert.ok(
+    talkDamsel.messages.some((m) => m.includes("LET'S GET OUT OF HERE")),
+    "talk to damsel should work",
+  );
+
+  const talkGirl = engine.execute("talk girl");
+  assert.ok(
+    talkGirl.messages.some((m) => m.includes("LET'S GET OUT OF HERE")),
+    "talk girl should work",
+  );
+
+  const sayPrincess = engine.execute("say to princess");
+  assert.ok(
+    sayPrincess.messages.some((m) => m.includes("LET'S GET OUT OF HERE")),
+    "say to princess should work",
+  );
+
+  // Bare talk defaults to Sabrina when she is present
+  const bareTalk = engine.execute("talk");
+  assert.ok(
+    bareTalk.messages.some((m) => m.includes("LET'S GET OUT OF HERE")),
+    "bare talk should default to Sabrina when she is present",
+  );
+});
+
+

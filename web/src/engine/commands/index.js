@@ -36,6 +36,7 @@ import { fly, ride } from "./ride.js";
 import { sail } from "./sail.js";
 import { shoot } from "./shoot.js";
 import { take } from "./take.js";
+import { talk } from "./talk.js";
 import { lock, unlock } from "./unlock.js";
 import { touch } from "./touch.js";
 import { use } from "./use.js";
@@ -100,7 +101,28 @@ export const COMMANDS = {
   wear, // 4400
   close, // 7600
   clap: nothingHappened, // 7900 fallback (290)
-  say: () => ["OKAY.", MESSAGES.nothingHappened], // 8500 / 8540
+  say: (context) => {
+    const { command } = context;
+    const noun = (command.directNoun || command.noun || "").toLowerCase();
+    const prep = (command.indirectNoun || "").toLowerCase();
+    if (
+      noun.includes("princess") ||
+      noun.includes("sabrina") ||
+      noun.includes("damsel") ||
+      noun.includes("girl") ||
+      prep.includes("princess") ||
+      prep.includes("sabrina") ||
+      prep.includes("damsel") ||
+      prep.includes("girl") ||
+      command.X === 71 ||
+      command.directX === 71 ||
+      command.indirectX === 71
+    ) {
+      return talk(context);
+    }
+    return ["OKAY.", MESSAGES.nothingHappened];
+  },
+  talk,
   strike: ({ command }) => (command.X === 49 ? ["HUH?"] : [MESSAGES.nothingHappened]), // 9800 / 9821
   listen, // 9900
 
