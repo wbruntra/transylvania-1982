@@ -55,6 +55,13 @@
 - Final Sequence Messaging & Character Conversation:
   - Each step of the three-part waking ritual gives clear, evocative confirmation: `WAVE ELIXIR` confirms the ingredients swirl vigorously and glow with warm magical energy; `POUR ELIXIR` confirms the energized elixir envelops Sabrina in a shimmering aura; `CLAP` awakens her.
   - Non-turn-consuming conversation (`TALK` / `SPEAK` / `SAY TO`): talking to awake Sabrina produces `"PRINCESS SABRINA SAYS, 'LET'S GET OUT OF HERE!'"`; talking while asleep explains she is in deep magical slumber. Contextual action chip `[💬 TALK TO SABRINA]` is offered whenever Sabrina is awake in the room or carried. Also supports flavorful dialogue for other world creatures (goblin, bullfrog, black cat, werewolf, vampire, alien statue).
+- Flat Border Styling (No Overlapping Shadows):
+  - Removed all outer drop shadows from `#stage`, `#scene`, and `#console` across all versions (`box-shadow: none;`). The image box no longer casts dark shadows over the text box, maximizing clarity and readability.
+- Mobile Phone Playability (< 680px & Mobile Portrait):
+  - Stage is sized compactly (`clamp(140px, 26vh, 210px)`) to present a centered, crisp square scene without overwhelming the screen. The mini-map HUD is hidden on small screens (accessible via the MAP header button).
+  - Text display (`#log`) occupies all remaining vertical space (`flex: 1`, min-height 80px), ensuring 8-15 lines of story and room descriptions are readable without cramped truncation.
+  - Directional Arrow Pad is condensed into a sleek, 32px horizontal bar (`[◀ W] [▲ N] [▼ S] [▶ E] [⇡ UP] [⇣ DN]`) with dynamic exit illumination, giving thumb-accessible navigation while saving 118px of vertical room.
+  - Command input bar (`#row`) dynamically docks to the bottom of the console on mobile, staying above the keyboard when focused without triggering viewport auto-zoom (`font-size: 16px`).
 
 ## Patterns That Don't Work
 - Matching nouns only against object names: fails for scenery (trees, wall, stump) and misses alias chains in `noun_map_N`.

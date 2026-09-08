@@ -173,6 +173,31 @@ export function createView({ onCommand }) {
   const dpadButtons = /** @type {NodeListOf<HTMLButtonElement>} */ (document.querySelectorAll(".dpad-btn"));
   const quickButtons = /** @type {NodeListOf<HTMLButtonElement>} */ (document.querySelectorAll(".quick-btn"));
   const legacyDirs = /** @type {HTMLElement | null} */ (document.getElementById("dirs"));
+  const stageFrame = /** @type {HTMLElement | null} */ (document.querySelector(".stage-frame"));
+  const consoleFooter = /** @type {HTMLElement | null} */ (document.querySelector(".console-footer"));
+  const rowEl = /** @type {HTMLElement | null} */ (document.getElementById("row"));
+
+  function syncRowPlacement() {
+    if (!rowEl || !stageFrame || !consoleFooter) return;
+    const isMobile = window.matchMedia(
+      "(max-width: 680px), ((max-width: 920px) and (orientation: portrait) and (max-height: 850px))"
+    ).matches;
+    if (isMobile) {
+      if (rowEl.parentElement !== consoleFooter) {
+        consoleFooter.appendChild(rowEl);
+      }
+    } else {
+      if (rowEl.parentElement !== stageFrame) {
+        stageFrame.appendChild(rowEl);
+      }
+    }
+  }
+
+  if (typeof window !== "undefined") {
+    window.addEventListener("resize", syncRowPlacement);
+    window.addEventListener("orientationchange", syncRowPlacement);
+    syncRowPlacement();
+  }
 
   function submitInput() {
     const value = input.value;

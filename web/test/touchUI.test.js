@@ -105,3 +105,27 @@ test("computeActionChips generates contextual smart actions for iPad touch navig
   assert.ok(cmds7Cleared.includes("get acid"), "should offer GET ACID once cat is gone");
   assert.ok(cmds7Cleared.includes("get broom"), "should offer GET BROOM once cat is gone");
 });
+
+test("mobile arrow navigation directions map to valid world exits", async () => {
+  const engine = await createTestEngine();
+  const world = engine.world;
+  const state = engine.state;
+
+  // At room 1 (Stump): only North (8) is an exit
+  const room1 = world.room(1);
+  const exits1 = room1.exits;
+  assert.equal(exits1.N, 8);
+  assert.equal(exits1.S, 0);
+  assert.equal(exits1.W, 0);
+  assert.equal(exits1.E, 0);
+
+  // Moving via directional command 'n' reaches Cave Entrance (room 8)
+  const resN = engine.execute("n");
+  assert.equal(state.room, 8);
+  assert.ok(resN.messages.some((m) => m.includes("CAVE ENTRANCE")));
+
+  // In room 8, South goes back to 1
+  const resS = engine.execute("s");
+  assert.equal(state.room, 1);
+});
+
