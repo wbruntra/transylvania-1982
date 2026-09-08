@@ -33,6 +33,7 @@ export const MESSAGES = {
   slipperyMoss: "SLIPPERY MOSS COVERS THE TREES, MAKING  THEM IMPOSSIBLE TO CLIMB.", // TRANS.bas:310
   slidBackDown: "YOU SLID BACK DOWN AS IF YOU WERE\rPUSHED.", // TRANS.bas:320
   alreadyIs: "IT ALREADY IS.", // TRANS.bas:4502
+  pistolEmpty: "CLICK - THE PISTOL IS EMPTY.",
   missed: "MISSED.", // TRANS.bas:4606
   wallSpins: "THE WALL SPINS AND...", // TRANS.bas:4703
   acidSizzlesStump: "THE ACID SIZZLES VIOLENTLY OVER THE WRITING.  YOU CAN READ IT NOW.", // TRANS.bas:4867

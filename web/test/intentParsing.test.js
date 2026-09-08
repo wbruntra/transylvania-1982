@@ -222,3 +222,18 @@ test("hint system: princess in tower", async () => {
     "use elixir should point player toward note",
   );
 });
+
+test("hint system: shooting unloaded pistol produces CLICK - THE PISTOL IS EMPTY", async () => {
+  const engine = await createTestEngine();
+  const { state } = engine;
+
+  state.objectLoc[17] = -2; // carry pistol
+  state.flags.GN = 0;       // empty
+
+  const shootRes = engine.execute("shoot pistol");
+  assert.ok(
+    shootRes.messages.some((m) => m.includes("CLICK - THE PISTOL IS EMPTY")),
+    "shooting unloaded pistol should click and report empty",
+  );
+});
+

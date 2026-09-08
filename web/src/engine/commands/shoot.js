@@ -6,8 +6,18 @@ import { isCarried, placeObject, setObjectName } from "../state.js";
 
 /** @type {import("./index.js").CommandHandler} */
 export function shoot({ state, command }) {
-  // 4600 IF NOT GN OR P%(17)<>-2 OR I=61 AND X<>33 THEN 240
-  if (!state.flags.GN || !isCarried(state, 17) || (command.I === 61 && command.X !== 33)) {
+  // If player does not carry the pistol:
+  if (!isCarried(state, 17)) {
+    return [MESSAGES.dontHaveIt];
+  }
+
+  // 4600 IF NOT GN -> CLICK - THE PISTOL IS EMPTY.
+  if (!state.flags.GN) {
+    return [MESSAGES.pistolEmpty];
+  }
+
+  // 4600 IF I=61 AND X<>33 THEN 240
+  if (command.I === 61 && command.X !== 33) {
     return [MESSAGES.cant];
   }
 
