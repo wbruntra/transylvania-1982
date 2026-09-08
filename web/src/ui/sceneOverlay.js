@@ -1062,51 +1062,14 @@ function renderRoom38(overlay, state, onAction) {
  * Scurries across rooms 2, 17, 3, 19, 38.
  */
 function renderRavenousMice(overlay, state, onAction) {
-  const g = createInteractiveGroup("Ravenous Mice", () => onAction?.("look mice"));
-  placeProp(g, "translate(512, 820)");
+  const g = createInteractiveGroup("Ravenous Mice", () => onAction?.("get mice"));
+  placeProp(g, "translate(512, 800)");
   g.innerHTML += `
-    <!-- Mouse 1: Left mouse facing right -->
-    <g transform="translate(-65, 0)">
-      <ellipse cx="0" cy="12" rx="22" ry="7" fill="rgba(0,0,0,0.4)" filter="url(#paperShadow)"/>
-      <ellipse cx="0" cy="5" rx="20" ry="11" fill="#64748b" stroke="#334155" stroke-width="1.2"/>
-      <ellipse cx="16" cy="2" rx="8" ry="6" fill="#64748b"/>
-      <circle cx="21" cy="0" r="2" fill="#0f172a"/>
-      <!-- Pink ear -->
-      <circle cx="10" cy="-3" r="4.5" fill="#fda4af" stroke="#e2e8f0" stroke-width="0.8"/>
-      <!-- Long curving pink tail -->
-      <path d="M -18 7 Q -32 5 -38 -8 Q -42 -18 -36 -24" fill="none" stroke="#f472b6" stroke-width="2.2" stroke-linecap="round"/>
-      <!-- Whiskers -->
-      <line x1="20" y1="2" x2="30" y2="-2" stroke="#cbd5e1" stroke-width="1"/>
-      <line x1="20" y1="4" x2="29" y2="7" stroke="#cbd5e1" stroke-width="1"/>
-    </g>
-
-    <!-- Mouse 2: Center mouse sniffing upward -->
-    <g transform="translate(0, -10)">
-      <ellipse cx="0" cy="14" rx="18" ry="6" fill="rgba(0,0,0,0.4)" filter="url(#paperShadow)"/>
-      <ellipse cx="0" cy="4" rx="16" ry="12" fill="#475569" stroke="#1e293b" stroke-width="1.2"/>
-      <ellipse cx="2" cy="-6" rx="9" ry="7" fill="#475569"/>
-      <circle cx="2" cy="-11" r="2.5" fill="#ef4444"/>
-      <!-- Pink ears -->
-      <circle cx="-5" cy="-9" r="4" fill="#fda4af"/>
-      <circle cx="8" cy="-9" r="4" fill="#fda4af"/>
-      <!-- Tail -->
-      <path d="M -12 10 Q -24 16 -30 8 Q -34 0 -28 -6" fill="none" stroke="#f472b6" stroke-width="2" stroke-linecap="round"/>
-    </g>
-
-    <!-- Mouse 3: Right mouse darting forward -->
-    <g transform="translate(60, 5)">
-      <ellipse cx="0" cy="10" rx="20" ry="6" fill="rgba(0,0,0,0.4)" filter="url(#paperShadow)"/>
-      <ellipse cx="0" cy="4" rx="18" ry="9" fill="#64748b" stroke="#334155" stroke-width="1.2"/>
-      <ellipse cx="14" cy="2" rx="7" ry="5" fill="#64748b"/>
-      <circle cx="18" cy="1" r="1.8" fill="#0f172a"/>
-      <circle cx="9" cy="-2" r="4" fill="#fda4af"/>
-      <path d="M -16 6 Q -28 8 -34 2 Q -38 -6 -32 -12" fill="none" stroke="#f472b6" stroke-width="2.2" stroke-linecap="round"/>
-      <line x1="17" y1="2" x2="26" y2="0" stroke="#cbd5e1" stroke-width="1"/>
-    </g>
-
+    <ellipse cx="0" cy="10" rx="110" ry="26" fill="rgba(0,0,0,0.7)" filter="url(#paperShadow)"/>
+    <image href="art/props/mice.webp" x="-140" y="-198" width="280" height="198" filter="url(#paperShadow)"/>
     <g class="prop-badge">
-      <rect x="-60" y="-45" width="120" height="22" rx="11" fill="rgba(6, 9, 18, 0.95)" stroke="#94a3b8" stroke-width="1.2"/>
-      <text x="0" y="-30" text-anchor="middle" class="prop-badge-text">🐀 RAVENOUS MICE</text>
+      <rect x="-66" y="-222" width="132" height="24" rx="12" fill="rgba(6, 9, 18, 0.95)" stroke="#fb7185" stroke-width="1.4"/>
+      <text x="0" y="-206" text-anchor="middle" class="prop-badge-text">🐀 RAVENOUS MICE</text>
     </g>
   `;
   overlay.appendChild(propRoot(g));

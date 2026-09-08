@@ -166,9 +166,10 @@ export function createTurnHookManager({ world, state, randomEvents = false, rng 
       }
     }
 
-    // 7140: Ambient sounds (20% chance)
+    // 7140: Ambient sounds (20% chance) - TRANS.bas:7170 Y=INT(RND(1)*ZZ)+1
     if (rng() <= 0.2) {
-      const ambientIndex = Math.floor(rng() * 11) + 1;
+      const maxAmbient = state.timers?.ZZ ?? 10;
+      const ambientIndex = Math.floor(rng() * maxAmbient) + 1;
       if (ambientIndex === 1) {
         messages.push("A WITCH'S CACKLE CUTS THROUGH THE STILL AIR OF THE NIGHT.");
       } else if (ambientIndex === 2) {
