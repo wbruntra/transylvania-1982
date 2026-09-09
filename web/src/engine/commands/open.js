@@ -2,7 +2,8 @@
 
 import { GONE } from "../constants.js";
 import { MESSAGES } from "../messages.js";
-import { placeObject, setNounMapEntry } from "../state.js";
+import { awardPoints } from "../scoring.js";
+import { isCarried, placeObject, setNounMapEntry } from "../state.js";
 import { unlock } from "./unlock.js";
 
 /** @type {import("./index.js").CommandHandler} */
@@ -19,6 +20,7 @@ export function open(context) {
     }
     placeObject(state, 37, 38);
     placeObject(state, 21, GONE);
+    awardPoints(state, "openCoffin");
     return ["AS YOU LIFT THE LID AN OVERPOWERING STENCH HITS YOU..."];
   }
 
@@ -35,6 +37,7 @@ export function open(context) {
       placeObject(state, 4, state.room);
       placeObject(state, 5, state.room);
       placeObject(state, 23, GONE);
+      awardPoints(state, "openCoffer");
       return [MESSAGES.ok];
     }
     return [MESSAGES.alreadyOpen];
@@ -42,6 +45,17 @@ export function open(context) {
 
   // 7510 IF X=70 AND P=37: sarcophagus
   if (command.X === 70 && state.room === 37) {
+    // Added -- not in TRANS.bas, which just says "HERMETICALLY SEALED." no
+    // matter what. Without the box, this was a flat dead end with nothing
+    // to suggest a device could open it; a click-and-whir that goes nowhere
+    // hints that some kind of powered mechanism is what's actually needed,
+    // without giving away what it is.
+    const hasBox = isCarried(state, 27) || state.objectLoc[27] === state.room;
+    if (state.objectLoc[15] === state.room && !hasBox) {
+      return [
+        "YOU HEAR A FAINT CLICK AND A WHIR FROM SOMEWHERE DEEP INSIDE THE LID, THEN NOTHING. IT DOESN'T BUDGE.",
+      ];
+    }
     return [MESSAGES.hermeticallySealed];
   }
 

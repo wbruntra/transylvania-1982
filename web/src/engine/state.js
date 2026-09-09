@@ -37,6 +37,10 @@ export function createFlags() {
     ZZ: 10,
     /** The player's name, from the guest register at TRANS.bas:874. */
     YN: "",
+    /** Added -- not in TRANS.bas. Set when the mousetrap (object 40) catches
+     * the mice (turnHooks.js); cleared when they're released at the cat
+     * guard in room 7 (rules.js). */
+    TC: 0,
   };
 }
 
@@ -107,6 +111,9 @@ export function createState(world, options = {}) {
     gameOverReason: null,
     gameOverDetails: "",
     lastActionUnloadedShot: false,
+    // Added -- not in TRANS.bas, which has no scoring at all. See scoring.js.
+    score: 0,
+    scored: {},
   };
 }
 
@@ -233,5 +240,7 @@ export function deserializeState(json) {
     gameOverReason: parsed.gameOverReason ?? null,
     gameOverDetails: parsed.gameOverDetails ?? "",
     lastActionUnloadedShot: Boolean(parsed.lastActionUnloadedShot),
+    score: parsed.score ?? 0,
+    scored: { ...parsed.scored },
   };
 }

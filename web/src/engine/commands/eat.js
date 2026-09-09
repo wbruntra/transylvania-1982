@@ -2,6 +2,7 @@
 
 import { GONE } from "../constants.js";
 import { MESSAGES } from "../messages.js";
+import { awardPoints } from "../scoring.js";
 import { isCarried, placeObject } from "../state.js";
 
 /** @type {import("./index.js").CommandHandler} */
@@ -12,6 +13,7 @@ export function eat({ state, command }) {
       return [MESSAGES.notHere];
     }
     placeObject(state, 32, GONE);
+    awardPoints(state, "eatGarlic");
     return ["OK"];
   }
 
@@ -27,6 +29,7 @@ export function eat({ state, command }) {
 
   // 6534 PRINT "IT TASTED AWFUL."
   placeObject(state, 9, GONE);
+  awardPoints(state, "eatBread");
   return ["IT TASTED AWFUL."];
 }
 
@@ -35,6 +38,7 @@ export function drink({ state, command }) {
   // 6600 IF X=117 THEN 6620 (WATER)
   if (command.X === 117) {
     if (state.room !== 16) return [MESSAGES.cant];
+    awardPoints(state, "drinkWater");
     return [MESSAGES.hitsTheSpot];
   }
 

@@ -2,6 +2,7 @@
 // TRANS.bas:2990-2996, 6315-6330
 
 import { MESSAGES } from "../messages.js";
+import { awardPoints } from "../scoring.js";
 import { isCarried } from "../state.js";
 import { take } from "./take.js";
 
@@ -21,6 +22,7 @@ export function pick(context) {
     // 6320 IF P%(26)=-2 THEN DR=1: PRINT "OK.": GOTO 7000
     if (isCarried(state, 26)) {
       state.flags.DR = 1;
+      awardPoints(state, "pickCaveDoor");
       return [MESSAGES.ok];
     }
     // 6330 GOTO 240

@@ -5,6 +5,7 @@
 
 import { CARRIED, GONE } from "./constants.js";
 import { MESSAGES } from "./messages.js";
+import { awardPoints } from "./scoring.js";
 import { getObjectName, isCarried, placeObject } from "./state.js";
 
 /**
@@ -62,6 +63,7 @@ export function revealSarcophagus(world, state) {
     return [MESSAGES.dontUnderstand];
   }
   placeObject(state, 15, 37);
+  awardPoints(state, "moveVines");
   return [MESSAGES.foundSomething, MESSAGES.thereIsA(getObjectName(world, state, 15))];
 }
 
@@ -75,6 +77,7 @@ export function alienFireball(world, state) {
   placeObject(state, 5, GONE);
   placeObject(state, 2, GONE);
   state.timers.R = state.turns;
+  awardPoints(state, "waveRing");
   return [
     "A STREAM OF WHITE FIRE SHOOTS FROM YOUR RING ONTO THE STATUE. GREEN AND WHITE FLAMES BURN QUICKLY, ENGULFING ALL THAT",
     "IS AROUND YOU. SUDDENLY, A RED FIREBALL EMERGES, QUELLING THE WHITE AND GREEN FLAMES IN ITS FURY. THE AWKWARD",
@@ -96,6 +99,7 @@ export function crossLight(world, state) {
     messages.push("THE VAMPIRE SHRIEKS AND DISINTEGRATES INTO A PILE OF BURNING DUST.");
     placeObject(state, 39, GONE);
     state.flags.VR = 1;
+    awardPoints(state, "waveCross");
   }
   return messages;
 }
@@ -170,8 +174,14 @@ export function specialNav5737(world, state, X) {
     placeObject(state, 28, GONE);
     placeObject(state, 29, 4);
     placeObject(state, 27, CARRIED);
+    awardPoints(state, "goUfo");
     return [
       "FANTASTIC! UTTERLY FASCINATING!..OH NO! ...EVERYTHING IS GETTING BLACK--HELP!!",
+      // Added -- not in TRANS.bas, which cuts off right there. Without a
+      // line to land on, the blackout read as the game hanging or crashing
+      // rather than time passing, and nothing told the player they now had
+      // the box.
+      "...YOU COME TO, LYING IN A SCORCHED CIRCLE OF FLATTENED BRUSH WHERE THE SAUCER USED TO BE. IT'S GONE -- BUT A SMALL BLACK METAL BOX IS NOW CLUTCHED IN YOUR HAND.",
     ];
   }
   if (X === 59 && state.room === 36) return ladderMovement(world, state); // 5880

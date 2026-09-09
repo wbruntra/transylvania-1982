@@ -2,6 +2,7 @@
 
 import { GONE } from "../constants.js";
 import { MESSAGES } from "../messages.js";
+import { awardPoints } from "../scoring.js";
 import { isCarried, isObjectTakeable, placeObject } from "../state.js";
 import { sail } from "./sail.js";
 
@@ -36,6 +37,7 @@ export function fly({ world, state, command }) {
   // 6150-6170 Broom flyover
   placeObject(state, 25, GONE);
   state.room = 15;
+  awardPoints(state, "rideBroom");
   return [
     "THE BROOMSTICK BUCKS VIOLENTLY, BUT YOU ARE FINALLY ABLE TO MASTER IT. IT SOARS HIGH OVER THE WOODS, SHOWING YOU THE",
     "HILLS OF TRANSYLVANIA BATHED IN A PALE MOONLIGHT. THE BROOM DIVES, CIRCLING TWICE AROUND A GLOOMY CASTLE. TO THE",

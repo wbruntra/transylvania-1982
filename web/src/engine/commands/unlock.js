@@ -1,6 +1,7 @@
 // 6300: UNLOCK / 6400: LOCK. Door (noun 61) in 9/10, grate (noun 27) in 5.
 
 import { MESSAGES } from "../messages.js";
+import { awardPoints } from "../scoring.js";
 import { isCarried } from "../state.js";
 
 /** @type {import("./index.js").CommandHandler} */
@@ -22,6 +23,7 @@ export function unlock({ state, command }) {
     if (state.flags.GT) return [MESSAGES.alreadyOpen];
     if (!isCarried(state, 11)) return [MESSAGES.cant];
     state.flags.GT = 1;
+    awardPoints(state, "unlockGrate");
     return [MESSAGES.ok];
   }
 
@@ -34,6 +36,7 @@ export function unlock({ state, command }) {
     }
     if (isCarried(state, 26)) {
       state.flags.DR = 1;
+      awardPoints(state, "pickCaveDoor");
       return [MESSAGES.ok];
     }
     return [MESSAGES.cant];

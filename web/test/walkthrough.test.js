@@ -632,7 +632,7 @@ test("tier 3 puzzle routines work as expected", async () => {
   winEngine.state.objectLoc[38] = CARRIED;
   const sailWin = winEngine.run("sail boat");
   assert.equal(sailWin[0].includes("PRINCESS SABRINA"), true);
-  assert.equal(sailWin[1], "PRESS ANY KEY TO RESTART THE GAME.");
+  assert.equal(sailWin.at(-1), "PRESS ANY KEY TO RESTART THE GAME.");
   assert.equal(winEngine.isGameOver(), true);
 
   // --- 9700: READ ---
@@ -974,6 +974,105 @@ test("cat guard in room 7 blocks acid and broom until distracted by mice", async
   const flyRes = engine.run("ride broom");
   assert.equal(flyRes[0].includes("THE BROOMSTICK BUCKS VIOLENTLY"), true);
   assert.equal(engine.state.room, 15); // Willow on lake shore
+});
+
+test("the mousetrap (added, not in TRANS.bas) is the only way to catch the mice", async () => {
+  const engine = await createTestEngine();
+
+  // The trap starts baited in the shack (room 20), same as any other object.
+  assert.equal(engine.state.objectLoc[40], 20);
+  engine.state.room = 20;
+  assert.deepEqual(engine.run("get trap"), [MESSAGES.ok]);
+  assert.equal(engine.state.objectLoc[40], CARRIED);
+
+  // SET TRAP (routed through the "sail" verb's "set" synonym) leaves it in
+  // room 2, one stop on the mice's wander loop (2 -> 17 -> 3 -> 19 -> 2).
+  engine.state.room = 2;
+  assert.deepEqual(engine.run("set trap"), [
+    "YOU SET THE MOUSETRAP ON THE GROUND, BAITED AND READY.",
+  ]);
+  assert.equal(engine.state.objectLoc[40], 2);
+  assert.deepEqual(engine.run("set trap"), ["THE TRAP IS ALREADY SET HERE."]);
+
+  // While the mice are still loose, GET MICE fails -- they scurry off. Room 3
+  // is two stops from the trap (3 -> 19 -> 2), so this same turn's wander
+  // step (3 -> 19) can't accidentally catch them and confuse the assertion.
+  engine.state.objectLoc[20] = 3;
+  engine.state.room = 3;
+  assert.deepEqual(engine.run("get mice"), [
+    "THE MICE SCURRY AWAY BEFORE YOU CAN GRAB THEM.",
+  ]);
+  assert.equal(engine.state.objectLoc[20], 19);
+  assert.equal(engine.state.flags.TC, 0);
+
+  // Next tick, the mice wander from 19 into the trapped room (2) and are
+  // caught -- witnessed this time, standing right there when it happens.
+  engine.state.room = 2;
+  const caught = engine.run("look");
+  assert.equal(
+    caught.includes("YOU HEAR FRANTIC SQUEAKING -- THE MICE HAVE BLUNDERED INTO YOUR TRAP!"),
+    true,
+  );
+  assert.equal(engine.state.objectLoc[20], GONE);
+  assert.equal(engine.state.flags.TC, 1);
+
+  // GET MICE still doesn't work -- only the trap itself is takeable now.
+  assert.deepEqual(engine.run("get mice"), [MESSAGES.notHere]);
+
+  // Walk back to room 2 and pick up the now-full trap.
+  engine.state.room = 2;
+  assert.deepEqual(engine.run("get trap"), [MESSAGES.ok]);
+  assert.deepEqual(engine.run("inventory"), [
+    MESSAGES.carryingHeader,
+    MESSAGES.carriedItem("MOUSETRAP WITH THREE SQUEAKING MICE INSIDE."),
+  ]);
+
+  // Carry it to the hut and open it to distract the cat, same payoff as before.
+  engine.state.room = 7;
+  const released = engine.run("open trap");
+  assert.equal(released[0], "YOU OPEN THE TRAP -- THE MICE BOLT OUT AND THE CAT CHASES AFTER THEM.");
+  assert.equal(engine.state.objectLoc[24], GONE);
+  assert.equal(engine.state.flags.TC, 0);
+  assert.deepEqual(engine.run("inventory"), [
+    MESSAGES.carryingHeader,
+    MESSAGES.carriedItem("MOUSETRAP BAITED WITH CHEESE."),
+  ]);
+
+  // And now that the cat is gone, the acid and broom are free for the taking.
+  assert.deepEqual(engine.run("get acid"), [MESSAGES.ok]);
+});
+
+test("the saucer and the sarcophagus give clues instead of dead ends (added, not in TRANS.bas)", async () => {
+  // LOOK SAUCER/UFO describes the crashed craft once the shooting star drops it.
+  const lookEngine = await createTestEngine();
+  lookEngine.state.room = 4;
+  lookEngine.state.objectLoc[28] = 4;
+  const lookRes = lookEngine.run("look saucer");
+  assert.equal(lookRes[0].includes("DOME-SHAPED CRAFT"), true);
+  assert.deepEqual(lookEngine.run("look ufo"), lookRes);
+
+  // GO UFO no longer cuts off mid-blackout -- it lands on a line that says
+  // what happened and that the player is now holding the box.
+  const goRes = lookEngine.run("go ufo");
+  assert.equal(goRes.length, 2);
+  assert.equal(goRes[1].includes("BOX IS NOW CLUTCHED IN YOUR HAND"), true);
+  assert.equal(lookEngine.state.objectLoc[27], CARRIED);
+  assert.equal(lookEngine.state.objectLoc[28], GONE);
+
+  // OPEN SARCOPHAGUS without the box: a click and a whir, not a flat "sealed."
+  const sarcEngine = await createTestEngine();
+  sarcEngine.state.room = 37;
+  sarcEngine.state.objectLoc[15] = 37;
+  sarcEngine.state.objectLoc[27] = GONE; // no box anywhere
+  assert.deepEqual(sarcEngine.run("open sarcophagus"), [
+    "YOU HEAR A FAINT CLICK AND A WHIR FROM SOMEWHERE DEEP INSIDE THE LID, THEN NOTHING. IT DOESN'T BUDGE.",
+  ]);
+
+  // With the box carried, OPEN SARCOPHAGUS still refuses (PUSH BUTTON is the
+  // real solution) -- but with the original, unchanged message, since there's
+  // nothing left to hint at once you already have the box.
+  sarcEngine.state.objectLoc[27] = CARRIED;
+  assert.deepEqual(sarcEngine.run("open sarcophagus"), [MESSAGES.hermeticallySealed]);
 });
 
 test("the loaf of stale bread is a red herring and does not affect mice", async () => {

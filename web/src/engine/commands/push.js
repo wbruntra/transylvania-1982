@@ -2,6 +2,7 @@
 
 import { GONE } from "../constants.js";
 import { MESSAGES } from "../messages.js";
+import { awardPoints } from "../scoring.js";
 import { isCarried, placeObject } from "../state.js";
 import { movePry } from "./movePry.js";
 
@@ -56,6 +57,7 @@ export function push(context) {
   if (state.objectLoc[15] === state.room) {
     placeObject(state, 15, GONE);
     placeObject(state, 16, 37);
+    awardPoints(state, "pushButton");
     return [
       prefix,
       "ENVELOPS THE SARCOPHAGUS. IN A VIOLENT BLAST THE LID FLIES OFF AND EXPLODES IN",
@@ -65,9 +67,11 @@ export function push(context) {
 
   // 4934 IF P<38 AND P>26: inside castle
   if (state.room > 26 && state.room < 38) {
+    awardPoints(state, "pressButtonElsewhere");
     return [prefix, "SHAKES THE ROOM WITH A FANTASTIC JOLT OF POWER."];
   }
 
   // 4935 in the forest
+  awardPoints(state, "pressButtonElsewhere");
   return [prefix, "UPROOTS A TREE."];
 }

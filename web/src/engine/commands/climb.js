@@ -2,11 +2,13 @@
 
 import { ladderMovement, stairsMovement } from "../helpers.js";
 import { MESSAGES } from "../messages.js";
+import { awardPoints } from "../scoring.js";
 
 /** @type {import("./index.js").CommandHandler} */
 export function climb({ world, state, command }) {
   // 6700 IF X=12 AND P=16 THEN 320 (WILLO)
   if (command.X === 12 && state.room === 16) {
+    awardPoints(state, "climbWillow");
     return [MESSAGES.slidBackDown];
   }
 
@@ -23,9 +25,12 @@ export function climb({ world, state, command }) {
     if (state.objectLoc[13] === state.room) {
       if (!state.flags.GT) return [MESSAGES.locked];
       state.room = 11;
+      awardPoints(state, "climbToChamber");
       return [];
     }
-    return ladderMovement(world, state);
+    const result = ladderMovement(world, state);
+    if (state.room === 37) awardPoints(state, "climbTowerLadder");
+    return result;
   }
 
   // 6711 IF X<>13 THEN 240 (TREE)
@@ -35,9 +40,11 @@ export function climb({ world, state, command }) {
 
   // 6712 IF P<>16 THEN 310
   if (state.room !== 16) {
+    awardPoints(state, "climbTree");
     return [MESSAGES.slipperyMoss];
   }
 
   // 6725 GOTO 320
+  awardPoints(state, "climbWillow");
   return [MESSAGES.slidBackDown];
 }

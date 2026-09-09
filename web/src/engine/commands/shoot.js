@@ -2,6 +2,7 @@
 
 import { GONE } from "../constants.js";
 import { MESSAGES } from "../messages.js";
+import { awardPoints } from "../scoring.js";
 import { isCarried, placeObject, setObjectName } from "../state.js";
 
 /** @type {import("./index.js").CommandHandler} */
@@ -46,6 +47,7 @@ export function shoot({ state, command }) {
     placeObject(state, 34, GONE);
     setObjectName(state, 17, "SMOKING FLINTLOCK PISTOL.");
     state.flags.GN = 0;
+    awardPoints(state, "shootWerewolf");
     return [
       "GOT HIM!  WITH A DESPERATE HOWL THE WEREWOLF COLLAPSES. SLOWLY ITS OUTLINE CHANGES TO THAT OF A DECREPIT OLD MAN,",
       "THEN CRUMBLES INTO DUST!",

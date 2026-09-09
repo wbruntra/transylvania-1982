@@ -2,6 +2,7 @@
 
 import { revealSarcophagus } from "../helpers.js";
 import { MESSAGES } from "../messages.js";
+import { awardPoints } from "../scoring.js";
 import { movePry } from "./movePry.js";
 
 /** @type {import("./index.js").CommandHandler} */
@@ -23,8 +24,15 @@ export function pull(context) {
     return revealSarcophagus(world, state);
   }
 
-  // 4701 IF X<>46 THEN 260 (X=46 is ANTLE; allow X=112 WALL in rooms 21/22)
-  if (command.X !== 46 && !((state.room === 21 || state.room === 22) && command.X === 112)) {
+  // 4701 IF X<>46 THEN 260 (X=46 is ANTLE; allow X=112 WALL in rooms 21/22).
+  // Also accept DEER/HORNS/HEAD as synonyms there, since ROOM_SCENERY
+  // (rules.js) describes them as the same mounted deer head -- a player who
+  // read that description and typed PULL HEAD or PULL DEER should get the
+  // same result as PULL ANTLERS, not "IT WON'T BUDGE."
+  const inAntlerRooms = state.room === 21 || state.room === 22;
+  const isAntlerSynonym =
+    inAntlerRooms && ["antler", "deer", "horn", "head", "wall"].some((w) => command.noun?.includes(w));
+  if (command.X !== 46 && command.X !== 112 && !isAntlerSynonym) {
     return [MESSAGES.wontBudge];
   }
 
@@ -33,5 +41,6 @@ export function pull(context) {
 
   // 4703/4704: Spin wall between 21 and 22
   state.room = state.room === 21 ? 22 : 21;
+  awardPoints(state, "pullAntlers");
   return [MESSAGES.wallSpins];
 }

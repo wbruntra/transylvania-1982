@@ -1,5 +1,6 @@
 import { CARRIED, GONE, MAX_CARRIED } from "../constants.js";
 import { MESSAGES } from "../messages.js";
+import { awardPoints } from "../scoring.js";
 import {
   carriedCount,
   getNounMapEntry,
@@ -31,6 +32,7 @@ export function catchFlies(world, state) {
   setObjectName(state, 7, "FLIES ON FLYPAPER.");
   placeObject(state, 7, CARRIED);
   placeObject(state, 31, GONE);
+  awardPoints(state, "catchFlies");
   return [
     "MANY FLIES ESCAPED, BUT YOU DID MANAGE TO CATCH SEVERAL OF THEM WITH THE PAPER.",
     MESSAGES.ok,
@@ -48,6 +50,13 @@ export function take({ world, state, command }) {
     return [
       "AS YOU TRY TO TAKE THE BOOK A MYSTERIOUS VOICE SHOUTS 'IT IS MINE! GO AWAY!'...YOU ARE BACK IN THE FOREST.",
     ];
+  }
+
+  // Added -- not in TRANS.bas: the mice are too quick to grab by hand. SET
+  // TRAP (rules.js) somewhere in their loop and wait for them to blunder in
+  // (turnHooks.js); only the trap itself is takeable once that's happened.
+  if ((command.X === 31 || command.noun.includes("mice")) && state.objectLoc[20] === state.room) {
+    return ["THE MICE SCURRY AWAY BEFORE YOU CAN GRAB THEM."];
   }
 
   // 3003 -> 3090: catching flies with flypaper
@@ -94,5 +103,6 @@ export function take({ world, state, command }) {
   }
 
   placeObject(state, object.id, CARRIED);
+  if (object.id === 6) awardPoints(state, "takeCross");
   return [MESSAGES.ok];
 }

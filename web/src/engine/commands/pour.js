@@ -2,6 +2,7 @@
 
 import { GONE } from "../constants.js";
 import { MESSAGES } from "../messages.js";
+import { awardPoints } from "../scoring.js";
 import { isCarried, placeObject } from "../state.js";
 
 /** @type {import("./index.js").CommandHandler} */
@@ -10,6 +11,7 @@ export function pour({ state, command }) {
   if (isAcid) {
     if (!isCarried(state, 1)) return [MESSAGES.dontUnderstand];
     placeObject(state, 1, GONE);
+    awardPoints(state, "pourAcid");
     if (state.room === 1) {
       state.flags.SM = 1;
       return [MESSAGES.acidSizzlesStump, MESSAGES.bottleSlipped];
@@ -34,6 +36,7 @@ export function pour({ state, command }) {
   if (state.room === 37 && (state.objectLoc[16] === 37 || state.flags.SH)) {
     if (state.flags.SH) {
       state.flags.PO = 1;
+      awardPoints(state, "pourElixir");
       return [MESSAGES.pourEnergizedElixir, MESSAGES.lightningInDistance];
     }
     return [MESSAGES.pourDullElixir];

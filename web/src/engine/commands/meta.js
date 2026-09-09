@@ -2,6 +2,7 @@
 
 import { describeRoom } from "../describe.js";
 import { MESSAGES } from "../messages.js";
+import { scoreReport } from "../scoring.js";
 import { deserializeState, serializeState } from "../state.js";
 
 const SAVE_KEY = "transylvania_savegame";
@@ -55,6 +56,11 @@ export function restoreGame({ world, state }) {
     // Ignore
   }
   return ["NO SAVED GAME FOUND."];
+}
+
+/** @type {import("./index.js").CommandHandler} */
+export function scoreCommand({ state }) {
+  return { messages: scoreReport(state), consumeTurn: false };
 }
 
 /** @type {import("./index.js").CommandHandler} */

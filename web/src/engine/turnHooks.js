@@ -1,7 +1,9 @@
 // 7000-7180: The per-turn block.
 // Turn-based threats, clock, wandering mice, shooting star, and ambient events.
 
-import { getObjectName, getNounMapEntry, isCarried, placeObject, setNounMapEntry } from "./state.js";
+import { GONE } from "./constants.js";
+import { awardPoints } from "./scoring.js";
+import { getObjectName, getNounMapEntry, isCarried, placeObject, setNounMapEntry, setObjectName } from "./state.js";
 
 /**
  * Creates the per-turn hook function for TRANS.bas:7000-7180.
@@ -105,7 +107,20 @@ export function createTurnHookManager({ world, state, randomEvents = false, rng 
       else if (loc === 19) loc = 2;
       else if (loc === 38 || loc === 74) loc = loc - 36;
       state.objectLoc[20] = loc;
-      if (loc === state.room) {
+
+      // Mousetrap (object 40, added -- not in TRANS.bas). SET TRAP (rules.js)
+      // leaves it somewhere in the mice's loop; when they wander into that
+      // room they're caught there instead of being pickable by hand (see the
+      // GET MICE refusal in take.js).
+      if (state.objectLoc[40] === loc) {
+        state.objectLoc[20] = GONE;
+        state.flags.TC = 1;
+        awardPoints(state, "catchMice");
+        setObjectName(state, 40, "MOUSETRAP WITH THREE SQUEAKING MICE INSIDE.");
+        if (loc === state.room) {
+          messages.push("YOU HEAR FRANTIC SQUEAKING -- THE MICE HAVE BLUNDERED INTO YOUR TRAP!");
+        }
+      } else if (loc === state.room) {
         messages.push(`THERE IS A ${getObjectName(world, state, 20)}`);
       }
     }

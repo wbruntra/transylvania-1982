@@ -729,6 +729,12 @@
    "name": "VAMPIRE.",
    "loc": -1,
    "takeable": 0
+  },
+  {
+   "id": 40,
+   "name": "MOUSETRAP BAITED WITH CHEESE.",
+   "loc": 20,
+   "takeable": 1
   }
  ],
  "verbs": [
@@ -1170,7 +1176,7 @@
  ],
  "counts": {
   "NZ": 171,
-  "M": 39,
+  "M": 40,
   "LZ": 38
  },
  "verb_targets": [

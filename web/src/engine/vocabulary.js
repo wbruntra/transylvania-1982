@@ -32,6 +32,8 @@ export const VERBS = {
   drop: { words: ["drop", "release", "throw", "leave", "give"], takesObject: true },
   help: { words: ["help"], takesObject: true },
   map: { words: ["map", "m", "chart"], takesObject: false },
+  // Added -- not in TRANS.bas, which has no scoring. See scoring.js.
+  score: { words: ["score", "points"], takesObject: false },
   quit: { words: ["quit", "end"], takesObject: false },
   save: { words: ["save"], takesObject: false },
   restore: { words: ["restore"], takesObject: false },

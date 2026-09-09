@@ -437,7 +437,9 @@ function renderRoom9(overlay, state, onAction) {
 
   // 2. Magic Book (Obj 33)
   if (state.objectLoc[33] === 9) {
-    const g = createInteractiveGroup("Magic Book", () => onAction?.("read book"));
+    const g = createInteractiveGroup("Magic Book (Property of Zin -- read, don't take)", () =>
+      onAction?.("read book"),
+    );
     placeProp(g, "translate(680, 680)");
     g.innerHTML += `
       <!-- Pedestal shadow -->
@@ -458,9 +460,13 @@ function renderRoom9(overlay, state, onAction) {
       <!-- Arcane seal glowing on left page -->
       <circle cx="-25" cy="0" r="6" fill="none" stroke="#dc2626" stroke-width="1.2"/>
 
+      <!-- Ownership warning burned into the pedestal, so a player sees a
+           reason not to just GET the book before finding out the hard way. -->
+      <text x="0" y="46" text-anchor="middle" class="prop-badge-text" fill="#a1a1aa" font-size="9" letter-spacing="0.5">PROPERTY OF ZIN</text>
+
       <g class="prop-badge">
-        <rect x="-56" y="-45" width="112" height="20" rx="10" fill="rgba(6, 9, 18, 0.9)" stroke="#f59e0b" stroke-width="1.2"/>
-        <text x="0" y="-31" text-anchor="middle" class="prop-badge-text">📖 MAGIC BOOK</text>
+        <rect x="-64" y="-66" width="128" height="20" rx="10" fill="rgba(6, 9, 18, 0.9)" stroke="#f59e0b" stroke-width="1.2"/>
+        <text x="0" y="-52" text-anchor="middle" class="prop-badge-text">📖 READ THE BOOK</text>
       </g>
     `;
     overlay.appendChild(propRoot(g));

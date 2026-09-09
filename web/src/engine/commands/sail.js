@@ -1,6 +1,7 @@
 // 9400: SET (I=35), CAST (I=54), SAIL (I=59), ROW (I=58). Lake crossing at room 16.
 
 import { MESSAGES } from "../messages.js";
+import { awardPoints, MAX_SCORE } from "../scoring.js";
 import { isCarried } from "../state.js";
 
 /** @type {import("./index.js").CommandHandler} */
@@ -30,8 +31,12 @@ export function sail({ state, command }) {
   state.gameOverReason = "win";
   state.gameOverDetails =
     "You safely sailed Princess Sabrina across the lake back to her father's kingdom! But the ungrateful King immediately ordered you to deepest Africa to save his other daughter... So tonight, disguised in humble peasant dress, you slip away into the moonlit castle courtyard, plotting your daring escape with Sabrina!";
+  awardPoints(state, "sailBoat");
   return [
     "AFTER A PRECARIOUS FEW MINUTES, THE JOURNEY GOES SMOOTHLY. A SOMEWHAT TIRED AND BEWILDERED PRINCESS SABRINA GRACIOUSLY THANKS YOU AS YOU RETURN TO HER KINGDOM. THE KING IS SUITABLY IMPRESSED AND ASKS THAT YOU BE SENT TO DEEPEST AFRICA TO SAVE HIS OTHER DAUGHTER. THAT EVENING, YOU SNEAK OUT IN PEASANT DRESS, PLOTTING YOUR RESCUE OF SABRINA FROM THE KING'S CASTLE...WELL DONE!",
+    // Added -- not in TRANS.bas, which has no scoring: a final tally, since
+    // this is the one moment every playthrough is guaranteed to reach.
+    `YOU SCORED ${state.score} OUT OF ${MAX_SCORE} POINTS.`,
     "PRESS ANY KEY TO RESTART THE GAME.",
   ];
 }

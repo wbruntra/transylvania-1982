@@ -2,6 +2,7 @@
 
 import { alienFireball, crossLight } from "../helpers.js";
 import { MESSAGES } from "../messages.js";
+import { awardPoints } from "../scoring.js";
 import { isCarried } from "../state.js";
 import { catchFlies } from "./take.js";
 
@@ -54,6 +55,7 @@ export function wave({ world, state, command }) {
       return [MESSAGES.elixirAlreadyEnergized];
     }
     state.flags.SH = 1;
+    awardPoints(state, "waveElixir");
     return [MESSAGES.elixirEnergized];
   }
 

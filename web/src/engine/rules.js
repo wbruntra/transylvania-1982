@@ -17,7 +17,8 @@
 // here and tested; add entries as each noun is confirmed.
 
 import { MESSAGES } from "./messages.js";
-import { isCarried, placeObject } from "./state.js";
+import { awardPoints } from "./scoring.js";
+import { isCarried, placeObject, setObjectName } from "./state.js";
 import { resolveNoun, resolveVerb } from "./vocabulary.js";
 import { objectsInRoom } from "./world.js";
 
@@ -25,7 +26,7 @@ import { objectsInRoom } from "./world.js";
  * @typedef {object} RuleCondition
  * @property {string} [verb]            Canonical verb, e.g. "look".
  * @property {number} [I]               1-based verb id from world.verbs.
- * @property {string} [noun]            Noun the player typed (substring match).
+ * @property {string | string[]} [noun] Noun(s) the player typed (substring match; array matches any).
  * @property {number | number[]} [X]    1-based noun id(s) from world.nouns.
  * @property {number | number[]} [room] Player must be in this room (or one of them).
  * @property {number} [maxRoomType]     Player must be in room where room.type <= maxRoomType.
@@ -42,10 +43,55 @@ import { objectsInRoom } from "./world.js";
  * @property {Record<string, unknown>} [setFlags]  Flags to assign.
  * @property {Record<number, number>} [placeObjects]  objectId -> new location.
  * @property {number} [goToRoom]
+ * @property {string} [points]  Scoring event key (scoring.js) to award once.
  * @property {(context: import("./commands/index.js").CommandContext) => void} [apply]
  *
  * @typedef {{when: RuleCondition, then: RuleEffect, source?: string}} Rule
  */
+
+/**
+ * Purely decorative additions -- not in TRANS.bas -- catalogued one room at a
+ * time. Everything examinable in a given room lives together in one list, so
+ * adding a new prop means scanning a handful of entries for a word that's
+ * already claimed, not scrolling the whole file.
+ *
+ * These match on the word the player typed (`words`, checked via `noun` in
+ * `ruleMatches`), not a hand-counted noun-table id (`X`). That's deliberate:
+ * X ids are 1-based positions in world.nouns that TRANS.bas's N%() alias
+ * table can silently redirect (e.g. "HEADS" isn't headgear, it's an alias for
+ * GRAVESTONE). Getting that arithmetic wrong is exactly how "HEADS" almost
+ * ended up meaning the deer trophy here. Matching on the typed word sidesteps
+ * the arithmetic entirely -- there's no index to miscount.
+ * @type {Record<number, { label: string, items: { words: string[], say: string }[] }>}
+ */
+const ROOM_SCENERY = {
+  21: {
+    label: "Log cabin",
+    items: [
+      {
+        words: ["deer", "antlers", "horns", "head"],
+        say: "AN IMPRESSIVE SPECIMEN. THOSE ANTLERS LOOK STURDY ENOUGH TO HANG ONTO.",
+      },
+      {
+        words: ["fireplace", "mantel", "kettle", "jug", "jugs"],
+        say: "A COLD STONE FIREPLACE, LONG SINCE GONE OUT. A CAST-IRON KETTLE AND A COUPLE OF CHIPPED CLAY JUGS SIT ON THE MANTEL.",
+      },
+      {
+        words: ["table", "stool", "plate", "meal", "bone"],
+        say: "A ROUGH-HEWN TABLE AND STOOL. A WOODEN PLATE WITH A HALF-EATEN MEAL SITS ON THE TABLE. SOMEONE ATE HERE NOT LONG AGO.",
+      },
+    ],
+  },
+};
+
+/** @type {Rule[]} */
+const SCENERY_RULES = Object.entries(ROOM_SCENERY).flatMap(([room, { items }]) =>
+  items.map(({ words, say }) => ({
+    when: { verb: "look", room: Number(room), noun: words },
+    then: { say },
+    source: "added",
+  })),
+);
 
 /** @type {Rule[]} */
 export const RULES = [
@@ -58,6 +104,7 @@ export const RULES = [
         "'IJNID' TO THE GOBLIN FOR ME.' HE HOPS INTO THE MURKY WATERS OF THE LAKE AND VANISHES.",
       ],
       placeObjects: { 7: -1, 8: -1 },
+      points: "feedFrog",
     },
     source: "TRANS.bas:4300, 4100",
   },
@@ -69,6 +116,7 @@ export const RULES = [
         "'IJNID' TO THE GOBLIN FOR ME.' HE HOPS INTO THE MURKY WATERS OF THE LAKE AND VANISHES.",
       ],
       placeObjects: { 7: -1, 8: -1 },
+      points: "feedFrog",
     },
     source: "TRANS.bas:4047, 4100",
   },
@@ -78,6 +126,7 @@ export const RULES = [
     then: {
       say: "THE MICE RUN AWAY AND THE CAT CHASES AFTER THEM.",
       placeObjects: { 20: -1, 24: -1 },
+      points: "distractCat",
       apply: ({ state }) => {
         if (!state.timers) state.timers = {};
         state.timers.ZZ = 11;
@@ -92,12 +141,68 @@ export const RULES = [
     source: "TRANS.bas:1599/3061",
   },
 
+  // Added -- not in TRANS.bas: the mousetrap (object 40). GET MICE no longer
+  // works by itself (take.js) -- the mice have to be caught in the trap
+  // (turnHooks.js) first. This rule (releasing caught mice at the cat) is
+  // listed before the general "set the trap down" rule below because it's
+  // the more specific case and `runRules` takes the first match: DROP TRAP
+  // in room 7 with the cat there and mice already caught must win over the
+  // generic "you set the trap down" response.
+  {
+    when: {
+      verb: ["drop", "open"],
+      noun: ["trap", "mice"],
+      room: 7,
+      objectInRoom: 24,
+      objectCarried: 40,
+      flag: "TC",
+    },
+    then: {
+      say: "YOU OPEN THE TRAP -- THE MICE BOLT OUT AND THE CAT CHASES AFTER THEM.",
+      setFlags: { TC: 0 },
+      placeObjects: { 20: -1, 24: -1 },
+      points: "distractCat",
+      apply: ({ state }) => {
+        setObjectName(state, 40, "MOUSETRAP BAITED WITH CHEESE.");
+        if (!state.timers) state.timers = {};
+        state.timers.ZZ = 11;
+      },
+    },
+    source: "added",
+  },
+  // SET/DROP/PLACE TRAP: the game already groups equivalent verbs under one
+  // canonical name (vocabulary.js's VERBS table) -- "set" is a synonym of
+  // "sail" (from "set sail"), "drop"/"leave"/"give" of "drop", and
+  // "put"/"place"/"insert" of "put". Matching all three canonical verbs here
+  // means SET TRAP, DROP TRAP, LEAVE TRAP and PLACE TRAP all arm it the same
+  // way, for free, without adding new parser vocabulary.
+  {
+    when: { verb: ["sail", "drop", "put"], noun: "trap", objectCarried: 40 },
+    then: {
+      say: "YOU SET THE MOUSETRAP ON THE GROUND, BAITED AND READY.",
+      points: "setTrap",
+      apply: ({ state }) => placeObject(state, 40, state.room),
+    },
+    source: "added",
+  },
+  {
+    when: { verb: ["sail", "drop", "put"], noun: "trap", objectInRoom: 40 },
+    then: { say: "THE TRAP IS ALREADY SET HERE." },
+    source: "added",
+  },
+  {
+    when: { verb: ["sail", "drop", "put"], noun: "trap" },
+    then: { say: MESSAGES.dontHaveIt },
+    source: "added",
+  },
+
   // Tier 2: CLAP (TRANS.bas:7900, 7915)
   {
     when: { verb: "clap", room: 37, flags: ["PO", "SH"] },
     then: {
       say: "THE DAMSEL STIRS A LITTLE AND FINALLY AWAKENS.",
       placeObjects: { 16: -1, 38: 37 },
+      points: "clapHands",
       apply: ({ world }) => {
         world.object(38).takeable = 1;
         if (world.nounMap) world.nounMap[70] = 38; // N%(71) = 38
@@ -115,6 +220,7 @@ export const RULES = [
         "THE GOBLIN DROPS THE KEY AND FLEES SCREAMING INTO THE DARKNESS...",
       ],
       placeObjects: { 10: -1, 11: 26 },
+      points: "sayIjnid",
     },
     source: "TRANS.bas:8510",
   },
@@ -122,7 +228,7 @@ export const RULES = [
   // Tier 2: STRIKE/KNOCK/HIT (TRANS.bas:9820)
   {
     when: { verb: "strike", X: 49, room: 1 },
-    then: { say: "POOF!", goToRoom: 9 },
+    then: { say: "POOF!", goToRoom: 9, points: "knockStump" },
     source: "TRANS.bas:9820",
   },
 
@@ -164,7 +270,10 @@ export const RULES = [
   },
   {
     when: { verb: "look", X: 66, objectInRoom: 33 },
-    then: { say: "IT'S ENTITLED 'THE JOY OF MAGIC'." },
+    // The extra sentence isn't in TRANS.bas:1530 -- added so a player sees a
+    // reason not to GET it (which teleports them out per TRANS.bas:3080)
+    // before finding out the hard way, and a nudge toward READ BOOK instead.
+    then: { say: "IT'S ENTITLED 'THE JOY OF MAGIC'. INSIDE THE COVER IS WRITTEN 'PROPERTY OF ZIN -- DO NOT REMOVE FROM CABIN'." },
     source: "TRANS.bas:1530",
   },
   {
@@ -187,6 +296,18 @@ export const RULES = [
     then: { say: "THERE IS A BUTTON ON ITS SMOOTH BLACK SURFACE." },
     source: "TRANS.bas:1540",
   },
+  // Added -- not in TRANS.bas, which never describes the crashed saucer at
+  // all: the shooting-star event just drops it into the room-contents list
+  // with its bare object name, and the only way to learn GO UFO does
+  // anything is to already know to type it. This gives the player something
+  // to react to before that leap.
+  {
+    when: { verb: "look", noun: ["saucer", "ufo"], objectInRoom: 28 },
+    then: {
+      say: "A SMALL, DOME-SHAPED CRAFT LIES HALF-BURIED IN THE SCORCHED EARTH, TICKING AND HISSING AS IT COOLS. A HATCH HANGS OPEN.",
+    },
+    source: "added",
+  },
   {
     when: { verb: "look", X: 16, objectInRoom: 2 },
     then: { say: "A QUIVERING, MUFFLED VOICE WITHIN THE STATUE CRIES 'HELP!'" },
@@ -208,6 +329,7 @@ export const RULES = [
     when: { verb: "look", X: 47, objectPresent: 3, objectLocEquals: { 26: -1 } },
     then: {
       say: "YOU FOUND A LOCK PICK IN THE FOLDS OF THE CLOAK'S FABRIC.",
+      points: "getLockPick",
       apply: ({ state }) => {
         placeObject(state, 26, state.room);
       },
@@ -231,6 +353,7 @@ export const RULES = [
         "OF HIS HAND, EVERYTHING AROUND THE STATUE GOES ABLAZE WITH BRIGHT GREEN FIRE. YOU FEEL A JOLT OF THUNDER AND",
         "RETURN TO YOUR SENSES, STEPPING AWAY FROM THE CRYSTAL BALL.",
       ],
+      points: "lookCrystalBall",
     },
     source: "TRANS.bas:1780, 1785-1787",
   },
@@ -254,6 +377,8 @@ export const RULES = [
     then: { say: "IT'S LOCKED." },
     source: "TRANS.bas:1562, 1770",
   },
+
+  ...SCENERY_RULES,
 ];
 
 /**
@@ -294,7 +419,8 @@ export function ruleMatches({ when }, { world, state, command }) {
 
   if (when.noun !== undefined) {
     const typed = command.noun.toLowerCase();
-    if (!typed.includes(when.noun.toLowerCase())) return false;
+    const candidates = Array.isArray(when.noun) ? when.noun : [when.noun];
+    if (!candidates.some((n) => typed.includes(n.toLowerCase()))) return false;
   }
   if (when.objectInRoom !== undefined) {
     const present = objectsInRoom(world, state, state.room).some(
@@ -335,6 +461,7 @@ export function applyRule({ then }, context) {
     }
   }
   if (then.goToRoom !== undefined) state.room = then.goToRoom;
+  if (then.points) awardPoints(state, then.points);
   if (typeof then.apply === "function") {
     then.apply(context);
   }

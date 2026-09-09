@@ -64,6 +64,16 @@ async function main() {
     });
   }
 
+  const saveButton = /** @type {HTMLButtonElement} */ (document.getElementById("saveButton"));
+  if (saveButton) {
+    saveButton.addEventListener("click", () => handleCommand("save"));
+  }
+
+  const loadButton = /** @type {HTMLButtonElement} */ (document.getElementById("loadButton"));
+  if (loadButton) {
+    loadButton.addEventListener("click", () => handleCommand("restore"));
+  }
+
   const map = createMap({
     miniMapElement: document.getElementById("miniMap"),
     miniMapViewport: document.getElementById("miniMapViewport"),

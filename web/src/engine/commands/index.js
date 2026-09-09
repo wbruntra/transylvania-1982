@@ -10,7 +10,7 @@ import { close } from "./close.js";
 import { drop } from "./drop.js";
 import { drink, eat } from "./eat.js";
 import { enterStructure, exitStructure } from "./enterExit.js";
-import { help, mapCommand, quit, restoreGame, saveGame } from "./meta.js";
+import { help, mapCommand, quit, restoreGame, saveGame, scoreCommand } from "./meta.js";
 import { inventory } from "./inventory.js";
 import { listen } from "./listen.js";
 import { load } from "./load.js";
@@ -64,6 +64,7 @@ export const COMMANDS = {
   drop,
   help,
   map: mapCommand,
+  score: scoreCommand,
   quit,
   save: saveGame,
   restore: restoreGame,

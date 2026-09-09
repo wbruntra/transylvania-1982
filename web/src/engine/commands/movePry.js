@@ -2,6 +2,7 @@
 
 import { revealSarcophagus } from "../helpers.js";
 import { MESSAGES } from "../messages.js";
+import { awardPoints } from "../scoring.js";
 import { getObjectName, placeObject } from "../state.js";
 
 /** @type {import("./index.js").CommandHandler} */
@@ -29,5 +30,6 @@ export function movePry({ world, state, command }) {
 
   // 7815 PRINT "YOU FOUND A GRATE BEHIND THE GRAVESTONE.": P%(13)=5
   placeObject(state, 13, 5);
+  awardPoints(state, "moveGravestone");
   return ["YOU FOUND A GRATE BEHIND THE GRAVESTONE.", MESSAGES.thereIsA(getObjectName(world, state, 13))];
 }

@@ -2,6 +2,7 @@
 
 import { GONE } from "../constants.js";
 import { MESSAGES } from "../messages.js";
+import { awardPoints } from "../scoring.js";
 import { isCarried, placeObject, setObjectName } from "../state.js";
 
 /** @type {import("./index.js").CommandHandler} */
@@ -19,5 +20,6 @@ export function load({ state, command }) {
   placeObject(state, 22, GONE);
   state.flags.GN = 1;
   setObjectName(state, 17, "LOADED FLINTLOCK PISTOL.");
+  awardPoints(state, "loadPistol");
   return [MESSAGES.ok];
 }
