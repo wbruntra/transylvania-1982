@@ -5,6 +5,10 @@
 // extractor writes from the Apple II .do images. Never hand-edit the copy under
 // web/public -- edit the extractor (or the kit file) and re-run this script.
 //
+// Object 40 (the mousetrap, room 20) is a hand-added exception: it isn't in
+// TRANS.bas or the disk image, it's new gameplay (see turnHooks.js and
+// rules.js). Re-running the extractor from scratch would need it re-added.
+//
 //   node tools/sync-data.mjs
 //
 // Runs automatically via the `predev` / `prebuild` npm scripts in web/.

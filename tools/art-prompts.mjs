@@ -89,6 +89,21 @@ const TREATMENT_OVERRIDES = {
   38: "Inside the bed of a broken wooden wagon at night, looking out past splintered planks and a torn canvas cover at the moonlit forest beyond.",
   1: "Open forest at night: tall conifer silhouettes, the moon visible above the treeline, a dirt path underfoot. The stump's face carries faint worn carvings that read as abstract marks rather than letters -- this is the only carved surface in the game's art.",
   8: "Standing outside at night before a rocky hillside: the collapsed cave mouth and its heaped boulders read as a dark mass against a moonlit sky.",
+  // The type-5 clause alone (log walls, plank floor) left the cabin empty --
+  // added the fireplace and table now that ROOM_SCENERY (rules.js) and
+  // ROOM_FLAVOR (describe.js) give the player things to examine there. The
+  // deer head was already in the shipped art, on the right-hand wall, and
+  // has to stay there and stay put: it's the wall PULL ANTLERS spins
+  // (TRANS.bas:4703), so the fireplace goes on the left wall instead, not
+  // built into the same wall as the antlers, which wouldn't read as
+  // something that could swing open. NOTE: the shipped art for this room
+  // was produced by image-editing the original reference (to add the
+  // fireplace, table, kettle/jugs and plate while holding the window and
+  // deer head fixed in place) rather than from this prompt via plain
+  // text-to-image -- regenerating from this string alone would not reliably
+  // reproduce that exact layout, and the shipped image no longer shows the
+  // doorway the original had on the left wall (replaced by the fireplace).
+  21: "A rough timber interior at night: log walls, plank floor, warmer brown tones, a mounted deer's head with wide antlers on the right-hand wall, a small cold stone fireplace on the left wall with a cast-iron kettle and a couple of clay jugs on its mantel, a rough-hewn table and stool in front of the fireplace with a wooden plate and a half-eaten meal left on the table, one small window admitting moonlight in the back wall. Any doorway or window shows dark night sky outside, never daylight.",
 };
 
 const DIRECTION_NAMES = {
