@@ -9,6 +9,11 @@
 // TRANS.bas or the disk image, it's new gameplay (see turnHooks.js and
 // rules.js). Re-running the extractor from scratch would need it re-added.
 //
+// Object 20's name was also hand-edited, from "TRIO OF RAVENOUS MICE." to
+// "TRIO OF MICE." -- a deliberate deviation from the original disk text
+// (TRANS.bas/DATA.txt, left untouched as the historical record), not an
+// extraction fix. Re-running the extractor would revert it.
+//
 //   node tools/sync-data.mjs
 //
 // Runs automatically via the `predev` / `prebuild` npm scripts in web/.

@@ -1,0 +1,600 @@
+{
+ "verbs": [
+  "N",
+  "NORTH",
+  "S",
+  "SOUTH",
+  "E",
+  "EAST",
+  "W",
+  "WEST",
+  "U",
+  "UP",
+  "D",
+  "DOWN",
+  "GET",
+  "TAKE",
+  "BUY",
+  "PURCHASE",
+  "FILL",
+  "LOOK",
+  "CLIMB",
+  "SWIM",
+  "TALK",
+  "SPEAK",
+  "ASK",
+  "ATTACK",
+  "FIGHT",
+  "HIT",
+  "STAB",
+  "SLAY",
+  "KILL",
+  "SMITE",
+  "DROP",
+  "PUT",
+  "THROW",
+  "POUR",
+  "GO",
+  "LEAVE",
+  "EXIT",
+  "RUN",
+  "WALK",
+  "OPEN",
+  "LIGHT",
+  "IGNITE",
+  "I",
+  "INVENTORY",
+  "INV",
+  "SAVE",
+  "RESTORE",
+  "QUIT",
+  "READ",
+  "KNOCK",
+  "GIVE",
+  "PAY",
+  "OFFER",
+  "TIE",
+  "FASTEN",
+  "KNOT",
+  "BOOK",
+  "BOOKS",
+  "SHELF",
+  "RIDE"
+ ],
+ "verb_dispatch": [
+  200,
+  200,
+  210,
+  210,
+  220,
+  220,
+  230,
+  230,
+  240,
+  240,
+  250,
+  250,
+  300,
+  300,
+  300,
+  300,
+  950,
+  800,
+  450,
+  1000,
+  900,
+  900,
+  900,
+  1050,
+  1050,
+  1050,
+  1050,
+  1050,
+  1050,
+  1050,
+  350,
+  350,
+  350,
+  350,
+  1100,
+  1100,
+  1100,
+  1100,
+  1100,
+  600,
+  850,
+  850,
+  400,
+  400,
+  400,
+  1200,
+  1250,
+  1300,
+  750,
+  650,
+  700,
+  700,
+  700,
+  500,
+  500,
+  500,
+  1350,
+  1350,
+  1350,
+  1400
+ ],
+ "nouns_and_topics": [
+  "CARTOGRAPH",
+  "MAP",
+  "GOLD",
+  "SOVEREIGNS",
+  "SWORD",
+  "BLADE",
+  "DRAGONBANE",
+  "RING",
+  "SALT",
+  "KEY",
+  "ROPE",
+  "SIGN",
+  "HOUSE",
+  "HOME",
+  "COTTAGE",
+  "DOOR",
+  "WATERSKIN",
+  "FLASK",
+  "SKIN",
+  "LISA",
+  "GIRL",
+  "LADY",
+  "WOMAN",
+  "BROAD",
+  "WITCH",
+  "WATERFALL",
+  "FALLS",
+  "ARMOR",
+  "ARMOUR",
+  "FLINT",
+  "ROCK",
+  "LIST",
+  "BACKPACK",
+  "PACK",
+  "SUGAR",
+  "WOLFSBANE",
+  "WOLFBANE",
+  "WATER",
+  "H20",
+  "ALL",
+  "EVERYTHING",
+  "LANTERN",
+  "LAMP",
+  "TORCH",
+  "RATIONS",
+  "FOOD",
+  "EATS",
+  "HERMIT",
+  "MAN",
+  "YOUNG DRAGON",
+  "BABY",
+  "CUB",
+  "DRAGON",
+  "SKELETON",
+  "BONES",
+  "CORPSE",
+  "BODY",
+  "SNAKE",
+  "PYTHON",
+  "BOA",
+  "BOARD",
+  "PLANK",
+  "CHEST",
+  "TRUNK",
+  "CARPET",
+  "RUG",
+  "OILSKIN",
+  "POUCH",
+  "CARE OF PET UNICORNS",
+  "CARE",
+  "USEFUL HERBS",
+  "USEFUL",
+  "LINGUA DRACO FLAMEUS",
+  "LINGUA",
+  "PIG LATIN MADE SIMPLE",
+  "PIG",
+  "BEGINNING PRESTIDIGITATION",
+  "BEGINNING",
+  "SOFTALK MAGAZINE",
+  "SOFTALK"
+ ],
+ "noun_to_item": [
+  1,
+  1,
+  2,
+  2,
+  3,
+  3,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  9,
+  9,
+  10,
+  11,
+  11,
+  11,
+  12,
+  12,
+  12,
+  12,
+  12,
+  12,
+  13,
+  13,
+  14,
+  14,
+  15,
+  15,
+  16,
+  17,
+  17,
+  18,
+  19,
+  19,
+  20,
+  20,
+  21,
+  21,
+  22,
+  22,
+  22,
+  23,
+  23,
+  23,
+  24,
+  24,
+  25,
+  25,
+  25,
+  26,
+  27,
+  27,
+  27,
+  27,
+  28,
+  28,
+  28,
+  29,
+  29,
+  30,
+  30,
+  31,
+  31,
+  32,
+  32,
+  33,
+  33,
+  34,
+  34,
+  35,
+  35,
+  36,
+  36,
+  37,
+  37,
+  38,
+  38
+ ],
+ "items": [
+  {
+   "id": 1,
+   "name": "CARTOGRAPH",
+   "synonyms": [
+    "CARTOGRAPH",
+    "MAP"
+   ]
+  },
+  {
+   "id": 2,
+   "name": "GOLD",
+   "synonyms": [
+    "GOLD",
+    "SOVEREIGNS"
+   ]
+  },
+  {
+   "id": 3,
+   "name": "SWORD",
+   "synonyms": [
+    "SWORD",
+    "BLADE",
+    "DRAGONBANE"
+   ]
+  },
+  {
+   "id": 4,
+   "name": "RING",
+   "synonyms": [
+    "RING"
+   ]
+  },
+  {
+   "id": 5,
+   "name": "SALT",
+   "synonyms": [
+    "SALT"
+   ]
+  },
+  {
+   "id": 6,
+   "name": "KEY",
+   "synonyms": [
+    "KEY"
+   ]
+  },
+  {
+   "id": 7,
+   "name": "ROPE",
+   "synonyms": [
+    "ROPE"
+   ]
+  },
+  {
+   "id": 8,
+   "name": "SIGN",
+   "synonyms": [
+    "SIGN"
+   ]
+  },
+  {
+   "id": 9,
+   "name": "HOUSE",
+   "synonyms": [
+    "HOUSE",
+    "HOME",
+    "COTTAGE"
+   ]
+  },
+  {
+   "id": 10,
+   "name": "DOOR",
+   "synonyms": [
+    "DOOR"
+   ]
+  },
+  {
+   "id": 11,
+   "name": "WATERSKIN",
+   "synonyms": [
+    "WATERSKIN",
+    "FLASK",
+    "SKIN"
+   ]
+  },
+  {
+   "id": 12,
+   "name": "LISA",
+   "synonyms": [
+    "LISA",
+    "GIRL",
+    "LADY",
+    "WOMAN",
+    "BROAD",
+    "WITCH"
+   ]
+  },
+  {
+   "id": 13,
+   "name": "WATERFALL",
+   "synonyms": [
+    "WATERFALL",
+    "FALLS"
+   ]
+  },
+  {
+   "id": 14,
+   "name": "ARMOR",
+   "synonyms": [
+    "ARMOR",
+    "ARMOUR"
+   ]
+  },
+  {
+   "id": 15,
+   "name": "FLINT",
+   "synonyms": [
+    "FLINT",
+    "ROCK"
+   ]
+  },
+  {
+   "id": 16,
+   "name": "LIST",
+   "synonyms": [
+    "LIST"
+   ]
+  },
+  {
+   "id": 17,
+   "name": "BACKPACK",
+   "synonyms": [
+    "BACKPACK",
+    "PACK"
+   ]
+  },
+  {
+   "id": 18,
+   "name": "SUGAR",
+   "synonyms": [
+    "SUGAR"
+   ]
+  },
+  {
+   "id": 19,
+   "name": "WOLFSBANE",
+   "synonyms": [
+    "WOLFSBANE",
+    "WOLFBANE"
+   ]
+  },
+  {
+   "id": 20,
+   "name": "WATER",
+   "synonyms": [
+    "WATER",
+    "H20"
+   ]
+  },
+  {
+   "id": 21,
+   "name": "ALL",
+   "synonyms": [
+    "ALL",
+    "EVERYTHING"
+   ]
+  },
+  {
+   "id": 22,
+   "name": "LANTERN",
+   "synonyms": [
+    "LANTERN",
+    "LAMP",
+    "TORCH"
+   ]
+  },
+  {
+   "id": 23,
+   "name": "RATIONS",
+   "synonyms": [
+    "RATIONS",
+    "FOOD",
+    "EATS"
+   ]
+  },
+  {
+   "id": 24,
+   "name": "HERMIT",
+   "synonyms": [
+    "HERMIT",
+    "MAN"
+   ]
+  },
+  {
+   "id": 25,
+   "name": "YOUNG DRAGON",
+   "synonyms": [
+    "YOUNG DRAGON",
+    "BABY",
+    "CUB"
+   ]
+  },
+  {
+   "id": 26,
+   "name": "DRAGON",
+   "synonyms": [
+    "DRAGON"
+   ]
+  },
+  {
+   "id": 27,
+   "name": "SKELETON",
+   "synonyms": [
+    "SKELETON",
+    "BONES",
+    "CORPSE",
+    "BODY"
+   ]
+  },
+  {
+   "id": 28,
+   "name": "SNAKE",
+   "synonyms": [
+    "SNAKE",
+    "PYTHON",
+    "BOA"
+   ]
+  },
+  {
+   "id": 29,
+   "name": "BOARD",
+   "synonyms": [
+    "BOARD",
+    "PLANK"
+   ]
+  },
+  {
+   "id": 30,
+   "name": "CHEST",
+   "synonyms": [
+    "CHEST",
+    "TRUNK"
+   ]
+  },
+  {
+   "id": 31,
+   "name": "CARPET",
+   "synonyms": [
+    "CARPET",
+    "RUG"
+   ]
+  },
+  {
+   "id": 32,
+   "name": "OILSKIN",
+   "synonyms": [
+    "OILSKIN",
+    "POUCH"
+   ]
+  },
+  {
+   "id": 33,
+   "name": "CARE OF PET UNICORNS",
+   "synonyms": [
+    "CARE OF PET UNICORNS",
+    "CARE"
+   ]
+  },
+  {
+   "id": 34,
+   "name": "USEFUL HERBS",
+   "synonyms": [
+    "USEFUL HERBS",
+    "USEFUL"
+   ]
+  },
+  {
+   "id": 35,
+   "name": "LINGUA DRACO FLAMEUS",
+   "synonyms": [
+    "LINGUA DRACO FLAMEUS",
+    "LINGUA"
+   ]
+  },
+  {
+   "id": 36,
+   "name": "PIG LATIN MADE SIMPLE",
+   "synonyms": [
+    "PIG LATIN MADE SIMPLE",
+    "PIG"
+   ]
+  },
+  {
+   "id": 37,
+   "name": "BEGINNING PRESTIDIGITATION",
+   "synonyms": [
+    "BEGINNING PRESTIDIGITATION",
+    "BEGINNING"
+   ]
+  },
+  {
+   "id": 38,
+   "name": "SOFTALK MAGAZINE",
+   "synonyms": [
+    "SOFTALK MAGAZINE",
+    "SOFTALK"
+   ]
+  }
+ ]
+}

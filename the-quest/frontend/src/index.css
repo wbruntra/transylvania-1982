@@ -1,0 +1,38 @@
+:root {
+  --bg: #12100e;
+  --panel: #1c1815;
+  --panel-2: #241f1a;
+  --border: #3a322a;
+  --text: #e8dfd0;
+  --text-dim: #a89a84;
+  --accent: #d99a3d;
+  --accent-2: #7fae6a;
+  --mono: ui-monospace, 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  --serif: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+
+  color-scheme: dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  font-family: var(--serif);
+}
+
+#app {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  font-family: inherit;
+}

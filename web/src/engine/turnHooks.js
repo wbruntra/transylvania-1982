@@ -227,7 +227,10 @@ export function createTurnHookManager({ world, state, randomEvents = false, rng 
           // new room twice.
         }
       } else if (ambientIndex === 11) {
-        messages.push("A CAT DARTED BY, FOLLOWED BY THREE RAVENOUS-LOOKING MICE.");
+        // TRANS.bas:7225 says "RAVENOUS-LOOKING MICE" -- dropped as an
+        // unnecessary flourish (the joke here is just the role reversal,
+        // mice chasing the cat, which needs no exaggeration).
+        messages.push("A CAT DARTED BY, FOLLOWED BY THREE MICE.");
       }
     }
 

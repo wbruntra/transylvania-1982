@@ -1,0 +1,257 @@
+.game {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.titlebar {
+  padding: 14px 20px 10px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.titlebar h1 {
+  font-size: 22px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.titlebar .meta {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 280 / 192;
+  background: #000;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.stage img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  display: block;
+}
+
+.stage .no-art {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.log {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px;
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.entry .cmd {
+  font-family: var(--mono);
+  color: var(--accent-2);
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.entry .cmd::before {
+  content: '> ';
+}
+
+.entry .lines p {
+  margin: 0 0 8px;
+  line-height: 1.5;
+  font-size: 16px;
+  white-space: pre-wrap;
+}
+
+.entry .lines p:last-child {
+  margin-bottom: 0;
+}
+
+.controls {
+  border-top: 1px solid var(--border);
+  background: var(--panel-2);
+  padding: 10px 16px 14px;
+  flex-shrink: 0;
+}
+
+.dpad {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.dpad button, .quickbar button {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 7px 4px;
+  font-size: 12px;
+  font-family: var(--mono);
+  cursor: pointer;
+  letter-spacing: 0.5px;
+}
+
+.dpad button:hover, .quickbar button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.dpad button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.dpad button:disabled:hover {
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.quickbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.inputRow {
+  display: flex;
+  gap: 8px;
+}
+
+.inputRow input {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 15px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  outline: none;
+}
+
+.inputRow input:focus {
+  border-color: var(--accent);
+}
+
+.inputRow button {
+  background: var(--accent);
+  color: #1c1815;
+  border: none;
+  border-radius: 6px;
+  padding: 0 18px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--serif);
+}
+
+.aboutPanel {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+  background: var(--panel);
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.aboutPanel a {
+  color: var(--accent);
+}
+
+.storyOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 5, 4, 0.86);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 50;
+  cursor: pointer;
+}
+
+.storyCard {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  max-width: 640px;
+  width: 100%;
+  max-height: 85svh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  cursor: default;
+}
+
+.storyArt {
+  width: 100%;
+  aspect-ratio: 280 / 192;
+  background: #000;
+  flex-shrink: 0;
+}
+
+.storyArt img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  display: block;
+}
+
+.storyText {
+  padding: 20px 24px;
+  overflow-y: auto;
+}
+
+.storyText p {
+  margin: 0 0 14px;
+  line-height: 1.6;
+  font-size: 17px;
+}
+
+.storyText p:last-child {
+  margin-bottom: 0;
+}
+
+.storyContinue {
+  margin: 0 20px 20px;
+  align-self: flex-end;
+  background: var(--accent);
+  color: #1c1815;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--serif);
+  flex-shrink: 0;
+}

@@ -10,7 +10,9 @@ export const AMBIENT_SOUNDS = [
   "A ROUGH VOICE SHOUTS 'GET OUT!'",
   "HOOOO! HOOOO! (WHO?) - JUST AN OWL.",
   "A GRIM CHUCKLE ERUPTS BEHIND YOU.",
-  "A CAT DARTED BY, FOLLOWED BY THREE RAVENOUS-LOOKING MICE.",
+  // TRANS.bas:9900-9930 says "RAVENOUS-LOOKING MICE" -- dropped, matching
+  // turnHooks.js's copy of the same line (7225).
+  "A CAT DARTED BY, FOLLOWED BY THREE MICE.",
 ];
 
 /** @type {import("./index.js").CommandHandler} */

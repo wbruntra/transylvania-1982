@@ -4,6 +4,7 @@
 import { fetchGameData } from "./data/gameData.js";
 import { createEngine } from "./engine/engine.js";
 import { getGameOverInfo } from "./engine/gameOver.js";
+import { connectAgentBridge } from "./ui/agentBridge.js";
 import { createDebug } from "./ui/debug.js"; // TEMPORARY -- see ui/debug.js
 import { isDebugInventoryEnabled, toggleDebugInventory } from "./ui/debugMode.js";
 import { createEffects } from "./ui/effects.js";
@@ -221,6 +222,8 @@ async function main() {
   render();
   preloadAllRooms(engine.world, scene.getArtMode());
   view.focus();
+
+  connectAgentBridge({ engine, handleCommand: (input) => handleCommand(input) });
 }
 
 main().catch((error) => {

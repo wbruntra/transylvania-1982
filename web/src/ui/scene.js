@@ -2,6 +2,7 @@
 // artwork does not exist yet. Swap the body of `show` for generated images or a
 // Three.js canvas without touching the engine.
 
+import { MAX_SCORE } from "../engine/scoring.js";
 import { updateSceneOverlay } from "./sceneOverlay.js";
 
 /** Room type (RT%) -> [background, highlight] for the placeholder gradient. */
@@ -280,14 +281,16 @@ export function createScene(container, label, overlaySvg, onAction) {
           overlaySvg.style.visibility = "visible";
         }
 
-        // Update scene label in unison
+        // Update scene label in unison. Shows the score rather than the room
+        // number/type -- added so there's a running, at-a-glance progress
+        // indicator (see scoring.js) without having to type SCORE.
         if (state?.isGameOver) {
           label.textContent =
             state.gameOverReason === "win" || (!state.isDead && state.objectLoc?.[38] === -2)
-              ? "VICTORY · KING'S CASTLE"
-              : `GAME OVER · ROOM ${room.id}`;
+              ? `VICTORY · ${state.score ?? 0}/${MAX_SCORE}`
+              : `GAME OVER · ${state.score ?? 0}/${MAX_SCORE}`;
         } else {
-          label.textContent = `ROOM ${room.id} · TYPE ${room.type}`;
+          label.textContent = `SCORE ${state?.score ?? 0}/${MAX_SCORE}`;
         }
 
         // Proactively preload adjacent surrounding rooms

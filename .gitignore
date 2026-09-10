@@ -7,3 +7,6 @@ web/dist/art/original/
 web/public/art/original/
 web/dist/art/original-pic.png
 web/public/art/original-pic.png
+secrets.ts
+.env
+agent/logs/

@@ -298,22 +298,12 @@ function renderRoom5(overlay, state, onAction) {
     const g = createInteractiveGroup("Wooden Cross", () => onAction?.("get cross"));
     placeProp(g, "translate(310, 680)");
     g.innerHTML += `
-      <!-- Cross shadow -->
-      <polygon points="10,65 140,80 160,95 20,80" fill="rgba(0,0,0,0.55)" filter="url(#paperShadow)"/>
-
-      <!-- Vertical timber beam -->
-      <rect x="-9" y="-80" width="18" height="150" rx="3" fill="url(#woodCrossGrad)" stroke="#1a0f08" stroke-width="1.8" filter="url(#paperShadow)"/>
-
-      <!-- Horizontal crossbar -->
-      <rect x="-48" y="-54" width="96" height="16" rx="3" fill="url(#woodCrossGrad)" stroke="#1a0f08" stroke-width="1.8" filter="url(#paperShadow)"/>
-
-      <!-- Wood grain & iron nail in center -->
-      <circle cx="0" cy="-46" r="3.5" fill="#0f172a" stroke="#475569" stroke-width="1"/>
-      <line x1="-38" y1="-46" x2="38" y2="-46" stroke="#2a180e" stroke-width="1"/>
+      <ellipse cx="0" cy="4" rx="55" ry="14" fill="rgba(0,0,0,0.55)" filter="url(#paperShadow)"/>
+      <image href="art/props/cross.webp" x="-70" y="-210" width="140" height="210" filter="url(#paperShadow)"/>
 
       <g class="prop-badge">
-        <rect x="-42" y="-110" width="84" height="20" rx="10" fill="rgba(6, 9, 18, 0.9)" stroke="#cbd5e1" stroke-width="1"/>
-        <text x="0" y="-96" text-anchor="middle" class="prop-badge-text">✝️ CROSS</text>
+        <rect x="-42" y="-234" width="84" height="20" rx="10" fill="rgba(6, 9, 18, 0.9)" stroke="#cbd5e1" stroke-width="1"/>
+        <text x="0" y="-220" text-anchor="middle" class="prop-badge-text">✝️ CROSS</text>
       </g>
     `;
     overlay.appendChild(propRoot(g));
@@ -639,20 +629,12 @@ function renderRoom22(overlay, state, onAction) {
     const g = createInteractiveGroup("Dusty Wizard's Cloak", () => onAction?.("get cloak"));
     placeProp(g, "translate(420, 520)");
     g.innerHTML += `
-      <!-- Wall peg -->
-      <rect x="-6" y="-120" width="12" height="18" rx="3" fill="#78350f" stroke="#451a03" stroke-width="1.5"/>
-      <!-- Cloak body hanging -->
-      <path d="M -15 -110 Q 0 -115 15 -110 Q 50 -30 65 90 Q 0 105 -65 90 Q -50 -30 -15 -110 Z" 
-            fill="#1e1b4b" stroke="#312e81" stroke-width="3" filter="url(#paperShadow)"/>
-      <path d="M -5 -110 Q 0 20 0 95" fill="none" stroke="#3730a3" stroke-width="2.5"/>
-      <!-- Celestial golden stars & crescent runes on cloak -->
-      <path d="M -25 -40 L -23 -34 L -17 -34 L -22 -30 L -20 -24 L -25 -28 L -30 -24 L -28 -30 L -33 -34 L -27 -34 Z" fill="#fbbf24"/>
-      <path d="M 25 20 L 27 25 L 32 25 L 28 29 L 30 34 L 25 31 L 20 34 L 22 29 L 18 25 L 23 25 Z" fill="#fbbf24"/>
-      <path d="M 18 -60 A 10 10 0 1 0 32 -48 A 8 8 0 1 1 18 -60" fill="#fde047"/>
+      <ellipse cx="0" cy="20" rx="65" ry="16" fill="rgba(0,0,0,0.5)" filter="url(#paperShadow)"/>
+      <image href="art/props/cloak.webp" x="-85" y="-230" width="170" height="255" filter="url(#paperShadow)"/>
 
       <g class="prop-badge">
-        <rect x="-60" y="-148" width="120" height="22" rx="11" fill="rgba(6, 9, 18, 0.95)" stroke="#6366f1" stroke-width="1.2"/>
-        <text x="0" y="-133" text-anchor="middle" class="prop-badge-text">✨ WIZARD CLOAK</text>
+        <rect x="-60" y="-254" width="120" height="22" rx="11" fill="rgba(6, 9, 18, 0.95)" stroke="#6366f1" stroke-width="1.2"/>
+        <text x="0" y="-239" text-anchor="middle" class="prop-badge-text">✨ WIZARD CLOAK</text>
       </g>
     `;
     overlay.appendChild(propRoot(g));
@@ -714,23 +696,14 @@ function renderRoom24(overlay, state, onAction) {
 function renderRoom25(overlay, state, onAction) {
   if (state.objectLoc[17] === 25) {
     const g = createInteractiveGroup("Flintlock Pistol", () => onAction?.("get pistol"));
-    placeProp(g, "translate(512, 720) rotate(-8)");
+    placeProp(g, "translate(600, 640) rotate(-8)");
     g.innerHTML += `
-      <!-- Shadow on attic floorboards -->
-      <ellipse cx="0" cy="18" rx="60" ry="16" fill="rgba(0,0,0,0.6)" filter="url(#paperShadow)"/>
-      <!-- Wooden pistol stock -->
-      <path d="M -45 28 Q -20 15 0 8 L 45 4 L 45 -4 L -5 -6 Q -35 -8 -45 28 Z" fill="#451a03" stroke="#2a1005" stroke-width="2"/>
-      <circle cx="-42" cy="24" r="8" fill="#ca8a04" stroke="#78350f" stroke-width="1.5"/>
-      <!-- Steel barrel -->
-      <rect x="0" y="-4" width="55" height="7" rx="2" fill="url(#silverGrad)" stroke="#475569" stroke-width="1.5"/>
-      <!-- Brass side plate and flint cock mechanism -->
-      <rect x="-12" y="-12" width="16" height="12" rx="2" fill="#ca8a04" stroke="#854d0e" stroke-width="1"/>
-      <path d="M -8 -12 L -6 -22 L 2 -18" fill="none" stroke="#64748b" stroke-width="3" stroke-linecap="round"/>
-      <path d="M -15 8 Q -8 20 0 10" fill="none" stroke="#ca8a04" stroke-width="2"/>
+      <ellipse cx="0" cy="18" rx="50" ry="12" fill="rgba(0,0,0,0.6)" filter="url(#paperShadow)"/>
+      <image href="art/props/pistol.webp" x="-90" y="-100" width="180" height="120" filter="url(#paperShadow)"/>
 
       <g class="prop-badge" transform="rotate(8)">
-        <rect x="-50" y="-62" width="100" height="22" rx="11" fill="rgba(6, 9, 18, 0.95)" stroke="#cbd5e1" stroke-width="1.2"/>
-        <text x="0" y="-47" text-anchor="middle" class="prop-badge-text">🔫 FLINTLOCK</text>
+        <rect x="-50" y="-124" width="100" height="22" rx="11" fill="rgba(6, 9, 18, 0.95)" stroke="#cbd5e1" stroke-width="1.2"/>
+        <text x="0" y="-109" text-anchor="middle" class="prop-badge-text">🔫 FLINTLOCK</text>
       </g>
     `;
     overlay.appendChild(propRoot(g));
@@ -1064,18 +1037,21 @@ function renderRoom38(overlay, state, onAction) {
 }
 
 /**
- * Dynamic Actor: Ravenous Mice (Obj 20)
- * Scurries across rooms 2, 17, 3, 19, 38.
+ * Dynamic Actor: Mice (Obj 20)
+ * Scurries across rooms 2, 17, 3, 19, 38. Kept small and tucked into a
+ * bottom corner rather than centred -- at full size and centre stage it sat
+ * on top of (and hid) whatever else the room was showing, e.g. the coffin's
+ * bullet in room 38.
  */
-function renderRavenousMice(overlay, state, onAction) {
-  const g = createInteractiveGroup("Ravenous Mice", () => onAction?.("get mice"));
-  placeProp(g, "translate(512, 800)");
+function renderMice(overlay, state, onAction) {
+  const g = createInteractiveGroup("Mice", () => onAction?.("get mice"));
+  placeProp(g, "translate(260, 900)");
   g.innerHTML += `
-    <ellipse cx="0" cy="10" rx="110" ry="26" fill="rgba(0,0,0,0.7)" filter="url(#paperShadow)"/>
-    <image href="art/props/mice.webp" x="-140" y="-198" width="280" height="198" filter="url(#paperShadow)"/>
+    <ellipse cx="0" cy="6" rx="68" ry="16" fill="rgba(0,0,0,0.7)" filter="url(#paperShadow)"/>
+    <image href="art/props/mice.webp" x="-85" y="-124" width="170" height="124" filter="url(#paperShadow)"/>
     <g class="prop-badge">
-      <rect x="-66" y="-222" width="132" height="24" rx="12" fill="rgba(6, 9, 18, 0.95)" stroke="#fb7185" stroke-width="1.4"/>
-      <text x="0" y="-206" text-anchor="middle" class="prop-badge-text">🐀 RAVENOUS MICE</text>
+      <rect x="-46" y="-146" width="92" height="20" rx="10" fill="rgba(6, 9, 18, 0.95)" stroke="#fb7185" stroke-width="1.4"/>
+      <text x="0" y="-132" text-anchor="middle" class="prop-badge-text">🐀 MICE</text>
     </g>
   `;
   overlay.appendChild(propRoot(g));
@@ -1204,9 +1180,9 @@ export function updateSceneOverlay(svg, { roomId, state, world, onAction }) {
   }
 
   // Dynamic wandering entities:
-  // 1. Ravenous Mice (Obj 20)
+  // 1. Mice (Obj 20)
   if (state.objectLoc[20] === roomId) {
-    renderRavenousMice(svg, state, onAction);
+    renderMice(svg, state, onAction);
   }
 
   // 2. Snarling Werewolf (Obj 34)

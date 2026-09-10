@@ -233,7 +233,7 @@ test("Dynamic actors: wandering mice, werewolf, and vampire render across rooms"
   state.objectLoc[34] = -1;
   state.objectLoc[39] = -1;
   updateSceneOverlay(svg, { roomId: 17, state, world });
-  assert.ok(findLabels(svg).includes("Ravenous Mice"));
+  assert.ok(findLabels(svg).includes("Mice"));
 
   // Werewolf appears in room 2 (Obj 34)
   state.objectLoc[34] = 2;

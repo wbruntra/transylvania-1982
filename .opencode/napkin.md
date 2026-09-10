@@ -67,10 +67,19 @@
   - Text display (`#log`) occupies remaining vertical space (`flex: 1`, min-height 60px), with generous readability and scrolling.
   - Directional Arrow Pad is condensed into a sleek, 32px horizontal bar (`[◀ W] [▲ N] [▼ S] [▶ E] [⇡ UP] [⇣ DN]`) with dynamic exit illumination, saving 118px of vertical room.
   - Command input bar (`#row`) dynamically docks to the bottom of the console on mobile, staying above the keyboard when focused without triggering viewport auto-zoom (`font-size: 16px`).
+- The Quest (1983):
+  - In Applesoft memory dumps and `AMP 2.8` binary, 16-bit integer values are big-endian (MSB first, e.g. GIVAYF `$E2F2` convention).
+  - `AMP 2.8` verb dispatch table is at `$968A` (offset 1272 in body), 60 big-endian 16-bit words corresponding 1:1 to the 60 verb words.
+  - `AMP 2.8` item table is at `$9909` (offset 1911 in body), 80 bytes mapping each noun word to item ID 1..38.
+  - Text files `T1`..`T7` are delimited by single `$00` (NUL) bytes totaling 187 messages; cumulative boundaries in `B%` are `[0, 25, 51, 69, 92, 143, 167, 187]` with `B%(0)=0` (since `QB` reads `I = 1 TO 7`).
+  - `USR` has two modes in `AMP 2.8`: numeric (`USR(...)H` and `USR(...)L` for 16-bit high/low byte extraction) and string (`USR("pat1/pat2")str, start` for multi-alternative substring search).
 
 ## Patterns That Don't Work
 - Matching nouns only against object names: fails for scenery (trees, wall, stump) and misses alias chains in `noun_map_N`.
 - Including "move" under `go` verbs: masks verb 41 (`MOVE`/`PRY` at 7800).
+- Reading 16-bit integers in Applesoft dumps or `AMP 2.8` tables as little-endian: corrupts line numbers and array indices.
+- Splitting `The Quest` text files on `\x8d\x00`: introduces off-by-one mismatches; the actual delimiter is purely `\x00`.
+
 
 ## Domain Notes
 - Porting 1982 Apple II game Transylvania (`trans_port_kit/TRANS.bas`) to web engine (`web/`).

@@ -734,7 +734,7 @@ test("per-turn block 7000-7180, endings, and meta commands work as expected", as
   // When mice arrive in player's room, announcement appears
   miceEngine.state.room = 17;
   const miceEnter = miceEngine.run("look"); // mice move from 2 to 17
-  assert.equal(miceEnter.at(-1), "THERE IS A TRIO OF RAVENOUS MICE.");
+  assert.equal(miceEnter.at(-1), "THERE IS A TRIO OF MICE.");
 
   // --- Per-turn block: Shooting star (7030) ---
   const starEngine = await createTestEngine();

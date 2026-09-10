@@ -6,7 +6,7 @@
 export const MESSAGES = {
   welcome: "VELCOME TO TRANSYLVANIA! (web port v0.1)",
   exitsPrefix: "OBVIOUS EXITS: ",
-  noOrdinaryExits: "(none — special exit, see full TRANS scripts)",
+  noOrdinaryExits: "(none)",
   thereIsA: (name) => `THERE IS A ${name}`,
 
   ok: "OK.",

@@ -1,0 +1,3015 @@
+{
+ "rooms": [
+  {
+   "id": 1,
+   "desc_message": 1,
+   "picture": 90,
+   "exits": {
+    "north": 2
+   },
+   "event_line": null
+  },
+  {
+   "id": 2,
+   "desc_message": 2,
+   "picture": 91,
+   "exits": {
+    "north": 3
+   },
+   "event_line": 2000
+  },
+  {
+   "id": 3,
+   "desc_message": 3,
+   "picture": 92,
+   "exits": {
+    "north": 5
+   },
+   "event_line": null
+  },
+  {
+   "id": 4,
+   "desc_message": 0,
+   "picture": 0,
+   "exits": {},
+   "event_line": 8000
+  },
+  {
+   "id": 5,
+   "desc_message": 4,
+   "picture": 6,
+   "exits": {
+    "north": 6,
+    "south": 3
+   },
+   "event_line": null
+  },
+  {
+   "id": 6,
+   "desc_message": 5,
+   "picture": 2,
+   "exits": {
+    "north": 9,
+    "south": 5,
+    "east": 7,
+    "west": 10
+   },
+   "event_line": null
+  },
+  {
+   "id": 7,
+   "desc_message": 6,
+   "picture": 13,
+   "exits": {
+    "north": 8,
+    "west": 6
+   },
+   "event_line": null
+  },
+  {
+   "id": 8,
+   "desc_message": 7,
+   "picture": 6,
+   "exits": {
+    "north": 56,
+    "south": 7,
+    "east": 117
+   },
+   "event_line": null
+  },
+  {
+   "id": 9,
+   "desc_message": 8,
+   "picture": 5,
+   "exits": {
+    "north": 114,
+    "south": 6,
+    "west": 36
+   },
+   "event_line": null
+  },
+  {
+   "id": 10,
+   "desc_message": 9,
+   "picture": 7,
+   "exits": {
+    "east": 6,
+    "west": 11
+   },
+   "event_line": null
+  },
+  {
+   "id": 11,
+   "desc_message": 10,
+   "picture": 8,
+   "exits": {
+    "south": 12,
+    "east": 10,
+    "west": 13
+   },
+   "event_line": null
+  },
+  {
+   "id": 12,
+   "desc_message": 11,
+   "picture": 6,
+   "exits": {
+    "north": 11,
+    "south": 14
+   },
+   "event_line": null
+  },
+  {
+   "id": 13,
+   "desc_message": 12,
+   "picture": 7,
+   "exits": {
+    "east": 11,
+    "west": 15
+   },
+   "event_line": null
+  },
+  {
+   "id": 14,
+   "desc_message": 13,
+   "picture": 3,
+   "exits": {
+    "north": 12,
+    "east": 16,
+    "west": 17
+   },
+   "event_line": null
+  },
+  {
+   "id": 15,
+   "desc_message": 14,
+   "picture": 93,
+   "exits": {
+    "north": 31,
+    "east": 13,
+    "west": 118
+   },
+   "event_line": 4000
+  },
+  {
+   "id": 16,
+   "desc_message": 16,
+   "picture": 95,
+   "exits": {
+    "east": 18,
+    "west": 14
+   },
+   "event_line": 4100
+  },
+  {
+   "id": 17,
+   "desc_message": 18,
+   "picture": 7,
+   "exits": {
+    "east": 14,
+    "west": 20
+   },
+   "event_line": null
+  },
+  {
+   "id": 18,
+   "desc_message": 19,
+   "picture": 97,
+   "exits": {
+    "east": 19,
+    "west": 16
+   },
+   "event_line": null
+  },
+  {
+   "id": 19,
+   "desc_message": 20,
+   "picture": 96,
+   "exits": {
+    "west": 18
+   },
+   "event_line": null
+  },
+  {
+   "id": 20,
+   "desc_message": 27,
+   "picture": 98,
+   "exits": {
+    "south": 21,
+    "east": 17,
+    "west": 22
+   },
+   "event_line": null
+  },
+  {
+   "id": 21,
+   "desc_message": 28,
+   "picture": 99,
+   "exits": {
+    "north": 20
+   },
+   "event_line": 2200
+  },
+  {
+   "id": 22,
+   "desc_message": 30,
+   "picture": 100,
+   "exits": {
+    "east": 20,
+    "west": 23
+   },
+   "event_line": null
+  },
+  {
+   "id": 23,
+   "desc_message": 32,
+   "picture": 101,
+   "exits": {
+    "north": 25,
+    "east": 22,
+    "west": 24
+   },
+   "event_line": null
+  },
+  {
+   "id": 24,
+   "desc_message": 33,
+   "picture": 102,
+   "exits": {
+    "east": 23,
+    "west": 26
+   },
+   "event_line": null
+  },
+  {
+   "id": 25,
+   "desc_message": 34,
+   "picture": 104,
+   "exits": {
+    "north": 27,
+    "south": 23,
+    "east": 28
+   },
+   "event_line": null
+  },
+  {
+   "id": 26,
+   "desc_message": 35,
+   "picture": 103,
+   "exits": {
+    "east": 24,
+    "down": 37
+   },
+   "event_line": 2300
+  },
+  {
+   "id": 27,
+   "desc_message": 36,
+   "picture": 14,
+   "exits": {
+    "north": 29,
+    "south": 25,
+    "west": 254
+   },
+   "event_line": null
+  },
+  {
+   "id": 28,
+   "desc_message": 37,
+   "picture": 105,
+   "exits": {
+    "north": 77,
+    "west": 25
+   },
+   "event_line": null
+  },
+  {
+   "id": 29,
+   "desc_message": 38,
+   "picture": 10,
+   "exits": {
+    "north": 32,
+    "south": 27,
+    "east": 30
+   },
+   "event_line": null
+  },
+  {
+   "id": 30,
+   "desc_message": 39,
+   "picture": 106,
+   "exits": {
+    "north": 33,
+    "south": 77,
+    "east": 31,
+    "west": 29
+   },
+   "event_line": null
+  },
+  {
+   "id": 31,
+   "desc_message": 59,
+   "picture": 107,
+   "exits": {
+    "north": 34,
+    "south": 15,
+    "west": 30
+   },
+   "event_line": null
+  },
+  {
+   "id": 32,
+   "desc_message": 60,
+   "picture": 11,
+   "exits": {
+    "south": 29,
+    "east": 33,
+    "west": 87
+   },
+   "event_line": null
+  },
+  {
+   "id": 33,
+   "desc_message": 61,
+   "picture": 9,
+   "exits": {
+    "south": 30,
+    "east": 34,
+    "west": 32
+   },
+   "event_line": null
+  },
+  {
+   "id": 34,
+   "desc_message": 62,
+   "picture": 9,
+   "exits": {
+    "south": 31,
+    "east": 35,
+    "west": 33
+   },
+   "event_line": null
+  },
+  {
+   "id": 35,
+   "desc_message": 63,
+   "picture": 7,
+   "exits": {
+    "east": 36,
+    "west": 34
+   },
+   "event_line": null
+  },
+  {
+   "id": 36,
+   "desc_message": 64,
+   "picture": 7,
+   "exits": {
+    "east": 9,
+    "west": 35
+   },
+   "event_line": null
+  },
+  {
+   "id": 37,
+   "desc_message": 104,
+   "picture": 29,
+   "exits": {
+    "west": 119,
+    "up": 26
+   },
+   "event_line": 3800
+  },
+  {
+   "id": 38,
+   "desc_message": 153,
+   "picture": 66,
+   "exits": {
+    "west": 39
+   },
+   "event_line": 3600
+  },
+  {
+   "id": 39,
+   "desc_message": 154,
+   "picture": 65,
+   "exits": {
+    "south": 117,
+    "east": 38,
+    "west": 56
+   },
+   "event_line": 3900
+  },
+  {
+   "id": 40,
+   "desc_message": 155,
+   "picture": 21,
+   "exits": {
+    "north": 41,
+    "west": 38
+   },
+   "event_line": 3800
+  },
+  {
+   "id": 41,
+   "desc_message": 97,
+   "picture": 27,
+   "exits": {
+    "north": 42,
+    "south": 40
+   },
+   "event_line": null
+  },
+  {
+   "id": 42,
+   "desc_message": 99,
+   "picture": 25,
+   "exits": {
+    "north": 46,
+    "south": 41,
+    "east": 43
+   },
+   "event_line": null
+  },
+  {
+   "id": 43,
+   "desc_message": 100,
+   "picture": 25,
+   "exits": {
+    "south": 44,
+    "east": 45,
+    "west": 42
+   },
+   "event_line": null
+  },
+  {
+   "id": 44,
+   "desc_message": 105,
+   "picture": 30,
+   "exits": {
+    "north": 43
+   },
+   "event_line": null
+  },
+  {
+   "id": 45,
+   "desc_message": 110,
+   "picture": 33,
+   "exits": {
+    "west": 43
+   },
+   "event_line": null
+  },
+  {
+   "id": 46,
+   "desc_message": 97,
+   "picture": 27,
+   "exits": {
+    "north": 47,
+    "south": 42
+   },
+   "event_line": null
+  },
+  {
+   "id": 47,
+   "desc_message": 101,
+   "picture": 26,
+   "exits": {
+    "north": 51,
+    "south": 46,
+    "west": 48
+   },
+   "event_line": null
+  },
+  {
+   "id": 48,
+   "desc_message": 106,
+   "picture": 31,
+   "exits": {
+    "north": 50,
+    "east": 47
+   },
+   "event_line": null
+  },
+  {
+   "id": 49,
+   "desc_message": 110,
+   "picture": 33,
+   "exits": {
+    "east": 50
+   },
+   "event_line": null
+  },
+  {
+   "id": 50,
+   "desc_message": 102,
+   "picture": 26,
+   "exits": {
+    "north": 52,
+    "south": 48,
+    "west": 49
+   },
+   "event_line": null
+  },
+  {
+   "id": 51,
+   "desc_message": 98,
+   "picture": 23,
+   "exits": {
+    "north": 53,
+    "south": 47
+   },
+   "event_line": null
+  },
+  {
+   "id": 52,
+   "desc_message": 95,
+   "picture": 22,
+   "exits": {
+    "south": 50,
+    "east": 53
+   },
+   "event_line": null
+  },
+  {
+   "id": 53,
+   "desc_message": 101,
+   "picture": 26,
+   "exits": {
+    "north": 54,
+    "south": 51,
+    "west": 52
+   },
+   "event_line": null
+  },
+  {
+   "id": 54,
+   "desc_message": 108,
+   "picture": 32,
+   "exits": {
+    "south": 53,
+    "west": 55
+   },
+   "event_line": null
+  },
+  {
+   "id": 55,
+   "desc_message": 103,
+   "picture": 28,
+   "exits": {
+    "east": 54,
+    "west": 252
+   },
+   "event_line": 3800
+  },
+  {
+   "id": 56,
+   "desc_message": 152,
+   "picture": 124,
+   "exits": {
+    "north": 112,
+    "south": 8,
+    "east": 39
+   },
+   "event_line": 3900
+  },
+  {
+   "id": 57,
+   "desc_message": 156,
+   "picture": 121,
+   "exits": {
+    "south": 112,
+    "east": 58
+   },
+   "event_line": 2400
+  },
+  {
+   "id": 58,
+   "desc_message": 157,
+   "picture": 7,
+   "exits": {
+    "east": 59,
+    "west": 57
+   },
+   "event_line": null
+  },
+  {
+   "id": 59,
+   "desc_message": 158,
+   "picture": 13,
+   "exits": {
+    "north": 60,
+    "west": 58
+   },
+   "event_line": null
+  },
+  {
+   "id": 60,
+   "desc_message": 159,
+   "picture": 4,
+   "exits": {
+    "north": 65,
+    "south": 59,
+    "east": 61
+   },
+   "event_line": null
+  },
+  {
+   "id": 61,
+   "desc_message": 160,
+   "picture": 12,
+   "exits": {
+    "north": 62,
+    "west": 60
+   },
+   "event_line": null
+  },
+  {
+   "id": 62,
+   "desc_message": 161,
+   "picture": 6,
+   "exits": {
+    "north": 63,
+    "south": 61
+   },
+   "event_line": null
+  },
+  {
+   "id": 63,
+   "desc_message": 162,
+   "picture": 5,
+   "exits": {
+    "north": 64,
+    "south": 62,
+    "west": 66
+   },
+   "event_line": null
+  },
+  {
+   "id": 64,
+   "desc_message": 163,
+   "picture": 1,
+   "exits": {
+    "north": 236,
+    "south": 63
+   },
+   "event_line": null
+  },
+  {
+   "id": 65,
+   "desc_message": 164,
+   "picture": 6,
+   "exits": {
+    "north": 66,
+    "south": 60
+   },
+   "event_line": null
+  },
+  {
+   "id": 66,
+   "desc_message": 165,
+   "picture": 74,
+   "exits": {
+    "south": 65,
+    "east": 63,
+    "west": 67
+   },
+   "event_line": null
+  },
+  {
+   "id": 67,
+   "desc_message": 166,
+   "picture": 7,
+   "exits": {
+    "east": 66,
+    "west": 68
+   },
+   "event_line": null
+  },
+  {
+   "id": 68,
+   "desc_message": 167,
+   "picture": 7,
+   "exits": {
+    "east": 67,
+    "west": 69
+   },
+   "event_line": null
+  },
+  {
+   "id": 69,
+   "desc_message": 169,
+   "picture": 4,
+   "exits": {
+    "north": 70,
+    "south": 74,
+    "east": 68
+   },
+   "event_line": null
+  },
+  {
+   "id": 70,
+   "desc_message": 170,
+   "picture": 6,
+   "exits": {
+    "north": 71,
+    "south": 69
+   },
+   "event_line": null
+  },
+  {
+   "id": 71,
+   "desc_message": 171,
+   "picture": 6,
+   "exits": {
+    "north": 72,
+    "south": 70
+   },
+   "event_line": null
+  },
+  {
+   "id": 72,
+   "desc_message": 172,
+   "picture": 78,
+   "exits": {
+    "north": 82,
+    "south": 71
+   },
+   "event_line": null
+  },
+  {
+   "id": 73,
+   "desc_message": 70,
+   "picture": 118,
+   "exits": {
+    "north": 85
+   },
+   "event_line": 3900
+  },
+  {
+   "id": 74,
+   "desc_message": 173,
+   "picture": 13,
+   "exits": {
+    "north": 69,
+    "west": 75
+   },
+   "event_line": null
+  },
+  {
+   "id": 75,
+   "desc_message": 174,
+   "picture": 2,
+   "exits": {
+    "north": 76,
+    "south": 111,
+    "east": 74,
+    "west": 78
+   },
+   "event_line": null
+  },
+  {
+   "id": 76,
+   "desc_message": 175,
+   "picture": 78,
+   "exits": {
+    "north": 82,
+    "south": 75
+   },
+   "event_line": null
+  },
+  {
+   "id": 77,
+   "desc_message": 40,
+   "picture": 108,
+   "exits": {
+    "north": 30,
+    "south": 28,
+    "down": 81
+   },
+   "event_line": 2500
+  },
+  {
+   "id": 78,
+   "desc_message": 176,
+   "picture": 7,
+   "exits": {
+    "east": 75,
+    "west": 79
+   },
+   "event_line": null
+  },
+  {
+   "id": 79,
+   "desc_message": 177,
+   "picture": 8,
+   "exits": {
+    "south": 115,
+    "east": 78,
+    "west": 80
+   },
+   "event_line": null
+  },
+  {
+   "id": 80,
+   "desc_message": 178,
+   "picture": 78,
+   "exits": {
+    "east": 79,
+    "west": 82
+   },
+   "event_line": null
+  },
+  {
+   "id": 81,
+   "desc_message": 44,
+   "picture": 110,
+   "exits": {
+    "up": 77
+   },
+   "event_line": 2600
+  },
+  {
+   "id": 82,
+   "desc_message": 87,
+   "picture": 67,
+   "exits": {},
+   "event_line": 2700
+  },
+  {
+   "id": 83,
+   "desc_message": 86,
+   "picture": 78,
+   "exits": {
+    "north": 82,
+    "south": 101
+   },
+   "event_line": null
+  },
+  {
+   "id": 84,
+   "desc_message": 84,
+   "picture": 6,
+   "exits": {
+    "north": 101,
+    "south": 85
+   },
+   "event_line": null
+  },
+  {
+   "id": 85,
+   "desc_message": 82,
+   "picture": 4,
+   "exits": {
+    "north": 84,
+    "south": 73,
+    "east": 86
+   },
+   "event_line": null
+  },
+  {
+   "id": 86,
+   "desc_message": 71,
+   "picture": 8,
+   "exits": {
+    "south": 88,
+    "east": 87,
+    "west": 85
+   },
+   "event_line": null
+  },
+  {
+   "id": 87,
+   "desc_message": 65,
+   "picture": 7,
+   "exits": {
+    "east": 32,
+    "west": 86
+   },
+   "event_line": null
+  },
+  {
+   "id": 88,
+   "desc_message": 72,
+   "picture": 6,
+   "exits": {
+    "north": 86,
+    "south": 89
+   },
+   "event_line": null
+  },
+  {
+   "id": 89,
+   "desc_message": 73,
+   "picture": 6,
+   "exits": {
+    "north": 88,
+    "south": 91
+   },
+   "event_line": null
+  },
+  {
+   "id": 90,
+   "desc_message": 91,
+   "picture": 123,
+   "exits": {
+    "north": 100
+   },
+   "event_line": 3900
+  },
+  {
+   "id": 91,
+   "desc_message": 74,
+   "picture": 83,
+   "exits": {
+    "north": 89,
+    "east": 92
+   },
+   "event_line": null
+  },
+  {
+   "id": 92,
+   "desc_message": 75,
+   "picture": 84,
+   "exits": {
+    "south": 93,
+    "west": 91
+   },
+   "event_line": null
+  },
+  {
+   "id": 93,
+   "desc_message": 76,
+   "picture": 85,
+   "exits": {
+    "north": 92,
+    "south": 94
+   },
+   "event_line": null
+  },
+  {
+   "id": 94,
+   "desc_message": 77,
+   "picture": 86,
+   "exits": {
+    "north": 95,
+    "south": 95,
+    "east": 95,
+    "west": 95
+   },
+   "event_line": 2900
+  },
+  {
+   "id": 95,
+   "desc_message": 79,
+   "picture": 89,
+   "exits": {
+    "north": 96,
+    "south": 96,
+    "east": 96,
+    "west": 96
+   },
+   "event_line": null
+  },
+  {
+   "id": 96,
+   "desc_message": 80,
+   "picture": 88,
+   "exits": {},
+   "event_line": 3000
+  },
+  {
+   "id": 97,
+   "desc_message": 88,
+   "picture": 7,
+   "exits": {
+    "east": 101,
+    "west": 99
+   },
+   "event_line": null
+  },
+  {
+   "id": 98,
+   "desc_message": 129,
+   "picture": 16,
+   "exits": {
+    "north": 103,
+    "south": 109
+   },
+   "event_line": null
+  },
+  {
+   "id": 99,
+   "desc_message": 89,
+   "picture": 8,
+   "exits": {
+    "south": 100,
+    "east": 97,
+    "west": 102
+   },
+   "event_line": null
+  },
+  {
+   "id": 100,
+   "desc_message": 90,
+   "picture": 73,
+   "exits": {
+    "north": 99,
+    "south": 90
+   },
+   "event_line": 3500
+  },
+  {
+   "id": 101,
+   "desc_message": 85,
+   "picture": 5,
+   "exits": {
+    "north": 83,
+    "south": 84,
+    "west": 97
+   },
+   "event_line": null
+  },
+  {
+   "id": 102,
+   "desc_message": 127,
+   "picture": 15,
+   "exits": {
+    "east": 99,
+    "west": 103
+   },
+   "event_line": null
+  },
+  {
+   "id": 103,
+   "desc_message": 128,
+   "picture": 18,
+   "exits": {
+    "south": 98,
+    "east": 102
+   },
+   "event_line": null
+  },
+  {
+   "id": 104,
+   "desc_message": 132,
+   "picture": 82,
+   "exits": {
+    "north": 109
+   },
+   "event_line": 3100
+  },
+  {
+   "id": 105,
+   "desc_message": 130,
+   "picture": 97,
+   "exits": {
+    "north": 106,
+    "south": 173
+   },
+   "event_line": null
+  },
+  {
+   "id": 106,
+   "desc_message": 131,
+   "picture": 17,
+   "exits": {
+    "north": 82,
+    "south": 105
+   },
+   "event_line": null
+  },
+  {
+   "id": 107,
+   "desc_message": 130,
+   "picture": 97,
+   "exits": {
+    "north": 108,
+    "south": 152
+   },
+   "event_line": null
+  },
+  {
+   "id": 108,
+   "desc_message": 131,
+   "picture": 17,
+   "exits": {
+    "north": 110,
+    "south": 107
+   },
+   "event_line": null
+  },
+  {
+   "id": 109,
+   "desc_message": 131,
+   "picture": 17,
+   "exits": {
+    "north": 98,
+    "south": 104
+   },
+   "event_line": null
+  },
+  {
+   "id": 110,
+   "desc_message": 129,
+   "picture": 16,
+   "exits": {
+    "north": 82,
+    "south": 108
+   },
+   "event_line": null
+  },
+  {
+   "id": 111,
+   "desc_message": 181,
+   "picture": 6,
+   "exits": {
+    "north": 75,
+    "south": 113
+   },
+   "event_line": null
+  },
+  {
+   "id": 112,
+   "desc_message": 186,
+   "picture": 10,
+   "exits": {
+    "north": 57,
+    "south": 56
+   },
+   "event_line": null
+  },
+  {
+   "id": 113,
+   "desc_message": 182,
+   "picture": 10,
+   "exits": {
+    "north": 111,
+    "south": 114
+   },
+   "event_line": null
+  },
+  {
+   "id": 114,
+   "desc_message": 183,
+   "picture": 6,
+   "exits": {
+    "north": 113,
+    "south": 9
+   },
+   "event_line": null
+  },
+  {
+   "id": 115,
+   "desc_message": 179,
+   "picture": 72,
+   "exits": {
+    "north": 79,
+    "west": 116
+   },
+   "event_line": null
+  },
+  {
+   "id": 116,
+   "desc_message": 180,
+   "picture": 71,
+   "exits": {
+    "east": 115
+   },
+   "event_line": 3200
+  },
+  {
+   "id": 117,
+   "desc_message": 187,
+   "picture": 70,
+   "exits": {
+    "north": 39,
+    "west": 8
+   },
+   "event_line": null
+  },
+  {
+   "id": 118,
+   "desc_message": 50,
+   "picture": 94,
+   "exits": {},
+   "event_line": 3300
+  },
+  {
+   "id": 119,
+   "desc_message": 97,
+   "picture": 23,
+   "exits": {
+    "east": 37,
+    "west": 120
+   },
+   "event_line": null
+  },
+  {
+   "id": 120,
+   "desc_message": 98,
+   "picture": 27,
+   "exits": {
+    "east": 119,
+    "west": 121
+   },
+   "event_line": null
+  },
+  {
+   "id": 121,
+   "desc_message": 97,
+   "picture": 23,
+   "exits": {
+    "east": 120,
+    "west": 122
+   },
+   "event_line": null
+  },
+  {
+   "id": 122,
+   "desc_message": 98,
+   "picture": 27,
+   "exits": {
+    "east": 121,
+    "west": 123
+   },
+   "event_line": null
+  },
+  {
+   "id": 123,
+   "desc_message": 97,
+   "picture": 23,
+   "exits": {
+    "east": 122,
+    "west": 124
+   },
+   "event_line": null
+  },
+  {
+   "id": 124,
+   "desc_message": 98,
+   "picture": 27,
+   "exits": {
+    "east": 123,
+    "west": 125
+   },
+   "event_line": null
+  },
+  {
+   "id": 125,
+   "desc_message": 97,
+   "picture": 23,
+   "exits": {
+    "east": 124,
+    "west": 126
+   },
+   "event_line": null
+  },
+  {
+   "id": 126,
+   "desc_message": 98,
+   "picture": 27,
+   "exits": {
+    "east": 125,
+    "west": 127
+   },
+   "event_line": null
+  },
+  {
+   "id": 127,
+   "desc_message": 97,
+   "picture": 23,
+   "exits": {
+    "east": 126,
+    "west": 128
+   },
+   "event_line": null
+  },
+  {
+   "id": 128,
+   "desc_message": 98,
+   "picture": 27,
+   "exits": {
+    "east": 127,
+    "west": 129
+   },
+   "event_line": null
+  },
+  {
+   "id": 129,
+   "desc_message": 97,
+   "picture": 23,
+   "exits": {
+    "east": 128,
+    "west": 130
+   },
+   "event_line": null
+  },
+  {
+   "id": 130,
+   "desc_message": 98,
+   "picture": 27,
+   "exits": {
+    "east": 129,
+    "west": 131
+   },
+   "event_line": null
+  },
+  {
+   "id": 131,
+   "desc_message": 97,
+   "picture": 23,
+   "exits": {
+    "east": 130,
+    "west": 132
+   },
+   "event_line": null
+  },
+  {
+   "id": 132,
+   "desc_message": 98,
+   "picture": 27,
+   "exits": {
+    "east": 131,
+    "west": 133
+   },
+   "event_line": null
+  },
+  {
+   "id": 133,
+   "desc_message": 106,
+   "picture": 31,
+   "exits": {
+    "north": 134,
+    "east": 132
+   },
+   "event_line": null
+  },
+  {
+   "id": 134,
+   "desc_message": 108,
+   "picture": 32,
+   "exits": {
+    "south": 133,
+    "west": 135
+   },
+   "event_line": null
+  },
+  {
+   "id": 135,
+   "desc_message": 99,
+   "picture": 25,
+   "exits": {
+    "north": 139,
+    "east": 134,
+    "west": 136
+   },
+   "event_line": null
+  },
+  {
+   "id": 136,
+   "desc_message": 97,
+   "picture": 23,
+   "exits": {
+    "east": 135,
+    "west": 137
+   },
+   "event_line": null
+  },
+  {
+   "id": 137,
+   "desc_message": 109,
+   "picture": 32,
+   "exits": {
+    "south": 138,
+    "east": 136
+   },
+   "event_line": null
+  },
+  {
+   "id": 138,
+   "desc_message": 105,
+   "picture": 30,
+   "exits": {
+    "north": 137
+   },
+   "event_line": null
+  },
+  {
+   "id": 139,
+   "desc_message": 98,
+   "picture": 27,
+   "exits": {
+    "north": 140,
+    "south": 135
+   },
+   "event_line": null
+  },
+  {
+   "id": 140,
+   "desc_message": 100,
+   "picture": 25,
+   "exits": {
+    "south": 139,
+    "east": 213,
+    "west": 141
+   },
+   "event_line": null
+  },
+  {
+   "id": 141,
+   "desc_message": 101,
+   "picture": 26,
+   "exits": {
+    "south": 142,
+    "east": 140,
+    "west": 147
+   },
+   "event_line": null
+  },
+  {
+   "id": 142,
+   "desc_message": 108,
+   "picture": 32,
+   "exits": {
+    "north": 141,
+    "west": 143
+   },
+   "event_line": null
+  },
+  {
+   "id": 143,
+   "desc_message": 97,
+   "picture": 23,
+   "exits": {
+    "east": 142,
+    "west": 144
+   },
+   "event_line": null
+  },
+  {
+   "id": 144,
+   "desc_message": 107,
+   "picture": 31,
+   "exits": {
+    "south": 145,
+    "east": 143
+   },
+   "event_line": null
+  },
+  {
+   "id": 145,
+   "desc_message": 109,
+   "picture": 32,
+   "exits": {
+    "north": 144,
+    "west": 146
+   },
+   "event_line": null
+  },
+  {
+   "id": 146,
+   "desc_message": 110,
+   "picture": 33,
+   "exits": {
+    "east": 145
+   },
+   "event_line": null
+  },
+  {
+   "id": 147,
+   "desc_message": 98,
+   "picture": 27,
+   "exits": {
+    "east": 141,
+    "west": 148
+   },
+   "event_line": null
+  },
+  {
+   "id": 148,
+   "desc_message": 99,
+   "picture": 25,
+   "exits": {
+    "north": 149,
+    "east": 147,
+    "west": 150
+   },
+   "event_line": null
+  },
+  {
+   "id": 149,
+   "desc_message": 142,
+   "picture": 69,
+   "exits": {
+    "south": 148
+   },
+   "event_line": 3400
+  },
+  {
+   "id": 150,
+   "desc_message": 106,
+   "picture": 31,
+   "exits": {
+    "north": 151,
+    "east": 148
+   },
+   "event_line": null
+  },
+  {
+   "id": 151,
+   "desc_message": 97,
+   "picture": 23,
+   "exits": {
+    "north": 152,
+    "south": 150
+   },
+   "event_line": null
+  },
+  {
+   "id": 152,
+   "desc_message": 102,
+   "picture": 26,
+   "exits": {
+    "north": 153,
+    "south": 151,
+    "west": 107
+   },
+   "event_line": 3800
+  },
+  {
+   "id": 153,
+   "desc_message": 100,
+   "picture": 25,
+   "exits": {
+    "south": 152,
+    "east": 210,
+    "west": 214
+   },
+   "event_line": null
+  },
+  {
+   "id": 154,
+   "desc_message": 98,
+   "picture": 27,
+   "exits": {
+    "north": 155,
+    "south": 214
+   },
+   "event_line": null
+  },
+  {
+   "id": 155,
+   "desc_message": 95,
+   "picture": 22,
+   "exits": {
+    "south": 154,
+    "east": 156
+   },
+   "event_line": null
+  },
+  {
+   "id": 156,
+   "desc_message": 101,
+   "picture": 26,
+   "exits": {
+    "north": 157,
+    "south": 158,
+    "east": 155
+   },
+   "event_line": null
+  },
+  {
+   "id": 157,
+   "desc_message": 105,
+   "picture": 30,
+   "exits": {
+    "south": 156
+   },
+   "event_line": null
+  },
+  {
+   "id": 158,
+   "desc_message": 102,
+   "picture": 26,
+   "exits": {
+    "north": 162,
+    "south": 159,
+    "east": 156
+   },
+   "event_line": null
+  },
+  {
+   "id": 159,
+   "desc_message": 99,
+   "picture": 25,
+   "exits": {
+    "north": 158,
+    "south": 160,
+    "east": 178
+   },
+   "event_line": null
+  },
+  {
+   "id": 160,
+   "desc_message": 101,
+   "picture": 26,
+   "exits": {
+    "north": 159,
+    "south": 210,
+    "west": 161
+   },
+   "event_line": null
+  },
+  {
+   "id": 161,
+   "desc_message": 110,
+   "picture": 33,
+   "exits": {
+    "east": 160
+   },
+   "event_line": null
+  },
+  {
+   "id": 162,
+   "desc_message": 100,
+   "picture": 25,
+   "exits": {
+    "north": 163,
+    "south": 158,
+    "east": 168
+   },
+   "event_line": null
+  },
+  {
+   "id": 163,
+   "desc_message": 102,
+   "picture": 26,
+   "exits": {
+    "north": 166,
+    "south": 162,
+    "west": 164
+   },
+   "event_line": null
+  },
+  {
+   "id": 164,
+   "desc_message": 96,
+   "picture": 22,
+   "exits": {
+    "east": 163,
+    "west": 165
+   },
+   "event_line": null
+  },
+  {
+   "id": 165,
+   "desc_message": 105,
+   "picture": 30,
+   "exits": {
+    "east": 164
+   },
+   "event_line": null
+  },
+  {
+   "id": 166,
+   "desc_message": 108,
+   "picture": 32,
+   "exits": {
+    "south": 163,
+    "west": 167
+   },
+   "event_line": null
+  },
+  {
+   "id": 167,
+   "desc_message": 105,
+   "picture": 30,
+   "exits": {
+    "east": 166
+   },
+   "event_line": null
+  },
+  {
+   "id": 168,
+   "desc_message": 109,
+   "picture": 32,
+   "exits": {
+    "north": 169,
+    "west": 162
+   },
+   "event_line": null
+  },
+  {
+   "id": 169,
+   "desc_message": 101,
+   "picture": 26,
+   "exits": {
+    "north": 174,
+    "south": 168,
+    "west": 170
+   },
+   "event_line": null
+  },
+  {
+   "id": 170,
+   "desc_message": 107,
+   "picture": 31,
+   "exits": {
+    "north": 171,
+    "east": 169
+   },
+   "event_line": null
+  },
+  {
+   "id": 171,
+   "desc_message": 97,
+   "picture": 23,
+   "exits": {
+    "north": 172,
+    "south": 170
+   },
+   "event_line": null
+  },
+  {
+   "id": 172,
+   "desc_message": 108,
+   "picture": 32,
+   "exits": {
+    "south": 171,
+    "west": 173
+   },
+   "event_line": null
+  },
+  {
+   "id": 173,
+   "desc_message": 103,
+   "picture": 28,
+   "exits": {
+    "east": 172,
+    "west": 105
+   },
+   "event_line": 3800
+  },
+  {
+   "id": 174,
+   "desc_message": 95,
+   "picture": 22,
+   "exits": {
+    "south": 169,
+    "east": 175
+   },
+   "event_line": null
+  },
+  {
+   "id": 175,
+   "desc_message": 96,
+   "picture": 22,
+   "exits": {
+    "east": 176,
+    "west": 174
+   },
+   "event_line": null
+  },
+  {
+   "id": 176,
+   "desc_message": 93,
+   "picture": 21,
+   "exits": {
+    "south": 177,
+    "west": 175
+   },
+   "event_line": null
+  },
+  {
+   "id": 177,
+   "desc_message": 110,
+   "picture": 33,
+   "exits": {
+    "north": 176
+   },
+   "event_line": null
+  },
+  {
+   "id": 178,
+   "desc_message": 98,
+   "picture": 27,
+   "exits": {
+    "east": 179,
+    "west": 159
+   },
+   "event_line": null
+  },
+  {
+   "id": 179,
+   "desc_message": 99,
+   "picture": 25,
+   "exits": {
+    "north": 180,
+    "east": 185,
+    "west": 178
+   },
+   "event_line": null
+  },
+  {
+   "id": 180,
+   "desc_message": 97,
+   "picture": 27,
+   "exits": {
+    "north": 181,
+    "south": 179
+   },
+   "event_line": null
+  },
+  {
+   "id": 181,
+   "desc_message": 106,
+   "picture": 31,
+   "exits": {
+    "south": 180,
+    "east": 182
+   },
+   "event_line": null
+  },
+  {
+   "id": 182,
+   "desc_message": 100,
+   "picture": 25,
+   "exits": {
+    "north": 183,
+    "east": 198,
+    "west": 181
+   },
+   "event_line": null
+  },
+  {
+   "id": 183,
+   "desc_message": 98,
+   "picture": 23,
+   "exits": {
+    "north": 184,
+    "south": 182
+   },
+   "event_line": null
+  },
+  {
+   "id": 184,
+   "desc_message": 110,
+   "picture": 33,
+   "exits": {
+    "south": 183
+   },
+   "event_line": null
+  },
+  {
+   "id": 185,
+   "desc_message": 97,
+   "picture": 27,
+   "exits": {
+    "east": 186,
+    "west": 179
+   },
+   "event_line": null
+  },
+  {
+   "id": 186,
+   "desc_message": 109,
+   "picture": 32,
+   "exits": {
+    "south": 187,
+    "west": 185
+   },
+   "event_line": null
+  },
+  {
+   "id": 187,
+   "desc_message": 108,
+   "picture": 32,
+   "exits": {
+    "north": 186,
+    "west": 188
+   },
+   "event_line": null
+  },
+  {
+   "id": 188,
+   "desc_message": 98,
+   "picture": 23,
+   "exits": {
+    "east": 187,
+    "west": 189
+   },
+   "event_line": null
+  },
+  {
+   "id": 189,
+   "desc_message": 107,
+   "picture": 31,
+   "exits": {
+    "south": 190,
+    "east": 188
+   },
+   "event_line": null
+  },
+  {
+   "id": 190,
+   "desc_message": 95,
+   "picture": 22,
+   "exits": {
+    "north": 189,
+    "east": 191
+   },
+   "event_line": null
+  },
+  {
+   "id": 191,
+   "desc_message": 97,
+   "picture": 27,
+   "exits": {
+    "east": 192,
+    "west": 190
+   },
+   "event_line": null
+  },
+  {
+   "id": 192,
+   "desc_message": 98,
+   "picture": 23,
+   "exits": {
+    "east": 193,
+    "west": 191
+   },
+   "event_line": null
+  },
+  {
+   "id": 193,
+   "desc_message": 101,
+   "picture": 26,
+   "exits": {
+    "north": 194,
+    "south": 211,
+    "west": 192
+   },
+   "event_line": null
+  },
+  {
+   "id": 194,
+   "desc_message": 106,
+   "picture": 31,
+   "exits": {
+    "south": 193,
+    "east": 195
+   },
+   "event_line": null
+  },
+  {
+   "id": 195,
+   "desc_message": 100,
+   "picture": 25,
+   "exits": {
+    "north": 196,
+    "east": 203,
+    "west": 194
+   },
+   "event_line": null
+  },
+  {
+   "id": 196,
+   "desc_message": 101,
+   "picture": 26,
+   "exits": {
+    "north": 199,
+    "south": 195,
+    "west": 197
+   },
+   "event_line": null
+  },
+  {
+   "id": 197,
+   "desc_message": 95,
+   "picture": 22,
+   "exits": {
+    "north": 198,
+    "east": 196
+   },
+   "event_line": null
+  },
+  {
+   "id": 198,
+   "desc_message": 93,
+   "picture": 21,
+   "exits": {
+    "south": 197,
+    "west": 182
+   },
+   "event_line": null
+  },
+  {
+   "id": 199,
+   "desc_message": 97,
+   "picture": 27,
+   "exits": {
+    "north": 200,
+    "south": 196
+   },
+   "event_line": null
+  },
+  {
+   "id": 200,
+   "desc_message": 98,
+   "picture": 23,
+   "exits": {
+    "north": 201,
+    "south": 199
+   },
+   "event_line": null
+  },
+  {
+   "id": 201,
+   "desc_message": 97,
+   "picture": 27,
+   "exits": {
+    "north": 202,
+    "south": 200
+   },
+   "event_line": null
+  },
+  {
+   "id": 202,
+   "desc_message": 103,
+   "picture": 28,
+   "exits": {
+    "north": 104,
+    "south": 201
+   },
+   "event_line": 3800
+  },
+  {
+   "id": 203,
+   "desc_message": 108,
+   "picture": 32,
+   "exits": {
+    "north": 204,
+    "west": 195
+   },
+   "event_line": null
+  },
+  {
+   "id": 204,
+   "desc_message": 98,
+   "picture": 23,
+   "exits": {
+    "north": 205,
+    "south": 203
+   },
+   "event_line": null
+  },
+  {
+   "id": 205,
+   "desc_message": 97,
+   "picture": 27,
+   "exits": {
+    "north": 206,
+    "south": 204
+   },
+   "event_line": null
+  },
+  {
+   "id": 206,
+   "desc_message": 106,
+   "picture": 31,
+   "exits": {
+    "south": 205,
+    "east": 207
+   },
+   "event_line": null
+  },
+  {
+   "id": 207,
+   "desc_message": 99,
+   "picture": 25,
+   "exits": {
+    "north": 208,
+    "east": 209,
+    "west": 206
+   },
+   "event_line": null
+  },
+  {
+   "id": 208,
+   "desc_message": 105,
+   "picture": 30,
+   "exits": {
+    "south": 207
+   },
+   "event_line": null
+  },
+  {
+   "id": 209,
+   "desc_message": 110,
+   "picture": 33,
+   "exits": {
+    "west": 207
+   },
+   "event_line": null
+  },
+  {
+   "id": 210,
+   "desc_message": 109,
+   "picture": 32,
+   "exits": {
+    "north": 160,
+    "west": 153
+   },
+   "event_line": null
+  },
+  {
+   "id": 211,
+   "desc_message": 98,
+   "picture": 23,
+   "exits": {
+    "north": 193,
+    "south": 212
+   },
+   "event_line": null
+  },
+  {
+   "id": 212,
+   "desc_message": 94,
+   "picture": 21,
+   "exits": {
+    "north": 211,
+    "south": 213
+   },
+   "event_line": null
+  },
+  {
+   "id": 213,
+   "desc_message": 94,
+   "picture": 21,
+   "exits": {
+    "north": 212,
+    "west": 140
+   },
+   "event_line": null
+  },
+  {
+   "id": 214,
+   "desc_message": 107,
+   "picture": 31,
+   "exits": {
+    "north": 154,
+    "east": 153
+   },
+   "event_line": null
+  },
+  {
+   "id": 215,
+   "desc_message": 114,
+   "picture": 47,
+   "exits": {
+    "north": 216,
+    "west": 222
+   },
+   "event_line": null
+  },
+  {
+   "id": 216,
+   "desc_message": 115,
+   "picture": 48,
+   "exits": {
+    "north": 217,
+    "south": 215,
+    "west": 223
+   },
+   "event_line": null
+  },
+  {
+   "id": 217,
+   "desc_message": 116,
+   "picture": 49,
+   "exits": {
+    "north": 218,
+    "south": 216,
+    "west": 224
+   },
+   "event_line": null
+  },
+  {
+   "id": 218,
+   "desc_message": 114,
+   "picture": 44,
+   "exits": {
+    "north": 219,
+    "south": 217,
+    "west": 225
+   },
+   "event_line": null
+  },
+  {
+   "id": 219,
+   "desc_message": 112,
+   "picture": 43,
+   "exits": {
+    "north": 220,
+    "south": 218,
+    "west": 226
+   },
+   "event_line": null
+  },
+  {
+   "id": 220,
+   "desc_message": 115,
+   "picture": 46,
+   "exits": {
+    "north": 221,
+    "south": 219,
+    "west": 227
+   },
+   "event_line": null
+  },
+  {
+   "id": 221,
+   "desc_message": 116,
+   "picture": 45,
+   "exits": {
+    "south": 220,
+    "west": 228
+   },
+   "event_line": null
+  },
+  {
+   "id": 222,
+   "desc_message": 118,
+   "picture": 57,
+   "exits": {
+    "north": 223,
+    "east": 215,
+    "west": 229
+   },
+   "event_line": null
+  },
+  {
+   "id": 223,
+   "desc_message": 119,
+   "picture": 58,
+   "exits": {
+    "north": 224,
+    "south": 222,
+    "east": 216,
+    "west": 230
+   },
+   "event_line": null
+  },
+  {
+   "id": 224,
+   "desc_message": 120,
+   "picture": 59,
+   "exits": {
+    "north": 225,
+    "south": 223,
+    "east": 217,
+    "west": 231
+   },
+   "event_line": null
+  },
+  {
+   "id": 225,
+   "desc_message": 121,
+   "picture": 60,
+   "exits": {
+    "north": 226,
+    "south": 224,
+    "east": 218,
+    "west": 232
+   },
+   "event_line": null
+  },
+  {
+   "id": 226,
+   "desc_message": 122,
+   "picture": 61,
+   "exits": {
+    "north": 227,
+    "south": 225,
+    "east": 219,
+    "west": 233
+   },
+   "event_line": null
+  },
+  {
+   "id": 227,
+   "desc_message": 123,
+   "picture": 62,
+   "exits": {
+    "north": 228,
+    "south": 226,
+    "east": 220,
+    "west": 234
+   },
+   "event_line": null
+  },
+  {
+   "id": 228,
+   "desc_message": 124,
+   "picture": 63,
+   "exits": {
+    "south": 227,
+    "east": 221,
+    "west": 235
+   },
+   "event_line": null
+  },
+  {
+   "id": 229,
+   "desc_message": 118,
+   "picture": 57,
+   "exits": {
+    "north": 230,
+    "east": 222,
+    "west": 236
+   },
+   "event_line": null
+  },
+  {
+   "id": 230,
+   "desc_message": 119,
+   "picture": 58,
+   "exits": {
+    "north": 231,
+    "south": 229,
+    "east": 223,
+    "west": 237
+   },
+   "event_line": null
+  },
+  {
+   "id": 231,
+   "desc_message": 120,
+   "picture": 59,
+   "exits": {
+    "north": 232,
+    "south": 230,
+    "east": 224,
+    "west": 238
+   },
+   "event_line": null
+  },
+  {
+   "id": 232,
+   "desc_message": 121,
+   "picture": 60,
+   "exits": {
+    "north": 233,
+    "south": 231,
+    "east": 225,
+    "west": 239
+   },
+   "event_line": null
+  },
+  {
+   "id": 233,
+   "desc_message": 117,
+   "picture": 56,
+   "exits": {
+    "north": 234,
+    "south": 232,
+    "east": 226,
+    "west": 240
+   },
+   "event_line": 3900
+  },
+  {
+   "id": 234,
+   "desc_message": 122,
+   "picture": 61,
+   "exits": {
+    "north": 235,
+    "south": 233,
+    "east": 227,
+    "west": 241
+   },
+   "event_line": null
+  },
+  {
+   "id": 235,
+   "desc_message": 123,
+   "picture": 62,
+   "exits": {
+    "south": 234,
+    "east": 228,
+    "west": 242
+   },
+   "event_line": null
+  },
+  {
+   "id": 236,
+   "desc_message": 124,
+   "picture": 63,
+   "exits": {
+    "north": 237,
+    "south": 64,
+    "east": 229,
+    "west": 243
+   },
+   "event_line": null
+  },
+  {
+   "id": 237,
+   "desc_message": 118,
+   "picture": 57,
+   "exits": {
+    "north": 238,
+    "south": 236,
+    "east": 230,
+    "west": 245
+   },
+   "event_line": null
+  },
+  {
+   "id": 238,
+   "desc_message": 119,
+   "picture": 58,
+   "exits": {
+    "north": 239,
+    "south": 237,
+    "east": 231,
+    "west": 246
+   },
+   "event_line": null
+  },
+  {
+   "id": 239,
+   "desc_message": 120,
+   "picture": 59,
+   "exits": {
+    "north": 240,
+    "south": 238,
+    "east": 232,
+    "west": 247
+   },
+   "event_line": null
+  },
+  {
+   "id": 240,
+   "desc_message": 121,
+   "picture": 60,
+   "exits": {
+    "north": 241,
+    "south": 239,
+    "east": 233,
+    "west": 248
+   },
+   "event_line": null
+  },
+  {
+   "id": 241,
+   "desc_message": 122,
+   "picture": 61,
+   "exits": {
+    "north": 242,
+    "south": 240,
+    "east": 234,
+    "west": 249
+   },
+   "event_line": null
+  },
+  {
+   "id": 242,
+   "desc_message": 124,
+   "picture": 63,
+   "exits": {
+    "south": 241,
+    "east": 235,
+    "west": 250
+   },
+   "event_line": null
+  },
+  {
+   "id": 243,
+   "desc_message": 118,
+   "picture": 57,
+   "exits": {
+    "north": 245,
+    "east": 236
+   },
+   "event_line": null
+  },
+  {
+   "id": 244,
+   "desc_message": 113,
+   "picture": 42,
+   "exits": {
+    "east": 251
+   },
+   "event_line": null
+  },
+  {
+   "id": 245,
+   "desc_message": 119,
+   "picture": 58,
+   "exits": {
+    "north": 246,
+    "south": 243,
+    "east": 237
+   },
+   "event_line": null
+  },
+  {
+   "id": 246,
+   "desc_message": 120,
+   "picture": 59,
+   "exits": {
+    "north": 247,
+    "south": 245,
+    "east": 238
+   },
+   "event_line": null
+  },
+  {
+   "id": 247,
+   "desc_message": 121,
+   "picture": 60,
+   "exits": {
+    "north": 248,
+    "south": 246,
+    "east": 239
+   },
+   "event_line": null
+  },
+  {
+   "id": 248,
+   "desc_message": 122,
+   "picture": 61,
+   "exits": {
+    "north": 249,
+    "south": 247,
+    "east": 240
+   },
+   "event_line": null
+  },
+  {
+   "id": 249,
+   "desc_message": 123,
+   "picture": 62,
+   "exits": {
+    "north": 250,
+    "south": 248,
+    "east": 241
+   },
+   "event_line": null
+  },
+  {
+   "id": 250,
+   "desc_message": 124,
+   "picture": 63,
+   "exits": {
+    "south": 249,
+    "east": 242
+   },
+   "event_line": null
+  },
+  {
+   "id": 251,
+   "desc_message": 125,
+   "picture": 77,
+   "exits": {
+    "east": 253,
+    "west": 244
+   },
+   "event_line": null
+  },
+  {
+   "id": 252,
+   "desc_message": 111,
+   "picture": 41,
+   "exits": {
+    "east": 55
+   },
+   "event_line": null
+  },
+  {
+   "id": 253,
+   "desc_message": 126,
+   "picture": 75,
+   "exits": {
+    "west": 251
+   },
+   "event_line": 2100
+  },
+  {
+   "id": 254,
+   "desc_message": 66,
+   "picture": 111,
+   "exits": {
+    "east": 27,
+    "west": 255
+   },
+   "event_line": null
+  },
+  {
+   "id": 255,
+   "desc_message": 67,
+   "picture": 112,
+   "exits": {
+    "east": 254
+   },
+   "event_line": null
+  }
+ ],
+ "items": [
+  {
+   "id": 1,
+   "name": "CARTOGRAPH",
+   "synonyms": [
+    "CARTOGRAPH",
+    "MAP"
+   ],
+   "location": 2,
+   "price": 5
+  },
+  {
+   "id": 2,
+   "name": "GOLD",
+   "synonyms": [
+    "GOLD",
+    "SOVEREIGNS"
+   ],
+   "location": 81,
+   "price": 0
+  },
+  {
+   "id": 3,
+   "name": "SWORD",
+   "synonyms": [
+    "SWORD",
+    "BLADE",
+    "DRAGONBANE"
+   ],
+   "location": 26,
+   "price": 0
+  },
+  {
+   "id": 4,
+   "name": "RING",
+   "synonyms": [
+    "RING"
+   ],
+   "location": 21,
+   "price": 0
+  },
+  {
+   "id": 5,
+   "name": "SALT",
+   "synonyms": [
+    "SALT"
+   ],
+   "location": 116,
+   "price": 1
+  },
+  {
+   "id": 6,
+   "name": "KEY",
+   "synonyms": [
+    "KEY"
+   ],
+   "location": 94,
+   "price": 0
+  },
+  {
+   "id": 7,
+   "name": "ROPE",
+   "synonyms": [
+    "ROPE"
+   ],
+   "location": 2,
+   "price": 1
+  },
+  {
+   "id": 8,
+   "name": "SIGN",
+   "synonyms": [
+    "SIGN"
+   ],
+   "location": -15,
+   "price": 0
+  },
+  {
+   "id": 9,
+   "name": "HOUSE",
+   "synonyms": [
+    "HOUSE",
+    "HOME",
+    "COTTAGE"
+   ],
+   "location": 256,
+   "price": 0
+  },
+  {
+   "id": 10,
+   "name": "DOOR",
+   "synonyms": [
+    "DOOR"
+   ],
+   "location": 256,
+   "price": 0
+  },
+  {
+   "id": 11,
+   "name": "WATERSKIN",
+   "synonyms": [
+    "WATERSKIN",
+    "FLASK",
+    "SKIN"
+   ],
+   "location": 2,
+   "price": 1
+  },
+  {
+   "id": 12,
+   "name": "LISA",
+   "synonyms": [
+    "LISA",
+    "GIRL",
+    "LADY",
+    "WOMAN",
+    "BROAD",
+    "WITCH"
+   ],
+   "location": -170,
+   "price": 0
+  },
+  {
+   "id": 13,
+   "name": "WATERFALL",
+   "synonyms": [
+    "WATERFALL",
+    "FALLS"
+   ],
+   "location": -38,
+   "price": 0
+  },
+  {
+   "id": 14,
+   "name": "ARMOR",
+   "synonyms": [
+    "ARMOR",
+    "ARMOUR"
+   ],
+   "location": 2,
+   "price": 50
+  },
+  {
+   "id": 15,
+   "name": "FLINT",
+   "synonyms": [
+    "FLINT",
+    "ROCK"
+   ],
+   "location": 2,
+   "price": 10
+  },
+  {
+   "id": 16,
+   "name": "LIST",
+   "synonyms": [
+    "LIST"
+   ],
+   "location": -2,
+   "price": 5
+  },
+  {
+   "id": 17,
+   "name": "BACKPACK",
+   "synonyms": [
+    "BACKPACK",
+    "PACK"
+   ],
+   "location": 2,
+   "price": 2
+  },
+  {
+   "id": 18,
+   "name": "SUGAR",
+   "synonyms": [
+    "SUGAR"
+   ],
+   "location": 2,
+   "price": 1
+  },
+  {
+   "id": 19,
+   "name": "WOLFSBANE",
+   "synonyms": [
+    "WOLFSBANE",
+    "WOLFBANE"
+   ],
+   "location": 2,
+   "price": 1
+  },
+  {
+   "id": 20,
+   "name": "WATER",
+   "synonyms": [
+    "WATER",
+    "H20"
+   ],
+   "location": 256,
+   "price": 0
+  },
+  {
+   "id": 21,
+   "name": "ALL",
+   "synonyms": [
+    "ALL",
+    "EVERYTHING"
+   ],
+   "location": 256,
+   "price": 0
+  },
+  {
+   "id": 22,
+   "name": "LANTERN",
+   "synonyms": [
+    "LANTERN",
+    "LAMP",
+    "TORCH"
+   ],
+   "location": 2,
+   "price": 1
+  },
+  {
+   "id": 23,
+   "name": "RATIONS",
+   "synonyms": [
+    "RATIONS",
+    "FOOD",
+    "EATS"
+   ],
+   "location": 2,
+   "price": 5
+  },
+  {
+   "id": 24,
+   "name": "HERMIT",
+   "synonyms": [
+    "HERMIT",
+    "MAN"
+   ],
+   "location": -119,
+   "price": 0
+  },
+  {
+   "id": 25,
+   "name": "YOUNG DRAGON",
+   "synonyms": [
+    "YOUNG DRAGON",
+    "BABY",
+    "CUB"
+   ],
+   "location": 253,
+   "price": 0
+  },
+  {
+   "id": 26,
+   "name": "DRAGON",
+   "synonyms": [
+    "DRAGON"
+   ],
+   "location": -149,
+   "price": 0
+  },
+  {
+   "id": 27,
+   "name": "SKELETON",
+   "synonyms": [
+    "SKELETON",
+    "BONES",
+    "CORPSE",
+    "BODY"
+   ],
+   "location": -21,
+   "price": 0
+  },
+  {
+   "id": 28,
+   "name": "SNAKE",
+   "synonyms": [
+    "SNAKE",
+    "PYTHON",
+    "BOA"
+   ],
+   "location": -22,
+   "price": 0
+  },
+  {
+   "id": 29,
+   "name": "BOARD",
+   "synonyms": [
+    "BOARD",
+    "PLANK"
+   ],
+   "location": -73,
+   "price": 0
+  },
+  {
+   "id": 30,
+   "name": "CHEST",
+   "synonyms": [
+    "CHEST",
+    "TRUNK"
+   ],
+   "location": -81,
+   "price": 0
+  },
+  {
+   "id": 31,
+   "name": "CARPET",
+   "synonyms": [
+    "CARPET",
+    "RUG"
+   ],
+   "location": 256,
+   "price": 0
+  },
+  {
+   "id": 32,
+   "name": "OILSKIN",
+   "synonyms": [
+    "OILSKIN",
+    "POUCH"
+   ],
+   "location": 2,
+   "price": 2
+  },
+  {
+   "id": 33,
+   "name": "CARE OF PET UNICORNS",
+   "synonyms": [
+    "CARE OF PET UNICORNS",
+    "CARE"
+   ],
+   "location": 2,
+   "price": 20
+  },
+  {
+   "id": 34,
+   "name": "USEFUL HERBS",
+   "synonyms": [
+    "USEFUL HERBS",
+    "USEFUL"
+   ],
+   "location": 2,
+   "price": 35
+  },
+  {
+   "id": 35,
+   "name": "LINGUA DRACO FLAMEUS",
+   "synonyms": [
+    "LINGUA DRACO FLAMEUS",
+    "LINGUA"
+   ],
+   "location": 2,
+   "price": 35
+  },
+  {
+   "id": 36,
+   "name": "PIG LATIN MADE SIMPLE",
+   "synonyms": [
+    "PIG LATIN MADE SIMPLE",
+    "PIG"
+   ],
+   "location": 2,
+   "price": 15
+  },
+  {
+   "id": 37,
+   "name": "BEGINNING PRESTIDIGITATION",
+   "synonyms": [
+    "BEGINNING PRESTIDIGITATION",
+    "BEGINNING"
+   ],
+   "location": 2,
+   "price": 25
+  },
+  {
+   "id": 38,
+   "name": "SOFTALK MAGAZINE",
+   "synonyms": [
+    "SOFTALK MAGAZINE",
+    "SOFTALK"
+   ],
+   "location": 2,
+   "price": 20
+  }
+ ],
+ "d_percent_raw": [
+  60,
+  84,
+  38
+ ],
+ "counts": {
+  "rooms": 255,
+  "items": 38
+ }
+}
