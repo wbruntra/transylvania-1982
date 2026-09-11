@@ -120,8 +120,17 @@ async function ensurePagesSource() {
       `${config.source ? ` (${config.source.branch}${config.source.path})` : ""}` +
       `, switching to ${BRANCH}/`,
   );
-  const set = await $`gh api -X PUT repos/${repo}/pages -f build_type=legacy \
-      -f source[branch]=${BRANCH} -f source[path]=/`.nothrow().quiet();
+  // Sent as raw JSON, not as `-f` fields: `source` is a nested object, and
+  // `-f 'source[branch]=x'` does not build one. It fails halfway instead --
+  // build_type flips, the branch quietly does not, and Pages carries on
+  // serving whatever it served before.
+  const body = JSON.stringify({
+    build_type: "legacy",
+    source: { branch: BRANCH, path: "/" },
+  });
+  const set = await $`echo ${body} | gh api -X PUT repos/${repo}/pages --input -`
+    .nothrow()
+    .quiet();
   if (set.exitCode !== 0) {
     console.warn(
       `could not change it (needs admin on ${repo}). Set it by hand:\n` +
