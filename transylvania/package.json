@@ -4,13 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "sync-data": "node ../tools/sync-data.mjs",
-    "predev": "npm run sync-data",
+    "sync-data": "bun ../tools/sync-data.mjs",
+    "predev": "bun run sync-data",
     "dev": "vite",
-    "prebuild": "npm run sync-data",
+    "prebuild": "bun run sync-data",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node --test ../web/test/*.test.js"
+    "pretest": "bun run sync-data",
+    "test": "bun test"
   },
   "dependencies": {
     "preact": "^10.29.8"
