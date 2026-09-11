@@ -3,7 +3,7 @@
 //
 // trans_port_kit/game.json is the single source of truth: it is what the
 // extractor writes from the Apple II .do images. Never hand-edit the copy under
-// web/public -- edit the extractor (or the kit file) and re-run this script.
+// transylvania/public -- edit the extractor (or the kit file) and re-run it.
 //
 // Object 40 (the mousetrap, room 20) is a hand-added exception: it isn't in
 // TRANS.bas or the disk image, it's new gameplay (see turnHooks.js and
@@ -24,10 +24,7 @@ import { fileURLToPath } from "node:url";
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const source = resolve(repoRoot, "trans_port_kit/game.json");
-const destinations = [
-  resolve(repoRoot, "web/public/game.json"),
-  resolve(repoRoot, "transylvania/public/game.json"),
-];
+const destinations = [resolve(repoRoot, "transylvania/public/game.json")];
 
 // Keys the web app depends on. `noun_map_N`, `verb_targets` and `counts` are
 // the vocabulary tables the earlier hand-copied game.json had silently dropped;

@@ -69,11 +69,11 @@ def compose(picdraw_bin, image, catalog, room, object_ids, rom=None):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--art", default="web/public/art/original")
-    parser.add_argument("--game", default="web/public/game.json")
+    parser.add_argument("--art", default="transylvania/public/art/original")
+    parser.add_argument("--game", default="transylvania/public/game.json")
     parser.add_argument("--disk", default="Transylvania (1982)(Penguin Software)"
                         "(Disk 1 of 2).DO/Transylvania (1982)(Penguin Software)(Disk 1 of 2).do")
-    parser.add_argument("--out", default="web/public/art/original")
+    parser.add_argument("--out", default="transylvania/public/art/original")
     parser.add_argument("--compose", help="e.g. 5:6,12 to put objects 6 and 12 in room 5")
     parser.add_argument("--rom", help="Apple II $D000-$FFFF ROM image; see picdraw.load_rom")
     args = parser.parse_args()
