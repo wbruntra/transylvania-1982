@@ -9,6 +9,7 @@ onto but perfectly visible over the room art it was meant to sit on.
 import argparse
 import json
 import os
+import re
 import sys
 
 from PIL import Image, ImageDraw
@@ -31,7 +32,7 @@ def labels(game_json):
 def sheet(art_dir, kind, columns, out, game_json):
     rooms, objects = labels(game_json)
     names = sorted(
-        (f for f in os.listdir(art_dir) if f.startswith(kind) and f.endswith(".png")),
+        (f for f in os.listdir(art_dir) if re.fullmatch(rf"{kind}\d+\.png", f)),
         key=lambda f: int(f[1:-4]),
     )
     rows = (len(names) + columns - 1) // columns
@@ -51,15 +52,17 @@ def sheet(art_dir, kind, columns, out, game_json):
     return len(names), canvas.size
 
 
-def compose(picdraw_bin, image, catalog, room, object_ids):
+def compose(picdraw_bin, image, catalog, room, object_ids, rom=None):
     """Room first, then each object over it -- TRANS.bas:8000 then 8030/8070."""
     page = picdraw.render(
-        picdraw_bin, picdraw.binary(image, catalog[f"R{room}"]), is_object=False
+        picdraw_bin, picdraw.binary(image, catalog[f"R{room}"]),
+        is_object=False, rom=rom,
     ).page
     for object_id in object_ids:
         page = picdraw.render(
             picdraw_bin, picdraw.binary(image, catalog[f"O{object_id}"]),
-            is_object=True, page=page,
+            is_object=True, page=page, rom=rom,
+            addr=picdraw.ROOM_ADDR if object_id in picdraw.BIG_OBJECTS else None,
         ).page
     return page
 
@@ -72,6 +75,7 @@ def main():
                         "(Disk 1 of 2).DO/Transylvania (1982)(Penguin Software)(Disk 1 of 2).do")
     parser.add_argument("--out", default="web/public/art/original")
     parser.add_argument("--compose", help="e.g. 5:6,12 to put objects 6 and 12 in room 5")
+    parser.add_argument("--rom", help="Apple II $D000-$FFFF ROM image; see picdraw.load_rom")
     args = parser.parse_args()
 
     if args.compose:
@@ -79,12 +83,10 @@ def main():
         object_ids = [int(i) for i in ids.split(",") if i]
         catalog, image = picdraw.load_disk(args.disk)
         picdraw_bin = picdraw.binary(image, catalog["PICDRAW2"])
-        page = compose(picdraw_bin, image, catalog, int(room), object_ids)
-        rows = picdraw.decode_hires(page)
-        out = Image.new("RGB", (picdraw.WIDTH, picdraw.HEIGHT))
-        out.putdata([p for row in rows for p in row])
+        page = compose(picdraw_bin, image, catalog, int(room), object_ids,
+                       rom=picdraw.load_rom(args.rom))
         path = os.path.join(args.out, f"compose-r{room}.png")
-        out.resize((picdraw.WIDTH * 3, picdraw.HEIGHT * 3), Image.NEAREST).save(path)
+        picdraw.image_from_page(page, 3).save(path)
         print(path)
         return
 
