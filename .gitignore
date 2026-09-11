@@ -1,4 +1,6 @@
 node_modules/
+__pycache__/
+*.pyc
 
 # Original 1982 Transylvania game files (ripped disk images + extracted art)
 *.DO/
