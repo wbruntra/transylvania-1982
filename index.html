@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Penguin Software Adventures — Web Ports</title>
+    <meta
+      name="description"
+      content="Browser ports of two Apple II illustrated adventures from Penguin Software: Transylvania (1982) and The Quest (1983)."
+    />
+    <!--
+      The landing page for the Pages site. Each game is a separate Vite build
+      deployed into its own subdirectory, so the links here are plain relative
+      hrefs to /transylvania/ and /the-quest/ -- no router, no hash routes.
+      Assembled into the site root by .github/workflows/deploy.yml.
+    -->
+    <style>
+      :root {
+        --ink: #e8e4dc;
+        --dim: #9a948a;
+        --ground: #14131a;
+        --panel: #1d1b25;
+        --edge: #332f3e;
+        --accent: #d9a441;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        padding-block: clamp(2.5rem, 8vw, 5rem);
+        padding-inline: 16px;
+        background: var(--ground);
+        background-image:
+          radial-gradient(ellipse 120% 80% at 50% -10%, #2a2740 0%, transparent 60%);
+        color: var(--ink);
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+        line-height: 1.55;
+        min-height: 100vh;
+      }
+      .wrap { max-width: 60rem; margin: 0 auto; }
+      header { text-align: center; margin-bottom: clamp(2rem, 6vw, 3.5rem); }
+      h1 {
+        font-family: ui-serif, Georgia, "Times New Roman", serif;
+        font-size: clamp(1.9rem, 6vw, 3rem);
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        margin: 0 0 0.6rem;
+      }
+      .tagline { color: var(--dim); margin: 0 auto; max-width: 38rem; font-size: 1.02rem; }
+
+      .games {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+        gap: clamp(1.25rem, 3vw, 2rem);
+      }
+      .game {
+        display: flex;
+        flex-direction: column;
+        background: var(--panel);
+        border: 1px solid var(--edge);
+        border-radius: 10px;
+        overflow: hidden;
+        text-decoration: none;
+        color: inherit;
+        transition: border-color 0.15s ease, transform 0.15s ease;
+      }
+      .game:hover, .game:focus-visible {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+      }
+      .game:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+      .cover {
+        display: block;
+        width: 100%;
+        /* height:auto is load-bearing -- the width/height attributes on the img
+           are presentational hints, and without this the attribute height wins
+           and the covers render at full natural height. */
+        height: auto;
+        aspect-ratio: 3 / 2;
+        object-fit: cover;
+        background: #0b0a0f;
+        border-bottom: 1px solid var(--edge);
+      }
+      .body { padding: 1.1rem 1.25rem 1.35rem; display: flex; flex-direction: column; gap: 0.4rem; flex: 1; }
+      h2 {
+        font-family: ui-serif, Georgia, "Times New Roman", serif;
+        font-size: 1.3rem; font-weight: 600; margin: 0;
+      }
+      .meta { color: var(--dim); font-size: 0.85rem; letter-spacing: 0.03em; text-transform: uppercase; }
+      .blurb { margin: 0.35rem 0 0; color: #c4bfb6; font-size: 0.95rem; flex: 1; }
+      .play { color: var(--accent); font-weight: 600; font-size: 0.95rem; margin-top: 0.9rem; }
+      .play::after { content: " \2192"; }
+
+      footer {
+        margin-top: clamp(2.5rem, 7vw, 4rem);
+        text-align: center;
+        color: var(--dim);
+        font-size: 0.88rem;
+      }
+      footer a { color: var(--dim); }
+      footer a:hover { color: var(--accent); }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>Penguin Software Adventures</h1>
+        <p class="tagline">
+          Two illustrated Apple II adventures from the early eighties, ported to the
+          browser. The original artwork is not bitmaps &mdash; it is vector programs
+          re-run through a 6502 emulator and the real Applesoft ROM, exactly as the
+          machine drew it.
+        </p>
+      </header>
+
+      <main class="games">
+        <a class="game" href="transylvania/">
+          <img
+            class="cover"
+            src="transylvania/art/pic-enhanced.webp"
+            alt="A moonlit castle tower above a dark pine forest, bats crossing the moon"
+            width="1024" height="1024" loading="lazy"
+          />
+          <div class="body">
+            <h2>Transylvania</h2>
+            <p class="meta">1982 &middot; Antonio Antiochia</p>
+            <p class="blurb">
+              Find the vanished Princess Sabrina before sunrise. A werewolf stalks the
+              forest, and something worse waits in the castle.
+            </p>
+            <span class="play">Play</span>
+          </div>
+        </a>
+
+        <a class="game" href="the-quest/">
+          <img
+            class="cover"
+            src="the-quest/art-cartoon/p92.webp"
+            alt="A stone castle across a moat, in cel-shaded cartoon art"
+            width="1536" height="1024" loading="lazy"
+          />
+          <div class="body">
+            <h2>The Quest</h2>
+            <p class="meta">1983 &middot; Dallas Snell</p>
+            <p class="blurb">
+              Gorn is sent to slay the dragon laying waste to the kingdom. Cross the
+              desert, the mountains and the sea &mdash; and pick your companions well.
+            </p>
+            <span class="play">Play</span>
+          </div>
+        </a>
+      </main>
+
+      <footer>
+        <p>
+          Source and porting notes on
+          <a href="https://github.com/wbruntra/transylvania-1982">GitHub</a>.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
