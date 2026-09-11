@@ -1,5 +1,17 @@
 name: Deploy to GitHub Pages
 
+# Builds both games and publishes them under one Pages site:
+#
+#   /                 site/index.html, the landing page
+#   /transylvania/    transylvania/          (Transylvania, 1982)
+#   /the-quest/       the-quest/frontend/    (The Quest, 1983)
+#
+# Each game is an independent Vite build with `base: './'`, dropped into its own
+# subdirectory. Neither does client-side routing, so there is nothing to rewrite
+# and no 404 fallback to configure -- every URL maps to a real file on disk.
+# Both apps must keep that relative base, and must not reference assets with a
+# leading slash, or they will look for them at the site root.
+
 on:
   push:
     branches:
@@ -26,24 +38,46 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: 22
-          cache: "npm"
-          cache-dependency-path: web/package-lock.json
+          bun-version: latest
 
-      - name: Install dependencies
-        working-directory: web
-        run: npm ci
+      - name: Install Transylvania dependencies
+        working-directory: transylvania
+        run: bun install --frozen-lockfile
 
-      - name: Run test suite
-        working-directory: web
-        run: npm test
+      - name: Test Transylvania
+        working-directory: transylvania
+        run: bun test
 
-      - name: Build web application
-        working-directory: web
-        run: npm run build
+      # `prebuild` regenerates public/game.json from trans_port_kit/ first.
+      - name: Build Transylvania
+        working-directory: transylvania
+        run: bun run build
+
+      - name: Install The Quest dependencies
+        working-directory: the-quest/frontend
+        run: bun install --frozen-lockfile
+
+      - name: Test The Quest
+        working-directory: the-quest/frontend
+        run: bun test
+
+      - name: Build The Quest
+        working-directory: the-quest/frontend
+        run: bun run build
+
+      - name: Assemble site
+        run: |
+          rm -rf dist
+          mkdir -p dist
+          cp site/index.html dist/index.html
+          cp -r transylvania/dist dist/transylvania
+          cp -r the-quest/frontend/dist dist/the-quest
+          test -f dist/transylvania/index.html
+          test -f dist/the-quest/index.html
+          echo "Assembled:" && du -sh dist/*
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -51,7 +85,7 @@ jobs:
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: web/dist
+          path: dist
 
       - name: Deploy to GitHub Pages
         id: deployment
