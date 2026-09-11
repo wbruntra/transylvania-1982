@@ -1,7 +1,7 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 // Deletes scene-art PNGs that already have a WebP sibling.
 //
-//   node tools/art-prune-png.mjs
+//   bun tools/art-prune-png.mjs
 //
 // generate_image writes PNG, convert_to_webp produces the file the game ships,
 // and the PNG is then dead weight (~1.5MB each). A PNG with no WebP beside it is

@@ -8,13 +8,66 @@ export function newGame() {
   for (const item of world.items) locations[item.id] = item.location
   return {
     room: START_ROOM,
+    prevRoom: 0,
     inventory: [],
     locations,
     visited: [START_ROOM],
     turns: 0,
+    roomTurns: 0,
+    gold: 150,
+    water: 0,
+    lastDrinkTurn: 0,
+    thirstWarning: false,
+    flags: {
+      cubDied: false,
+      chestOpen: false,
+      highwaymenPaid: false,
+      sphinxSolved: false,
+      dragonConversed: false,
+      lanternLit: false,
+      lisaJoined: false,
+      pigLatinRead: false,
+      poisonedWater: false,
+      vineSnapped: false,
+      cubInPouch: false,
+      lizardMenCount: 3,
+      villageBurned: false,
+    },
+    roomExits: {},
+    pendingPrompt: null,
     over: false,
+    won: false,
   }
 }
+
+export function getRoomExits(state, roomId) {
+  const room = world.rooms.find((r) => r.id === roomId)
+  const baseExits = room ? { ...room.exits } : {}
+  const overrides = state.roomExits && state.roomExits[roomId]
+  if (overrides) {
+    for (const [dir, dest] of Object.entries(overrides)) {
+      if (dest === 0 || dest === null) {
+        delete baseExits[dir]
+      } else {
+        baseExits[dir] = dest
+      }
+    }
+  }
+  return baseExits
+}
+
+export function setRoomExit(state, roomId, direction, destRoomId) {
+  if (!state.roomExits) state.roomExits = {}
+  if (!state.roomExits[roomId]) state.roomExits[roomId] = {}
+  state.roomExits[roomId][direction] = destRoomId
+}
+
+export function removeRoomExit(state, roomId, direction) {
+  if (!state.roomExits) state.roomExits = {}
+  if (!state.roomExits[roomId]) state.roomExits[roomId] = {}
+  state.roomExits[roomId][direction] = null
+}
+
 
 export function itemsInRoom(state, roomId) {
   return world.items.filter((it) => state.locations[it.id] === roomId)
@@ -39,7 +92,7 @@ export function dropItem(state, itemId, roomId) {
 }
 
 export function visitRoom(state, roomId) {
-  if (!state.visited.includes(roomId)) state.visited.push(roomId)
+  if (!state.visited.includes(roomId)) state.visited = [...state.visited, roomId]
 }
 
 export function saveGame(state) {

@@ -1,0 +1,1 @@
+Use bun instead of node for running scripts and package management.

@@ -1,0 +1,4 @@
+SPY'S DEMISE+��� load 0x801 : 1997 SYS 2059 (next ptr $080B)
+SPY'S DEMISE DOX load 0x801 : 239 SYS 2061 (next ptr $080B)
+T.SPY'S DEMISE�� load 0x8000 : 
+SPY'S DEMISE +�� load 0x801 : 239 SYS 2061 (next ptr $080B)

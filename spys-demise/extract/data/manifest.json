@@ -1,0 +1,46 @@
+[
+ {
+  "name": "SPY'S DEMISE+\ufffd\ufffd\ufffd",
+  "file": "SPY_S_DEMISE_T17_S0.prg",
+  "type": "0x82",
+  "start_track": 17,
+  "start_sector": 0,
+  "blocks": 33,
+  "bytes": 8382,
+  "load": "0x801",
+  "basic_stub": "1997 SYS 2059 (next ptr $080B)"
+ },
+ {
+  "name": "SPY'S DEMISE DOX",
+  "file": "SPY_S_DEMISE_DOX_T19_S0.prg",
+  "type": "0x82",
+  "start_track": 19,
+  "start_sector": 0,
+  "blocks": 14,
+  "bytes": 3556,
+  "load": "0x801",
+  "basic_stub": "239 SYS 2061 (next ptr $080B)"
+ },
+ {
+  "name": "T.SPY'S DEMISE\ufffd\ufffd",
+  "file": "T_SPY_S_DEMISE_T19_S7.prg",
+  "type": "0x82",
+  "start_track": 19,
+  "start_sector": 7,
+  "blocks": 10,
+  "bytes": 2540,
+  "load": "0x8000",
+  "basic_stub": ""
+ },
+ {
+  "name": "SPY'S DEMISE +\ufffd\ufffd",
+  "file": "SPY_S_DEMISE_T16_S2.prg",
+  "type": "0x82",
+  "start_track": 16,
+  "start_sector": 2,
+  "blocks": 31,
+  "bytes": 7874,
+  "load": "0x801",
+  "basic_stub": "239 SYS 2061 (next ptr $080B)"
+ }
+]

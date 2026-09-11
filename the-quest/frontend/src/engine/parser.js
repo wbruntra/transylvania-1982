@@ -30,16 +30,35 @@ export function parseCommand(input) {
     return { action: 'move', direction: action, raw: input }
   }
 
+  const numMatch = input.match(/\b\d+\b/)
+  const numeral = numMatch ? parseInt(numMatch[0], 10) : 0
+
   const nounPhrase = rest.join(' ')
   let item = null
   if (nounPhrase) {
-    item = lookupItemWord(nounPhrase) || lookupItemWord(rest[rest.length - 1])
+    item = lookupItemWord(nounPhrase)
+    if (!item) {
+      const nonFiller = rest.filter((w) => !['THE', 'A', 'AN', 'AT', 'TO', 'IN', 'INTO', 'ON', 'WITH'].includes(w))
+      if (nonFiller.length > 0) {
+        item =
+          lookupItemWord(nonFiller.join(' ')) ||
+          nonFiller.map((w) => lookupItemWord(w)).find(Boolean)
+      }
+    }
+    if (!item) {
+      item = rest.map((w) => lookupItemWord(w)).find(Boolean)
+    }
   }
+
 
   // GO/WALK/RUN/LEAVE/EXIT + a direction word.
-  if (action === 'go' && rest.length === 1 && DIRECTION_WORDS[rest[0]]) {
-    return { action: 'move', direction: DIRECTION_WORDS[rest[0]], raw: input }
+  if (action === 'go' && rest.length >= 1) {
+    const dirCandidate = rest.find((w) => DIRECTION_WORDS[w])
+    if (dirCandidate) {
+      return { action: 'move', direction: DIRECTION_WORDS[dirCandidate], raw: input, numeral }
+    }
   }
 
-  return { action, item, nounPhrase, noun: rest[0], raw: input }
+  return { action, item, nounPhrase, noun: rest[0], numeral, words, raw: input }
 }
+

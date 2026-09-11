@@ -1,10 +1,10 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 // Builds the scene-art prompt manifest from the game data.
 //
-//   node tools/art-prompts.mjs                      # write web/art-prompts.json
-//   node tools/art-prompts.mjs --room 1             # print one prompt and exit
-//   node tools/art-prompts.mjs --style cel          # a different look entirely
-//   node tools/art-prompts.mjs --style cel --room 1
+//   bun tools/art-prompts.mjs                      # write web/art-prompts.json
+//   bun tools/art-prompts.mjs --room 1             # print one prompt and exit
+//   bun tools/art-prompts.mjs --style cel          # a different look entirely
+//   bun tools/art-prompts.mjs --style cel --room 1
 //
 // The point of generating these rather than hand-writing 38 prompts: the style
 // contract lives in one place, so retuning it is one edit and a re-run, and the

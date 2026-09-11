@@ -1,0 +1,30 @@
+.sd {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 16px;
+  text-align: center;
+  font-family: ui-monospace, Consolas, monospace;
+}
+.sd h1 { font-size: 28px; margin: 8px 0 12px; }
+.sd h1 span { font-size: 14px; color: #8a93a6; font-weight: normal; }
+.sd canvas {
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  border: 2px solid #2e303a;
+  background: #0a0a12;
+  touch-action: none;
+}
+.controls { display: flex; gap: 8px; justify-content: center; margin: 12px 0; }
+.controls button {
+  font: inherit;
+  padding: 12px 18px;
+  background: #1f2028;
+  color: #f2f5ff;
+  border: 1px solid #2e303a;
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+}
+.controls button:active { background: #3aa0ff; }
+.hint { color: #8a93a6; font-size: 13px; }

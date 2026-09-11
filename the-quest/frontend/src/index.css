@@ -21,14 +21,15 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   margin: 0;
-  min-height: 100svh;
+  height: 100svh;
+  overflow: hidden;
   font-family: var(--serif);
 }
 
 #app {
-  min-height: 100svh;
+  height: 100svh;
   display: flex;
   flex-direction: column;
 }

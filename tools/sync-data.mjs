@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 // Regenerates the web app's copy of the game data from the extraction kit.
 //
 // trans_port_kit/game.json is the single source of truth: it is what the
@@ -14,9 +14,9 @@
 // (TRANS.bas/DATA.txt, left untouched as the historical record), not an
 // extraction fix. Re-running the extractor would revert it.
 //
-//   node tools/sync-data.mjs
+//   bun tools/sync-data.mjs
 //
-// Runs automatically via the `predev` / `prebuild` npm scripts in web/.
+// Runs automatically via the `predev` / `prebuild` npm/bun scripts in transylvania/.
 
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
@@ -24,7 +24,10 @@ import { fileURLToPath } from "node:url";
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const source = resolve(repoRoot, "trans_port_kit/game.json");
-const destination = resolve(repoRoot, "web/public/game.json");
+const destinations = [
+  resolve(repoRoot, "web/public/game.json"),
+  resolve(repoRoot, "transylvania/public/game.json"),
+];
 
 // Keys the web app depends on. `noun_map_N`, `verb_targets` and `counts` are
 // the vocabulary tables the earlier hand-copied game.json had silently dropped;
@@ -62,10 +65,12 @@ if (verbs.length !== raw.verb_targets.length) {
   throw new Error(`${verbs.length} verbs but ${raw.verb_targets.length} dispatch targets`);
 }
 
-await mkdir(dirname(destination), { recursive: true });
-await writeFile(destination, `${JSON.stringify(raw, null, 1)}\n`);
+for (const destination of destinations) {
+  await mkdir(dirname(destination), { recursive: true });
+  await writeFile(destination, `${JSON.stringify(raw, null, 1)}\n`);
+}
 
 console.log(
   `synced ${rooms.length} rooms, ${objects.length} objects, ${verbs.length} verbs, ` +
-    `${nouns.length} nouns -> web/public/game.json`,
+    `${nouns.length} nouns -> ${destinations.map((d) => d.replace(repoRoot + '/', '')).join(', ')}`,
 );

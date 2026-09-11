@@ -2,9 +2,10 @@
   max-width: 900px;
   width: 100%;
   margin: 0 auto;
-  min-height: 100svh;
+  height: 100svh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .titlebar {
@@ -32,6 +33,72 @@
   color: var(--text-dim);
 }
 
+.titlebarRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.artStyleToggle {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.artStyleToggle button {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 6px 8px;
+  background: var(--bg);
+  color: var(--text-dim);
+  border: none;
+  cursor: pointer;
+}
+
+.artStyleToggle button + button {
+  border-left: 1px solid var(--border);
+}
+
+.artStyleToggle button.active {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.miniMap {
+  position: relative;
+  width: 44px;
+  height: 32px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.miniMap:hover {
+  border-color: var(--accent);
+}
+
+.miniMapDot {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  margin: -1.5px;
+  border-radius: 50%;
+  background: var(--text-dim);
+}
+
+.miniMapDot.here {
+  width: 5px;
+  height: 5px;
+  margin: -2.5px;
+  background: var(--accent);
+  box-shadow: 0 0 4px var(--accent);
+}
+
 .stage {
   position: relative;
   width: 100%;
@@ -46,8 +113,12 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  image-rendering: pixelated;
   display: block;
+}
+
+.stage img.pixelated,
+.storyArt img.pixelated {
+  image-rendering: pixelated;
 }
 
 .stage .no-art {
@@ -63,6 +134,7 @@
 
 .log {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
   padding: 16px 20px;
   background: var(--panel);
@@ -223,7 +295,6 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  image-rendering: pixelated;
   display: block;
 }
 
@@ -242,6 +313,109 @@
   margin-bottom: 0;
 }
 
+.mapScrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 5, 4, 0.6);
+  z-index: 39;
+}
+
+.mapDrawer {
+  --map-cell: 26px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(320px, 86vw);
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  box-shadow: -12px 0 30px rgba(0, 0, 0, 0.4);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+}
+
+.mapDrawer.open {
+  transform: translateX(0);
+}
+
+.mapDrawerHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+.mapDrawerHead button {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.mapDrawerHead button:hover {
+  color: var(--accent);
+}
+
+.mapGrid {
+  flex: 1;
+  overflow: auto;
+  padding: 20px;
+}
+
+.mapGridInner {
+  display: grid;
+  gap: 0;
+  width: max-content;
+}
+
+.mapCell {
+  width: var(--map-cell);
+  height: var(--map-cell);
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.mapCell.here {
+  background: var(--accent);
+  color: #1c1815;
+  border-color: var(--accent);
+  font-weight: 700;
+}
+
+.mapConnector {
+  align-self: center;
+  justify-self: center;
+  background: var(--border);
+}
+
+.mapConnector.h {
+  width: var(--map-cell);
+  height: 3px;
+}
+
+.mapConnector.v {
+  width: 3px;
+  height: var(--map-cell);
+}
+
 .storyContinue {
   margin: 0 20px 20px;
   align-self: flex-end;
@@ -254,4 +428,58 @@
   cursor: pointer;
   font-family: var(--serif);
   flex-shrink: 0;
+}
+
+.endOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 5, 4, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 60;
+}
+
+.endCard {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  max-width: 560px;
+  width: 100%;
+  max-height: 85svh;
+  overflow-y: auto;
+  padding: 28px 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.endCard h2 {
+  margin: 0 0 16px;
+  font-size: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.endCard p {
+  margin: 0 0 12px;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.endCard p:last-of-type {
+  margin-bottom: 20px;
+}
+
+.endRestart {
+  background: var(--accent);
+  color: #1c1815;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 28px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  font-family: var(--serif);
 }
