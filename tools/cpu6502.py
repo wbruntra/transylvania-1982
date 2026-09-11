@@ -141,11 +141,18 @@ class CPU:
             raise NotImplementedError(f"opcode ${op:02X} at ${self.pc - 1:04X}")
         handler(self)
 
-    def run(self, start, stop, limit=80_000_000):
-        """Runs from `start` until PC reaches `stop`."""
+    def run(self, start, stop, limit=80_000_000, watch=None):
+        """Runs from `start` until PC reaches `stop`.
+
+        `watch` maps an address to a callback, called when execution *arrives*
+        there and then allowed to proceed -- unlike `hooks`, which stand in for
+        the code at that address. It is for looking without intervening.
+        """
         self.pc = start
         steps = 0
         while self.pc != stop:
+            if watch is not None and self.pc in watch:
+                watch[self.pc](self)
             self.step()
             steps += 1
             if steps > limit:

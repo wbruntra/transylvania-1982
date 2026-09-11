@@ -43,7 +43,14 @@ def main():
     parser.add_argument("--out", default="the-quest/quest_port_kit/art_samples")
     parser.add_argument("--scale", type=int, default=2)
     parser.add_argument("--only", help="render just this file, e.g. P9 or O1")
+    parser.add_argument("--rom", help="Apple II $D000-$FFFF ROM image; see "
+                                      "picdraw.load_rom")
     args = parser.parse_args()
+
+    rom = picdraw.load_rom(args.rom)
+    if rom is None:
+        print(f"warning: no ROM (--rom or ${picdraw.ROM_ENV}); imitating "
+              "Applesoft, which leaves some fills misplaced\n")
 
     picdraw.ROOM_ADDR = PICTURE_ADDR
     picdraw.OBJECT_ADDR = PICTURE_ADDR
@@ -70,7 +77,7 @@ def main():
         seen.add(name)
         data = picdraw.binary(img, cat[name])
         try:
-            picture = picdraw.render(picdrawf, data, is_object=is_object)
+            picture = picdraw.render(picdrawf, data, is_object=is_object, rom=rom)
         except Exception as exc:  # noqa: BLE001
             failures.append((name, f"{type(exc).__name__}: {exc}"))
             continue
