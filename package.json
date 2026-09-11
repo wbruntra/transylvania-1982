@@ -1,0 +1,9 @@
+{
+  "name": "penguin-software-adventures",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "deploy": "bun tools/deploy.mjs",
+    "deploy:dry": "bun tools/deploy.mjs --dry-run"
+  }
+}

@@ -1,7 +1,8 @@
 #!/usr/bin/env bun
 // Builds both games and publishes them to the gh-pages branch.
 //
-//   bun tools/deploy.mjs              # test, build, commit to gh-pages, push
+//   bun run deploy                    # test, build, commit to gh-pages, push
+//   bun tools/deploy.mjs              # the same thing
 //   bun tools/deploy.mjs --dry-run    # everything except the push
 //   bun tools/deploy.mjs --skip-tests # when you already just ran them
 //
@@ -77,6 +78,58 @@ async function assemble() {
   await $`du -sh ${join(dist, "index.html")} ${GAMES.map((g) => join(dist, g.into))}`;
 }
 
+/** owner/repo, from the origin remote -- ssh or https. */
+async function slug() {
+  const url = (await $`git remote get-url origin`.text()).trim();
+  const match = url.match(/github\.com[:/](.+?)(?:\.git)?$/);
+  if (!match) throw new Error(`cannot read a GitHub slug out of ${url}`);
+  return match[1];
+}
+
+/**
+ * Points the repo's Pages source at this branch.
+ *
+ * Pages has two modes, and they are mutually exclusive: "workflow" (an Action
+ * uploads an artifact) and "legacy" (a branch is served as-is). This repo used
+ * the first and now uses the second, so the setting has to follow -- otherwise
+ * pushing gh-pages publishes nothing at all and the site silently goes stale.
+ * Checked on every deploy rather than documented in a README, because a setting
+ * nobody can see from the source tree is a setting that eventually drifts.
+ */
+async function ensurePagesSource() {
+  if ((await $`which gh`.nothrow().quiet()).exitCode !== 0) {
+    console.warn("\nnote: gh not installed, skipping the Pages source check.");
+    return;
+  }
+  const repo = await slug();
+  const current = await $`gh api repos/${repo}/pages`.nothrow().quiet();
+  if (current.exitCode !== 0) {
+    console.warn(`\nnote: could not read Pages config for ${repo}; skipping.`);
+    return;
+  }
+
+  const config = JSON.parse(current.text());
+  const wanted =
+    config.build_type === "legacy" &&
+    config.source?.branch === BRANCH &&
+    config.source?.path === "/";
+  if (wanted) return;
+
+  console.log(
+    `\n=== Pages source is ${config.build_type}` +
+      `${config.source ? ` (${config.source.branch}${config.source.path})` : ""}` +
+      `, switching to ${BRANCH}/`,
+  );
+  const set = await $`gh api -X PUT repos/${repo}/pages -f build_type=legacy \
+      -f source[branch]=${BRANCH} -f source[path]=/`.nothrow().quiet();
+  if (set.exitCode !== 0) {
+    console.warn(
+      `could not change it (needs admin on ${repo}). Set it by hand:\n` +
+        `  Settings > Pages > Deploy from a branch > ${BRANCH} / (root)`,
+    );
+  }
+}
+
 async function publish() {
   const sha = (await $`git rev-parse --short HEAD`.text()).trim();
   const describe = (await $`git log -1 --pretty=%s`.text()).trim();
@@ -132,7 +185,9 @@ async function publish() {
       return;
     }
     await $`git push origin ${BRANCH}`.cwd(work);
+    await ensurePagesSource();
     console.log(`\nDeployed. https://wbruntra.github.io/transylvania-1982/`);
+    console.log("Pages takes a minute or so to pick it up.");
   } finally {
     await $`git worktree remove --force ${work}`.nothrow().quiet();
   }
