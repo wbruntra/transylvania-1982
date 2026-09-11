@@ -13,9 +13,13 @@ const OVERLAY_THRESHOLD = 320
 
 const TIPS = 'Type commands below, or use the buttons. Try LOOK, TAKE <thing>, INVENTORY, or a direction.'
 
+// Art directories are relative, not rooted at "/": Pages serves this game from
+// a subpath (/the-quest/) alongside Transylvania, and a leading slash would
+// send every request to the site root instead. There is no client-side routing
+// here, so the document URL never moves and relative always resolves correctly.
 const ART_STYLES = {
-  classic: { label: 'Classic', dir: '/art', ext: 'png', pixelated: true },
-  cartoon: { label: "King's Quest", dir: '/art-cartoon', ext: 'webp', pixelated: false },
+  classic: { label: 'Classic', dir: 'art', ext: 'png', pixelated: true },
+  cartoon: { label: "King's Quest", dir: 'art-cartoon', ext: 'webp', pixelated: false },
 }
 const ART_STYLE_KEY = 'the-quest-art-style'
 

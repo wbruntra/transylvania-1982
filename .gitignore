@@ -10,3 +10,5 @@ web/public/art/original-pic.png
 secrets.ts
 .env
 agent/logs/
+# The assembled Pages site (.github/workflows/deploy.yml builds this).
+/dist/
