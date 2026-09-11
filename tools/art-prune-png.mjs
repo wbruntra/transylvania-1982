@@ -14,7 +14,7 @@ import { fileURLToPath } from "node:url";
 
 const artDirectory = resolve(
   dirname(fileURLToPath(import.meta.url)),
-  "../web/public/art",
+  "../transylvania/public/art",
 );
 
 const files = await readdir(artDirectory);

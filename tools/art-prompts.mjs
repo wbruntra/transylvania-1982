@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 // Builds the scene-art prompt manifest from the game data.
 //
-//   bun tools/art-prompts.mjs                      # write web/art-prompts.json
+//   bun tools/art-prompts.mjs                      # write transylvania/art-prompts.json
 //   bun tools/art-prompts.mjs --room 1             # print one prompt and exit
 //   bun tools/art-prompts.mjs --style cel          # a different look entirely
 //   bun tools/art-prompts.mjs --style cel --room 1
@@ -180,15 +180,15 @@ function buildPrompt(room) {
   return `${scene}${toSpatialHint(room.exits)} ${treatment} ${STYLE}`;
 }
 
-const data = JSON.parse(await readFile(resolve(repoRoot, "web/public/game.json"), "utf8"));
+const data = JSON.parse(await readFile(resolve(repoRoot, "transylvania/public/game.json"), "utf8"));
 const manifest = data.rooms.map((room) => ({
   id: room.id,
   type: room.type,
   subject: toSubject(room.desc),
   // generate_image writes PNG; convert_to_webp then produces the shipped file
   // and the PNG is deleted. scene.js looks for the .webp first.
-  png: `web/public/art/room-${room.id}${suffix}.png`,
-  webp: `web/public/art/room-${room.id}${suffix}.webp`,
+  png: `transylvania/public/art/room-${room.id}${suffix}.png`,
+  webp: `transylvania/public/art/room-${room.id}${suffix}.webp`,
   prompt: buildPrompt(room),
 }));
 
@@ -199,12 +199,12 @@ if (roomArg !== -1) {
   if (!entry) throw new Error(`no room ${id}`);
   console.log(entry.prompt);
 } else {
-  const destination = resolve(repoRoot, `web/art-prompts${suffix}.json`);
+  const destination = resolve(repoRoot, `transylvania/art-prompts${suffix}.json`);
   await writeFile(destination, `${JSON.stringify(manifest, null, 2)}\n`);
   const byType = manifest.reduce((counts, room) => {
     counts[room.type] = (counts[room.type] ?? 0) + 1;
     return counts;
   }, {});
-  console.log(`wrote ${manifest.length} '${styleName}' prompts -> web/art-prompts${suffix}.json`);
+  console.log(`wrote ${manifest.length} '${styleName}' prompts -> transylvania/art-prompts${suffix}.json`);
   console.log("rooms by type:", byType);
 }

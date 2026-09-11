@@ -354,7 +354,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--disk", default="Transylvania (1982)(Penguin Software)"
                         "(Disk 1 of 2).DO/Transylvania (1982)(Penguin Software)(Disk 1 of 2).do")
-    parser.add_argument("--out", default="web/public/art/original")
+    parser.add_argument("--out", default="transylvania/public/art/original")
     parser.add_argument("--scale", type=int, default=3, help="PNG upscale factor")
     parser.add_argument("--only", help="render just this file, e.g. R9 or O18")
     parser.add_argument("--rom", help="Apple II $D000-$FFFF ROM image; without "
