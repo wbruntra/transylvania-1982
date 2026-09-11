@@ -73,6 +73,10 @@
   - `AMP 2.8` item table is at `$9909` (offset 1911 in body), 80 bytes mapping each noun word to item ID 1..38.
   - Text files `T1`..`T7` are delimited by single `$00` (NUL) bytes totaling 187 messages; cumulative boundaries in `B%` are `[0, 25, 51, 69, 92, 143, 167, 187]` with `B%(0)=0` (since `QB` reads `I = 1 TO 7`).
   - `USR` has two modes in `AMP 2.8`: numeric (`USR(...)H` and `USR(...)L` for 16-bit high/low byte extraction) and string (`USR("pat1/pat2")str, start` for multi-alternative substring search).
+- Preact Architecture (`transylvania/`):
+  - Replaces old imperative DOM manipulation (`document.getElementById`, `createElement`, `replaceChildren`, `classList.toggle`, `syncRowPlacement` DOM reparenting) with declarative Preact functional components and hooks (`useGame`, `useResponsive`).
+  - Modular component hierarchy: `<App>` -> `<Stage>` (`<Scene>`, `<SceneOverlay>`, `<MiniMap>`) + `<Console>` (`<ConsoleHeader>`, `<Log>`, `<ActionChips>`, `<TouchDeck>`, `<CommandRow>`) + `<MapDrawer>`.
+  - Clean reactive state for command execution, dynamic exit lighting on D-Pad, contextual action chips, audio synthesis via WebAudio, visual feedback (jolt/flash), and interactive exploration cartography with room inspection.
 
 ## Patterns That Don't Work
 - Matching nouns only against object names: fails for scenery (trees, wall, stump) and misses alias chains in `noun_map_N`.

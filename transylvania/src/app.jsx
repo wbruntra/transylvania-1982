@@ -1,104 +1,125 @@
-import { useState } from 'preact/hooks'
-import heroImg from './assets/hero.png'
-import preactLogo from './assets/preact.svg'
-import viteLogo from './assets/vite.svg'
-import './app.css'
+import { useEffect } from 'preact/hooks';
+import { useGame } from './hooks/useGame.js';
+import { useResponsive } from './hooks/useResponsive.js';
+import { Stage } from './components/Stage.jsx';
+import { Console } from './components/Console.jsx';
+import { MapDrawer } from './components/MapDrawer.jsx';
+import { CommandRow } from './components/CommandRow.jsx';
 
 export function App() {
-  const [count, setCount] = useState(0)
+  const {
+    room,
+    state,
+    world,
+    turns,
+    visitedRooms,
+    logText,
+    artMode,
+    artUrl,
+    artLoaded,
+    isMapOpen,
+    isMapMaximized,
+    gameOverInfo,
+    joltClass,
+    flashClass,
+    executeCommand,
+    toggleArt,
+    openMap,
+    closeMap,
+    toggleMapMaximize,
+    restart,
+    toggleDebug,
+    debugActive,
+  } = useGame();
+
+  const { isMobile } = useResponsive();
+
+  // Global keydown handler
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Escape closes map
+      if (e.key === 'Escape' && isMapOpen) {
+        closeMap();
+        return;
+      }
+
+      // Any key restarts on Game Over
+      if (gameOverInfo) {
+        if (['Shift', 'Control', 'Alt', 'Meta', 'CapsLock', 'Tab'].includes(e.key)) {
+          return;
+        }
+        if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+        }
+        restart();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isMapOpen, gameOverInfo, closeMap, restart]);
 
   return (
-    <>
-      <section id="center">
-        <div class="hero">
-          <img src={heroImg} class="base" width="170" height="179" alt="" />
-          <img src={preactLogo} class="framework" alt="Preact logo" />
-          <img src={viteLogo} class="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/app.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          class="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div id="app">
+      <Stage
+        room={room}
+        state={state}
+        world={world}
+        artUrl={artUrl}
+        artLoaded={artLoaded}
+        onAction={executeCommand}
+        gameOverInfo={gameOverInfo}
+        onRestart={restart}
+        onOpenMap={openMap}
+        visitedRooms={visitedRooms}
+        isMobile={isMobile}
+        commandRow={
+          !isMobile ? (
+            <CommandRow
+              onCommand={executeCommand}
+              disabled={Boolean(gameOverInfo)}
+            />
+          ) : null
+        }
+        joltClass={joltClass}
+        flashClass={flashClass}
+      />
 
-      <div class="ticks"></div>
+      <Console
+        turns={turns}
+        artMode={artMode}
+        onToggleArt={toggleArt}
+        onToggleMap={openMap}
+        onSave={() => executeCommand('save')}
+        onLoad={() => executeCommand('restore')}
+        debugActive={debugActive}
+        onToggleDebug={toggleDebug}
+        logContent={logText}
+        logFlashClass={flashClass}
+        room={room}
+        state={state}
+        world={world}
+        onCommand={executeCommand}
+        commandRow={
+          isMobile ? (
+            <CommandRow
+              onCommand={executeCommand}
+              disabled={Boolean(gameOverInfo)}
+            />
+          ) : null
+        }
+      />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg class="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img class="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://preactjs.com/" target="_blank">
-                <img class="button-icon" src={preactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg class="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg class="button-icon" role="presentation" aria-hidden="true">
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg class="button-icon" role="presentation" aria-hidden="true">
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg class="button-icon" role="presentation" aria-hidden="true">
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg class="button-icon" role="presentation" aria-hidden="true">
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div class="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      <MapDrawer
+        isOpen={isMapOpen}
+        isMaximized={isMapMaximized}
+        onToggleMaximize={toggleMapMaximize}
+        onClose={closeMap}
+        currentRoom={state?.room ?? 1}
+        visitedRooms={visitedRooms}
+        world={world}
+        state={state}
+      />
+    </div>
+  );
 }

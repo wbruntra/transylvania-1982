@@ -156,7 +156,7 @@ export function edgeLabel(edge) {
   return pick(edge.forward ? edge.aToB : edge.bToA);
 }
 
-const REGION_COLORS = {
+export const REGION_COLORS = {
   forest: { bg: "#064e3b", border: "#10b981", text: "#a7f3d0" },
   lake: { bg: "#083344", border: "#06b6d4", text: "#a5f3fc" },
   cemetery: { bg: "#2e1065", border: "#8b5cf6", text: "#ddd6fe" },

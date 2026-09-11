@@ -4,9 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "sync-data": "node ../tools/sync-data.mjs",
+    "predev": "npm run sync-data",
     "dev": "vite",
+    "prebuild": "npm run sync-data",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node --test ../web/test/*.test.js"
   },
   "dependencies": {
     "preact": "^10.29.8"
